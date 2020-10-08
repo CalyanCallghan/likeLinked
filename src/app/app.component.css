@@ -1,0 +1,35 @@
+body {
+    font-family: Roboto, Arial, sans-serif;
+    padding: 0;
+    margin: 0;
+}
+  
+#toolbarMenu {
+    cursor: pointer;
+    margin-right: 20px;
+}
+#mainToolbar .toolbar-spacer {
+    flex: 1 1 auto;
+}
+  
+#mainToolbar{
+    background: rgb(5,93,194);
+      color: whitesmoke;
+      display: flex;
+}
+  
+#mainToolbar .toolbar-icon {
+    cursor: pointer;
+    margin: 0 8px;
+}
+  
+#omIcon{
+    width: 100px;
+}
+ 
+.toolbar-btns .btn{
+    color: whitesmoke;
+}
+
+
+ 
