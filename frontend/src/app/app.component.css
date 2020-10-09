@@ -30,6 +30,10 @@ body {
 .toolbar-btns .btn{
     color: whitesmoke;
 }
+ul {
+    list-style: none;
+  }
 
+  
 
  
