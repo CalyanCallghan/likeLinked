@@ -8,10 +8,16 @@ import { MatCardModule } from "@angular/material/card";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { MatGridListModule } from '@angular/material/grid-list';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { UploadImageComponent } from './upload-image/upload-image.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UploadImageComponent,
   ],
   imports: [
     BrowserModule,
@@ -20,9 +26,15 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     MatToolbarModule,
     MatButtonModule,
     FlexLayoutModule,
-    CommonModule
+    CommonModule,
+    MatGridListModule,
+    ImageCropperModule,
+    MatDialogModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  
+}

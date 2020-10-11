@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { EmployeService } from './employe.service';
+import { UploadImageComponent } from './upload-image/upload-image.component';
+
 
 @Component({
   selector: 'app-root',
@@ -7,4 +11,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'card-view-demo';
+  card_data:any[];
+  constructor(private employeService:EmployeService,public dialog: MatDialog){
+    this.card_data = this.employeService.getEmployeeDetails();
+  }
+  openDialog() {
+    this.dialog.open(UploadImageComponent);
+  }
 }
