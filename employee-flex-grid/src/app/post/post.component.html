@@ -1,0 +1,48 @@
+<!-- <form class="example-form" >
+    <mat-form-field class="example-full-width"></mat-form-field>
+
+    <mat-form-field class="example-full-width" style="width: 22em">
+        <mat-label>Leave a comment</mat-label>
+        <textarea matInput></textarea>
+        <input #Image type="file" (change)="handleFileInput($event.target.files)" />
+        <img style="width:32em" *ngIf="imageUrl" [src]="imageUrl" class="image">
+    </mat-form-field>
+</form> -->
+<!-- <mat-card style="overflow-y: auto">
+    <mat-form-field class="example-full-width" style="width: 22em">
+        <mat-label>Leave</mat-label>
+        <textarea matInput></textarea>
+    </mat-form-field>
+    <input #Image type="file" (change)="handleFileInput($event.target.files)" />
+    <img *ngIf="imageUrl" [src]="imageUrl" class="image">
+</mat-card> 
+accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" -->
+<form class="example-form" >
+    <mat-form-field class="example-full-width"></mat-form-field>
+
+    <mat-form-field class="example-full-width" >
+        <mat-label>Leave a comment</mat-label>
+        <textarea matInput></textarea>
+    </mat-form-field>
+</form>
+<button mat-button  (click)="onClick()">
+    <mat-icon>image</mat-icon>
+</button>
+<button mat-button  (click)="onClickVideo()">
+    <mat-icon>videocam</mat-icon>
+</button>
+<button mat-button  (click)="onClickAttachment()">
+    <mat-icon>insert_drive_file</mat-icon>
+</button>
+<br/>
+<input type="file" id="fileUpload" name="fileUpload" multiple="multiple" 
+accept="{{accept}}" style="display:none;" (change)="handleFileInput($event.target.files)"/>
+
+<input type="file" id="fileUploadVideo" name="fileUploadVideo" multiple="multiple" 
+accept="video/mp4,video/x-m4v,video/*" style="display:none;" (change)="handleFileInput($event.target.files)"/>
+
+<input type="file" id="fileUploadAttachment" name="fileUploadAttachment" multiple="multiple" 
+accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf" style="display:none;" (change)="handleFileInput($event.target.files)"/>
+
+
+<img width="100%"  *ngIf="imageUrl" [src]="imageUrl" class="image" class="example-form">

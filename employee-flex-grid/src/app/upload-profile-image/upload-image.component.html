@@ -1,4 +1,4 @@
-<div>
+ <div>
     <h1 mat-dialog-title>Upload Image</h1>
     <div mat-dialog-content *ngIf="photoUploaded" >
         <input type="file" (change)="fileChangeEvent($event)" />
@@ -12,16 +12,3 @@
         <button mat-button mat-dialog-close color="warn">Close</button>
     </div>
 </div>
-<!-- <mat-card>
-    <div class="container">
-        <div class="row" style="margin-top: 5%;">
-            <div class="text-center col-md-12">
-                <input type="file" (change)="fileChangeEvent($event)" />
-            </div>
-        </div>
-        <div class="row" style="margin-top: 5%;height: 19em">
-            <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 4"
-                [resizeToWidth]="256" format="png" (imageCropped)="imageCropped($event)"></image-cropper>
-        </div>
-    </div>
-</mat-card> -->

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EmployeService } from './employe.service';
-import { UploadImageComponent } from './upload-image/upload-image.component';
+import { PostComponent } from './post/post.component';
+import { UploadImageComponent } from './upload-profile-image/upload-image.component';
 
 
 @Component({
@@ -17,5 +18,8 @@ export class AppComponent {
   }
   openDialog() {
     this.dialog.open(UploadImageComponent);
+  }
+  openPostDialog() {
+    this.dialog.open(PostComponent);
   }
 }

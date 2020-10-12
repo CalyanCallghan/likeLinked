@@ -4,33 +4,25 @@ import { CommonModule } from "@angular/common";
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCardModule } from "@angular/material/card";
-import { MatToolbarModule } from "@angular/material/toolbar";
-import { MatButtonModule } from "@angular/material/button";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { MatGridListModule } from '@angular/material/grid-list';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { UploadImageComponent } from './upload-image/upload-image.component';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatIconModule} from '@angular/material/icon';
+import { UploadImageComponent } from './upload-profile-image/upload-image.component';
+import { MaterialModule } from './material-module';
+import { PostComponent } from './post/post.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UploadImageComponent,
+    PostComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatCardModule,
-    MatToolbarModule,
-    MatButtonModule,
     FlexLayoutModule,
     CommonModule,
-    MatGridListModule,
     ImageCropperModule,
-    MatDialogModule,
-    MatIconModule
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
