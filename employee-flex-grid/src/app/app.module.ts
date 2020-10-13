@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { UploadImageComponent } from './upload-profile-image/upload-image.component';
 import { MaterialModule } from './material-module';
 import { PostComponent } from './post/post.component';
@@ -22,7 +23,8 @@ import { PostComponent } from './post/post.component';
     FlexLayoutModule,
     CommonModule,
     ImageCropperModule,
-    MaterialModule
+    MaterialModule,
+    PdfViewerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
