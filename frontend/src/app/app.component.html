@@ -1,5 +1,5 @@
-<mat-toolbar id="mainToolbar" color="primary" style="height: 2.2em;background-color:var(--cool-gray-80,#283e4a)">
-  <img id="omIcon" src="assets/images/logos/logo.png" />
+<mat-toolbar id="mainToolbar" style="height: 3.2em;">
+  <img id="omIcon" src="assets/images/logos/logo.svg" style="width: 3em"/>
   <input class="form-control form-control-sm" style="margin-left: 32em;" type="text" placeholder="Search"
     aria-label="Search" mdbInput>
   <div>
@@ -19,7 +19,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-4">
-      <mat-card style="width: 15em;top: 40px;left: 64px">
+      <mat-card  class="profilePicAndData">
         <!-- <img src="assets/images/logos/jhonwick.jpg" style="width:90px;border-radius: 50%;margin-left: 49px">
         <div style="padding-top: 20px;margin-left: 35px">
            Kalyan Kodapaka
@@ -42,9 +42,12 @@
       </mat-card>
     </div>
     <div class="col-sm-4">
+      <mat-card style="top: 40px;right: 6em;width: 32em;border-radius: 1em">
+      <button mat-button  style="width: 34em;color: rgba(0,0,0,.6)" class='btn' (click)="openPostDialog()"><mat-icon>post_add</mat-icon>Start a post</button>
+    </mat-card>
     </div>
     <div class="col-sm-4">
-      <mat-card style="width: 19em;top: 40px;background-color:white">
+      <mat-card style="width: 19em;top: 40px;background-color:white;right: 2em;border-radius: 1em">
         <span class="t-16 t-black t-normal">OnpassiveNet News</span>
         <ul style="padding-top: 10px;padding: 1em;">
           <li>

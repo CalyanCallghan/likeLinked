@@ -3,17 +3,15 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
-import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { HttpClientModule } from '@angular/common/http';
+import { StartPostComponent } from './start-post/start-post.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    EmployeeListComponent
+    StartPostComponent
   ],
   imports: [
     BrowserModule,

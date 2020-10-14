@@ -13,9 +13,9 @@ body {
 }
   
 #mainToolbar{
-    background: rgb(5,93,194);
       color: whitesmoke;
       display: flex;
+      background-image: url("src/assets/images/logos/header_bg.svg");
 }
   
 #mainToolbar .toolbar-icon {
@@ -32,7 +32,18 @@ body {
 }
 ul {
     list-style: none;
-  }
+}
+.profilePicAndData{
+    width: 15em;
+    top: 40px;
+    left:7em;
+    border-radius: 1em;
+    background-image: url("src/assets/images/logos/header_bg.svg");
+    background-repeat: repeat-x;
+    background-size: 2199px 115px;
+    
+
+}
 
   
 

@@ -1,8 +1,11 @@
 import { Employee } from './employee';
 import { Component, OnInit } from '@angular/core';
-import { EmployeeService } from './employee.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { StartPostComponent } from './start-post/start-post.component';
+import { PostService } from './post.service';
+
 
 @Component({
   selector: 'app-root',
@@ -10,24 +13,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-   title = 'material';
-   displayedColumns: string[] = ['id', 'firstName', 'lastName', 'emailId'];
-   dataSource = ELEMENT_DATA;
-   employees: Observable<Employee[]>;
-   constructor(private employeeService: EmployeeService) { }
+
+   constructor(private postService: PostService,public dialog: MatDialog) { }
    ngOnInit(): void {
-     this.reloadData();
-     //this.dataSource = this.employees;
+    
    }
-   reloadData() {
-     this.employees = this.employeeService.getEmployeesList();
-   }
+   
+   openPostDialog() {
+     console.log("-----dialog-----");
+    this.dialog.open(StartPostComponent);
+  }
   
 }
-const ELEMENT_DATA: Employee[] = [
-  {id: 1, firstName: 'Kalyan', lastName: 'Kodapaka', emailId: 'kalkodap@gmail.com'},
-  {id: 2, firstName: 'Jhon', lastName: 'Wick', emailId: 'jhonwick@gmail.com'},
-  {id: 3, firstName: 'Lily', lastName: 'Aldron', emailId: 'lillyaldron@gmail.com'},
-  {id: 4, firstName: 'Marshal', lastName: 'Erikson', emailId: 'marshalerikson@gmail.com'},
-  {id: 5, firstName: 'Ted', lastName: 'mosbey', emailId: 'tedmosbey@gmail.com'},
-];
+
