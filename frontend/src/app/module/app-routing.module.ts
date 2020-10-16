@@ -2,11 +2,10 @@ import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MyGroupsComponent } from './my-groups/my-groups.component';
-import { GroupMygroupComponent } from './group-mygroup/group-mygroup.component';
-
+import { HomepageComponent } from './homepage/homepage.component';
 
 const routes: Routes = [
-  { path: '', component: GroupMygroupComponent },
+  { path: '', component: HomepageComponent },
   { path: 'mygroup', component: MyGroupsComponent },
   
 ]; 

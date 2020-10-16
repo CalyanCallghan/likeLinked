@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PostService } from '../post.service';
 import { StartPostComponent } from '../start-post/start-post.component';
 
 
@@ -11,10 +10,12 @@ import { StartPostComponent } from '../start-post/start-post.component';
 })
 export class MyGroupsComponent implements OnInit {
 
-  constructor(private postService: PostService,public dialog: MatDialog) {
-  
+  constructor(public dialog: MatDialog) {
+    console.log("-----dialog----cons-");
    }
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    console.log("-----dialog---init--");
+  }
   openPostDialog() {
     console.log("-----dialog-----");
     this.dialog.open(StartPostComponent);

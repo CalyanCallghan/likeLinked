@@ -3,7 +3,6 @@ body {
     padding: 0;
     margin: 0;
 }
-  
 #toolbarMenu {
     cursor: pointer;
     margin-right: 20px;
@@ -33,20 +32,12 @@ body {
 ul {
     list-style: none;
 }
-.profilePicAndData{
-    width: 15em;
-    top: 40px;
-    left:7em;
-    border-radius: 1em;
-    background-image: url("src/assets/images/logos/header_bg.svg");
-    background-repeat: repeat-x;
-    background-size: 1169px 61px;
-}
-.groupAndMygrop{
-    width: 15em;
-    top: 51px;
-    left:7em;
-    border-radius: 1em;
+.iconAndName{
+        width: 57%;
+        left:26%;
+        top: 26%;
+        border-radius: 1em;
+        
 }
 
   

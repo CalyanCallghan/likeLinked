@@ -1,0 +1,10 @@
+.startpost{
+    width: 34em;
+    color: rgba(0,0,0,.6)
+}
+.postcard{
+    top: 22%;
+    right: 6em;
+    width: 32em;
+    border-radius: 1em
+}

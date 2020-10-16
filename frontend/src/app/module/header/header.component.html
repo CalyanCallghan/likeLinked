@@ -1,0 +1,17 @@
+<mat-toolbar id="mainToolbar" style="height: 3.2em;">
+    <img id="omIcon" src="assets/images/logos/logo.svg" style="width: 3em"/>
+    <input class="form-control form-control-sm" style="margin-left: 32em;" type="text" placeholder="Search"
+      aria-label="Search" mdbInput>
+    <div>
+      <a class='btn' mat-button  routerLink="/">Home <mat-icon>home</mat-icon></a>
+      <a class='btn' mat-button>Groups <mat-icon>groups</mat-icon></a>
+      <a class='btn' mat-button routerLink="mygroup">My Group <mat-icon>group</mat-icon></a>
+      <a class='btn' mat-button>Notifications <mat-icon>notifications_none</mat-icon></a>
+      <a class='btn' mat-button>Learning <mat-icon>library_books</mat-icon></a>
+      <img src="assets/images/logos/jhonwick.jpg" style="width:64px;border-radius: 50%;" [matMenuTriggerFor]="belowMenu" class='btn'>
+      <mat-menu #belowMenu="matMenu" yPosition="below">
+        <div><a class='btn' mat-button>My Profile<mat-icon>person</mat-icon></a></div>
+        <div><a class='btn' mat-button>Sign Out<mat-icon>login</mat-icon></a></div>      
+      </mat-menu>
+    </div>
+  </mat-toolbar>

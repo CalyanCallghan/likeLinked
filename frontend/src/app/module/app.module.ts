@@ -9,7 +9,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { StartPostComponent } from './start-post/start-post.component';
 import { MyGroupsComponent } from './my-groups/my-groups.component';
 import { AppRoutingModule } from './app-routing.module';
-import { GroupMygroupComponent } from './group-mygroup/group-mygroup.component';
+import { ProfileComponent } from './profile/profile.component';
+import { CreatePostComponent } from './create-post/create-post.component';
+import { HomepageComponent } from './homepage/homepage.component';
+import { NewsComponent } from './news/news.component';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
@@ -17,7 +21,11 @@ import { GroupMygroupComponent } from './group-mygroup/group-mygroup.component';
     AppComponent,
     StartPostComponent,
     MyGroupsComponent,
-    GroupMygroupComponent
+    ProfileComponent,
+    CreatePostComponent,
+    HomepageComponent,
+    NewsComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

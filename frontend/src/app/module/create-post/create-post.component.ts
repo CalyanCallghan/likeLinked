@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { PostService } from '../post.service';
+import { PostService } from 'src/app/service/post.service';
+
 
 @Component({
-  selector: 'app-start-post',
-  templateUrl: './start-post.component.html',
-  styleUrls: ['./start-post.component.css']
+  selector: 'app-create-post',
+  templateUrl: './create-post.component.html',
+  styleUrls: ['./create-post.component.css']
 })
-export class StartPostComponent implements OnInit {
+export class CreatePostComponent implements OnInit {
   accept = 'image/*'
   name = 'Angular';
   format: any;
@@ -64,5 +65,4 @@ export class StartPostComponent implements OnInit {
       },
         error => console.log(error));
   }
-
 }

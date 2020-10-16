@@ -44,3 +44,4 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+back_end/Users/chaitanya/.m2/repository/*

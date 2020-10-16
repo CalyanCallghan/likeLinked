@@ -1,0 +1,9 @@
+.profilePicAndData{
+    width: 57%;
+    top: 22%;
+    left: 26%;
+    border-radius: 1em;
+    background-image: url("src/assets/images/logos/header_bg.svg");
+    background-repeat: repeat-x;
+    background-size: 1169px 61px;
+}

@@ -1,0 +1,44 @@
+body {
+    font-family: Roboto, Arial, sans-serif;
+    padding: 0;
+    margin: 0;
+}
+#toolbarMenu {
+    cursor: pointer;
+    margin-right: 20px;
+}
+#mainToolbar .toolbar-spacer {
+    flex: 1 1 auto;
+}
+  
+#mainToolbar{
+      color: whitesmoke;
+      display: flex;
+      background-image: url("src/assets/images/logos/header_bg.svg");
+      height: 3.2em;
+}
+  
+#mainToolbar .toolbar-icon {
+    cursor: pointer;
+    margin: 0 8px;
+}
+  
+#onetIcon{
+    width: 3em
+}
+ 
+.toolbar-btns .btn{
+    color: whitesmoke;
+}
+
+.image{
+    width:64px;
+    border-radius: 50%;
+}
+.search{
+    margin-left: 32em;
+}
+
+  
+
+ 
