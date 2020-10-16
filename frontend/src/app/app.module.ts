@@ -7,11 +7,17 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { StartPostComponent } from './start-post/start-post.component';
+import { MyGroupsComponent } from './my-groups/my-groups.component';
+import { AppRoutingModule } from './app-routing.module';
+import { GroupMygroupComponent } from './group-mygroup/group-mygroup.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    StartPostComponent
+    StartPostComponent,
+    MyGroupsComponent,
+    GroupMygroupComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +25,9 @@ import { StartPostComponent } from './start-post/start-post.component';
     ReactiveFormsModule,
     MaterialModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

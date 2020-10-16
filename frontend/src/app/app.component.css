@@ -40,9 +40,13 @@ ul {
     border-radius: 1em;
     background-image: url("src/assets/images/logos/header_bg.svg");
     background-repeat: repeat-x;
-    background-size: 2199px 115px;
-    
-
+    background-size: 1169px 61px;
+}
+.groupAndMygrop{
+    width: 15em;
+    top: 51px;
+    left:7em;
+    border-radius: 1em;
 }
 
   

@@ -3,9 +3,9 @@
   <input class="form-control form-control-sm" style="margin-left: 32em;" type="text" placeholder="Search"
     aria-label="Search" mdbInput>
   <div>
-    <a class='btn' mat-button>Home <mat-icon>home</mat-icon></a>
+    <a class='btn' mat-button  routerLink="/">Home <mat-icon>home</mat-icon></a>
     <a class='btn' mat-button>Groups <mat-icon>groups</mat-icon></a>
-    <a class='btn' mat-button>My Group <mat-icon>group</mat-icon></a>
+    <a class='btn' mat-button routerLink="mygroup">My Group <mat-icon>group</mat-icon></a>
     <a class='btn' mat-button>Notifications <mat-icon>notifications_none</mat-icon></a>
     <a class='btn' mat-button>Learning <mat-icon>library_books</mat-icon></a>
     <!-- <button mat-mini-fab color="blue" [matMenuTriggerFor]="belowMenu" class='btn'>KK</button> -->
@@ -17,8 +17,8 @@
   </div>
 </mat-toolbar>
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-4">
+  <div class="row conten">
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
       <mat-card  class="profilePicAndData">
         <!-- <img src="assets/images/logos/jhonwick.jpg" style="width:90px;border-radius: 50%;margin-left: 49px">
         <div style="padding-top: 20px;margin-left: 35px">
@@ -27,26 +27,29 @@
         <p style="padding-top: 20px;margin-left: 20px;font-size: 13px;"> Java Developer at Onpassive </p> -->
         <a> 
           <div>
-            <img src="assets/images/logos/jhonwick.jpg" style="width:64px;border-radius: 50%;margin-left: 65px">
+            <img src="assets/images/logos/jhonwick.jpg" style="width:64px;border-radius: 50%;margin-left: 65px;margin-top: 12px">
           </div>
           <div style="padding-top: 5px;margin-left: 35px;font-weight: 600">
               Kalyan Kodapaka
           </div>
         </a>
-        <p style="margin-left: 20px;font-size: 13px;">Java Developer at Virinchi Ltd.</p>
-        <hr>
-        <div style="margin-left: 42px">
-          <a class='btn' mat-button>Groups<mat-icon>groups</mat-icon></a>
-          <a class='btn' mat-button>My Group<mat-icon>group</mat-icon></a>
-       </div>
+        <p style="margin-left: 50px;font-size: 13px;">Java Developer</p>
       </mat-card>
+      <!-- <mat-card class="groupAndMygrop">
+        <div style="margin-left: 42px">
+          <a class='btn' mat-button><mat-icon>groups</mat-icon><span>Groups</span></a>
+          <a class='btn' mat-button><mat-icon>group</mat-icon>My Group</a>
+          <a class='btn' mat-button><mat-icon>notifications_none</mat-icon>Notifications </a>
+       </div>
+      </mat-card> -->
+      <router-outlet></router-outlet>
     </div>
-    <div class="col-sm-4">
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
       <mat-card style="top: 40px;right: 6em;width: 32em;border-radius: 1em">
       <button mat-button  style="width: 34em;color: rgba(0,0,0,.6)" class='btn' (click)="openPostDialog()"><mat-icon>post_add</mat-icon>Start a post</button>
-    </mat-card>
+      </mat-card> 
     </div>
-    <div class="col-sm-4">
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
       <mat-card style="width: 19em;top: 40px;background-color:white;right: 2em;border-radius: 1em">
         <span class="t-16 t-black t-normal">OnpassiveNet News</span>
         <ul style="padding-top: 10px;padding: 1em;">

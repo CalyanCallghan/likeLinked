@@ -1,0 +1,12 @@
+.groupAndMygrop{
+    width: 15em;
+    top: 51px;
+    left:7em;
+    border-radius: 1em;
+}
+.list-group-item:first-child {
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+}
