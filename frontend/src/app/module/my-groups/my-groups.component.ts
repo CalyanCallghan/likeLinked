@@ -11,13 +11,10 @@ import { StartPostComponent } from '../start-post/start-post.component';
 export class MyGroupsComponent implements OnInit {
 
   constructor(public dialog: MatDialog) {
-    console.log("-----dialog----cons-");
    }
   ngOnInit(): void { 
-    console.log("-----dialog---init--");
   }
   openPostDialog() {
-    console.log("-----dialog-----");
     this.dialog.open(StartPostComponent);
  }
  list = [
@@ -55,7 +52,7 @@ export class MyGroupsComponent implements OnInit {
   },
   {
     'id': 9,
-    'value': 'Chanra'
+    'value': 'Chandra'
   },
   {
     'id': 10,

@@ -1,4 +1,6 @@
+import { Post } from './../../model/post';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { PostService } from 'src/app/service/post.service';
 
 
@@ -17,9 +19,12 @@ export class CreatePostComponent implements OnInit {
   min: number = 0;
   max: number = 100;
   file: any;
+  post:Post = new Post();
   constructor(private postService: PostService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    
+  }
 
   someFucn(newVal: any) {
     this.pageVariable = newVal;
@@ -58,11 +63,14 @@ export class CreatePostComponent implements OnInit {
     fileUploadVideo.click();
   }
   createPost() {
-    console.log("-----create---post-----");
-    this.postService.createPost(this.file)
+    this.post.email='pavan.kalyan@onpassive.com'
+    this.postService.createPost(this.post,this.file)
       .subscribe(data => {
         console.log(data)
-      },
-        error => console.log(error));
+        if(data == "success"){
+          const fileUpload = document.getElementById('cancel') as HTMLInputElement;
+          fileUpload.click();
+        }
+      },error => console.log(error));
   }
 }
