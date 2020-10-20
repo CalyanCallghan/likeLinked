@@ -1,7 +1,7 @@
 import { Post } from './../../model/post';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { PostService } from 'src/app/service/post.service';
+import { ResponseData } from 'src/app/model/response-data';
+import { MainService } from 'src/app/service/main.service';
 
 
 @Component({
@@ -20,7 +20,8 @@ export class CreatePostComponent implements OnInit {
   max: number = 100;
   file: any;
   post:Post = new Post();
-  constructor(private postService: PostService) { }
+  responseData : ResponseData = new ResponseData();
+  constructor(private mainService: MainService) { }
 
   ngOnInit(): void { 
     
@@ -64,10 +65,11 @@ export class CreatePostComponent implements OnInit {
   }
   createPost() {
     this.post.email='pavan.kalyan@onpassive.com'
-    this.postService.createPost(this.post,this.file)
+    this.mainService.createPost(this.post,this.file)
       .subscribe(data => {
-        console.log(data)
-        if(data == "success"){
+        this.responseData = data;
+        console.log(JSON.stringify(this.responseData));
+        if(this.responseData.message == "Success"){
           const fileUpload = document.getElementById('cancel') as HTMLInputElement;
           fileUpload.click();
         }

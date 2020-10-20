@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { StartPostComponent } from '../start-post/start-post.component';
 
 
@@ -9,8 +10,11 @@ import { StartPostComponent } from '../start-post/start-post.component';
   styleUrls: ['./my-groups.component.css']
 })
 export class MyGroupsComponent implements OnInit {
+  index:number;
+  constructor(public dialog: MatDialog,private router: Router,
 
-  constructor(public dialog: MatDialog) {
+
+    ) {
    }
   ngOnInit(): void { 
   }
@@ -20,7 +24,7 @@ export class MyGroupsComponent implements OnInit {
  list = [
   {
     'id': 1,
-    'value': 'Venkat'
+    'value': 'PavanKalyan Kodapaka'
   },
   {
     'id': 2,
@@ -59,5 +63,10 @@ export class MyGroupsComponent implements OnInit {
     'value': 'Mallik'
   }
 ];
+kalyan(){
+  this.router.navigate(["/chat"]);
+//   alert("-----kalyan-----");
+// this.index = 0;
+}
 
 }

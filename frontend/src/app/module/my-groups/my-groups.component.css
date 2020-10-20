@@ -1,23 +1,25 @@
 .mygroup{
     width: 57%;
     left:26%;
-    top: 26%;
+    margin-top: 3%;
     border-radius: 1em;
     background-image: url("src/assets/images/logos/header_bg.svg");
-    background-size: 1013px 53px;
+    background-size: 899px 47px;
     background-repeat: repeat-x;
 }
-.list-group-item:first-child {
+/*.list-group-item:first-child {
     border-top-left-radius: 1em;
     border-top-right-radius: 1em;
     border-bottom-left-radius: 1em;
     border-bottom-right-radius: 1em;
-}
+}*/
 ::-webkit-scrollbar {
     width: 0px;
     background: transparent;
 }
-
-  
-
- 
+.line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+  }

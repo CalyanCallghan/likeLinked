@@ -14,6 +14,11 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { NewsComponent } from './news/news.component';
 import { HeaderComponent } from './header/header.component';
 import { FormsModule } from '@angular/forms'; 
+import { ChatComponent } from './chat/chat.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { NotificationComponent } from './notification/notification.component';
+import { HighlightDirective } from './notification/highlight.directive';
+
 
 
 @NgModule({
@@ -25,7 +30,10 @@ import { FormsModule } from '@angular/forms';
     CreatePostComponent,
     HomepageComponent,
     NewsComponent,
-    HeaderComponent
+    HeaderComponent,
+    ChatComponent,
+    NotificationComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
@@ -35,8 +43,8 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
-    
+    FormsModule,
+    MDBBootstrapModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

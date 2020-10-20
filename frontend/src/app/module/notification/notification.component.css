@@ -1,0 +1,92 @@
+body {
+    font-family: Roboto, Arial, sans-serif;
+    padding: 0;
+    margin: 0;
+}
+  
+#toolbarMenu {
+    cursor: pointer;
+    margin-right: 20px;
+}
+#mainToolbar .toolbar-spacer {
+    flex: 1 1 auto;
+}
+  
+#mainToolbar{
+    background: rgb(5,93,194);
+      color: whitesmoke;
+      display: flex;
+}
+  
+#mainToolbar .toolbar-icon {
+    cursor: pointer;
+    margin: 0 8px;
+}
+  
+#omIcon{
+    width: 100px;
+}
+ 
+.toolbar-btns .btn{
+    color: whitesmoke;
+}
+ul {
+    list-style: none;
+  }
+
+/* notification css */
+.card{
+    margin-top: 10%;
+    margin-left: 10%;
+    max-width: 45%;
+    max-height: 90%;
+    border-radius: 20px;
+    background-image: url('src\assets\images\logos\header_bg.svg');
+    background-repeat: no-repeat;
+    background-size:795px 42px ;
+    border: none
+}
+.card-top{
+  font-family: cursive;
+  color:white;
+}
+.card-text{
+    display:inline-block;
+    padding-right: 40%;
+    font-size: 12px;
+    font-family: cursive;
+    color:gray;
+}
+.card-digit{
+    font-family: cursive;
+    font-size: 22px;
+    color:#007acc;
+    font-weight: 600;
+
+}
+.notification-title{
+    color:#007acc;
+    font-size: 14px;
+    font-family: cursive;
+    font-weight: 1000;
+
+}
+.notification-message{
+    font-family: sans-serif;
+    font-size: 12px;
+    font-weight: 600px;
+}
+
+.example-viewport {
+  height: 500px;
+  width: 440px;
+ 
+}
+.panel-description{
+  text-align: right;
+  font-size: 12px;
+}
+
+
+/* notification css */
+

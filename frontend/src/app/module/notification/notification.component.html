@@ -1,0 +1,110 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <!--notifications count section-->
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+
+      <mat-card class="card">
+        <mat-card-header class="card-top"> Notifications</mat-card-header>
+
+        <mat-divider></mat-divider>
+        <mat-card-header>
+          <mat-card-title class="card-text">Unread Notifications</mat-card-title>
+          <mat-card-title class="card-digit">{{unreadCount}}</mat-card-title>
+        </mat-card-header>
+
+        <mat-divider></mat-divider>
+
+        <mat-card-header>
+          <mat-card-title class="card-text">Total Notfications</mat-card-title>
+          <mat-card-subtitle class="card-digit">{{totalCount}}</mat-card-subtitle>
+        </mat-card-header>
+
+      </mat-card>
+    </div>
+
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="background-color: white;">
+
+
+      <mat-accordion>
+
+        <mat-card>
+          <mat-card-header class="notification-title">Recent Notifications</mat-card-header>
+        </mat-card>
+
+        <mat-divider></mat-divider>
+
+
+        <cdk-virtual-scroll-viewport class="example-viewport">
+
+          <mat-expansion-panel *ngFor="let notification of notifications"
+            [ngStyle]="notification.status =='unread'?{'background-color':'rgba(0, 0, 0, 0.08)'} : {'background-color': 'none'}"
+            [appHighlight] >
+            <mat-expansion-panel-header (click)='makeMeUnread(notification.id)'>
+
+              <mat-panel-title>
+                <img src="assets\images\logos\fav-icon.png" alt="image">
+                <b>&nbsp;&nbsp;{{notification.from}}</b>
+              </mat-panel-title>
+
+              <div class="panel-description">
+                <mat-panel-description>
+                  {{notification.sendDate}}
+                </mat-panel-description>
+              </div>
+
+            </mat-expansion-panel-header>
+
+            <mat-divider></mat-divider>
+            <p class="notification-message" >{{notification.message}}</p>
+
+          </mat-expansion-panel>
+
+        </cdk-virtual-scroll-viewport>
+
+      </mat-accordion>
+
+    </div>
+    <!-- notification display section -->
+
+    <!-- latest new section -->
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <mat-card style="width: 19em;top: 40px;background-color:white;border-radius: 20px;">
+        <span class="t-16 t-black t-normal"><b>Latest Events</b></span>
+        <mat-divider></mat-divider>
+        <ul style="padding-top: 10px;padding: 1em;">
+          <li>
+            <a href="" id="ember267">
+              <div style="font-size: 14px">
+                <span style="color: rgba(0,0,0,.9);">Is Tatas' Covid test a game changer?</span></div>
+            </a>
+            <span style="font-size: 12px;color: rgba(0,0,0,.6);">20h ago • 353 readers</span>
+          </li>
+          <li>
+            <a href="" id="ember267">
+              <div style="font-size: 14px">
+                <span style="color: rgba(0,0,0,.9);">Do internships matter?</span></div>
+            </a>
+            <span style="font-size: 12px;color: rgba(0,0,0,.6);">1d ago • 3,884 readers</span>
+          </li>
+          <li>
+            <a href="" id="ember267">
+              <div style="font-size: 14px">
+                <span style="color: rgba(0,0,0,.9);">Fresh curbs on H-1B visa</span></div>
+            </a>
+            <span style="font-size: 12px;color: rgba(0,0,0,.6);">3h ago • 1,115 readers</span>
+          </li>
+          <li>
+            <a href="" id="ember267">
+              <div style="font-size: 14px">
+                <span style="color: rgba(0,0,0,.9);">Ola banned in London</span></div>
+            </a>
+            <span style="font-size: 12px;color: rgba(0,0,0,.6);">1d ago • 8,860 readers</span>
+          </li>
+
+        </ul>
+      </mat-card>
+    </div>
+    <!-- latest new section -->
+  </div>
+</div>
