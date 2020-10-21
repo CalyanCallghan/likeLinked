@@ -23,3 +23,15 @@
     -webkit-box-orient: vertical;  
     overflow: hidden;
   }
+#rightbox{ 
+    float:right;
+} 
+
+#middlebox{ 
+    display:inline-block; 
+} 
+
+#leftbox { 
+   display:inline-block; 
+   
+} 

@@ -19,6 +19,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NotificationComponent } from './notification/notification.component';
 import { HighlightDirective } from './notification/highlight.directive';
 import { GroupsComponent } from './groups/groups.component';
+import { PersonPostComponent } from './person-post/person-post.component';
 
 
 
@@ -35,7 +36,8 @@ import { GroupsComponent } from './groups/groups.component';
     ChatComponent,
     NotificationComponent,
     HighlightDirective,
-    GroupsComponent
+    GroupsComponent,
+    PersonPostComponent
   ],
   imports: [
     BrowserModule,

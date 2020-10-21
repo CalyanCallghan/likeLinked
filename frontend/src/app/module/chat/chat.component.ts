@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Chat } from 'src/app/model/chat';
 import { PostService } from 'src/app/service/post.service';
+import { MyGroupsComponent } from '../my-groups/my-groups.component';
 
 @Component({
   selector: 'app-chat',
@@ -10,7 +11,7 @@ import { PostService } from 'src/app/service/post.service';
 export class ChatComponent implements OnInit {
 
   message:string;
-  constructor(private mainService: PostService) { }
+  constructor(private mainService: PostService,private myGroupsComponent:MyGroupsComponent) { }
   chat:Chat = new Chat();
   chatResponse : Chat = new Chat();
   allData:any[] = [
@@ -21,6 +22,9 @@ export class ChatComponent implements OnInit {
   ngOnInit(): void {
     this.getAllMsgs();
 
+  }
+  closePopup(){
+    this.myGroupsComponent.callClose()
   }
   sendMsg(){
     this.chat.empId=7;
