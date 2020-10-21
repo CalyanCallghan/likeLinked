@@ -1,7 +1,7 @@
 import { Post } from './../../model/post';
 import { Component, OnInit } from '@angular/core';
 import { ResponseData } from 'src/app/model/response-data';
-import { MainService } from 'src/app/service/main.service';
+import { PostService } from 'src/app/service/post.service';
 
 
 @Component({
@@ -21,7 +21,7 @@ export class CreatePostComponent implements OnInit {
   file: any;
   post:Post = new Post();
   responseData : ResponseData = new ResponseData();
-  constructor(private mainService: MainService) { }
+  constructor(private mainService: PostService) { }
 
   ngOnInit(): void { 
     
@@ -69,7 +69,7 @@ export class CreatePostComponent implements OnInit {
       .subscribe(data => {
         this.responseData = data;
         console.log(JSON.stringify(this.responseData));
-        if(this.responseData.message == "Success"){
+        if(this.responseData.status == "OK"){
           const fileUpload = document.getElementById('cancel') as HTMLInputElement;
           fileUpload.click();
         }

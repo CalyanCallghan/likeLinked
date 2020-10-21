@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Chat } from 'src/app/model/chat';
-import { MainService } from 'src/app/service/main.service';
+import { PostService } from 'src/app/service/post.service';
 
 @Component({
   selector: 'app-chat',
@@ -10,10 +10,9 @@ import { MainService } from 'src/app/service/main.service';
 export class ChatComponent implements OnInit {
 
   message:string;
-  constructor(private mainService: MainService) { }
+  constructor(private mainService: PostService) { }
   chat:Chat = new Chat();
   chatResponse : Chat = new Chat();
-  chatData : Chat[]; 
   allData:any[] = [
     {"from":"kalyan","content":"Hi"},
     {"from":"kalyan","content":"How are you?"},
@@ -37,7 +36,6 @@ export class ChatComponent implements OnInit {
     this.chat.empId=7;
     this.mainService.getAllMsg(this.chat.empId).subscribe(data => {
       this.chatResponse = data;
-      console.log("---->"+JSON.stringify(this.chatData));
     },error => console.log(error));
   }
 }

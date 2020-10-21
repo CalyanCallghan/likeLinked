@@ -1,0 +1,24 @@
+.groupAndMygrop{
+    width: 15em;
+    margin-top: 3%;
+    left:7em;
+    border-radius: 1em;
+}
+
+button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disabled), [type="submit"]:not(:disabled) {
+    cursor: pointer;
+    margin-left: 30%;
+}
+.mat-dialog-content {
+    display: block;
+    margin: 0 -24px;
+    padding: 10px 24px;
+    max-height: 65vh;
+    max-width: 100%;
+    overflow-x: hidden !important;
+}
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+

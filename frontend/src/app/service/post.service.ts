@@ -7,28 +7,22 @@ import { ResponseData } from '../model/response-data';
 @Injectable({
   providedIn: 'root'
 })
-export class MainService {
-  private baseUrl = 'http://localhost:8080/getMsgs';
+export class PostService {
+  private baseUrl = 'http://localhost:8080/file';
 
   constructor(private http: HttpClient) { }
 
-
   createPost(post: any,file:any): Observable<ResponseData> {
-    this.baseUrl =  'http://localhost:8080/uploadFile123';
     const uploadImageData = new FormData();
-    uploadImageData.append('file', file);
+    uploadImageData.append('files', file);
     uploadImageData.append('data', JSON.stringify(post));
-    console.log("post------->"+ JSON.stringify(post));
-    return this.http.post<ResponseData>(`${this.baseUrl}`,uploadImageData);
+    return this.http.post<ResponseData>(`${this.baseUrl}/uploadFile`,uploadImageData);
   }
 
   postMsg(chat:any):Observable<Chat>{
-    this.baseUrl =  'http://localhost:8080/postMsgs';
-    return this.http.post<Chat>(`${this.baseUrl}`,chat);
+    return this.http.post<Chat>(`${this.baseUrl}/postMsgs`,chat);
   }
   getAllMsg(chat:any):Observable<Chat>{
-    this.baseUrl =  'http://localhost:8080/getMsgs';
-    return this.http.get<Chat>(`${this.baseUrl}/${chat}`);
+    return this.http.get<Chat>(`${this.baseUrl}/getMsgs/${chat}`);
   }
-
 }

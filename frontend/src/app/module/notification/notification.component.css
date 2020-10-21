@@ -32,60 +32,66 @@ body {
 }
 ul {
     list-style: none;
-  }
+}
 
 /* notification css */
 .card{
-    margin-top: 10%;
-    margin-left: 10%;
-    max-width: 45%;
-    max-height: 90%;
-    border-radius: 20px;
-    background-image: url('src\assets\images\logos\header_bg.svg');
-    background-repeat: no-repeat;
-    background-size:795px 42px ;
+    width: 57%;
+    margin-top: 15.3%;
+    left: 26%;
+    border-radius: 1em;
+    background-image: url("src/assets/images/logos/header_bg.svg");
+    background-repeat: repeat-x;
+    background-size: 804px 42px;
     border: none
 }
 .card-top{
-  font-family: cursive;
   color:white;
 }
 .card-text{
     display:inline-block;
     padding-right: 40%;
     font-size: 12px;
-    font-family: cursive;
     color:gray;
 }
 .card-digit{
-    font-family: cursive;
     font-size: 22px;
     color:#007acc;
     font-weight: 600;
-
 }
 .notification-title{
     color:#007acc;
     font-size: 14px;
-    font-family: cursive;
     font-weight: 1000;
-
+    justify-content: center;
+    padding-bottom: 1em
 }
 .notification-message{
-    font-family: sans-serif;
     font-size: 12px;
     font-weight: 600px;
 }
 
 .example-viewport {
   height: 500px;
-  width: 440px;
  
 }
 .panel-description{
   text-align: right;
   font-size: 12px;
 }
+.allNotofications{
+    margin-top: 15.3%;
+    right: 6em;
+    width: 32em;
+    border-radius: 1em
+}
+.postcard{
+    margin-top: 15.3%;
+    right: 6em;
+    width: 32em;
+    border-radius: 1em
+}
+
 
 
 /* notification css */

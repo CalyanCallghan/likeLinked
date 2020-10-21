@@ -18,6 +18,7 @@ import { ChatComponent } from './chat/chat.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NotificationComponent } from './notification/notification.component';
 import { HighlightDirective } from './notification/highlight.directive';
+import { GroupsComponent } from './groups/groups.component';
 
 
 
@@ -33,7 +34,8 @@ import { HighlightDirective } from './notification/highlight.directive';
     HeaderComponent,
     ChatComponent,
     NotificationComponent,
-    HighlightDirective
+    HighlightDirective,
+    GroupsComponent
   ],
   imports: [
     BrowserModule,

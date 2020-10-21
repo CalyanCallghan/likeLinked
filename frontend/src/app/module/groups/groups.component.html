@@ -1,0 +1,82 @@
+<div class="container-fluid">
+      <div class="row">
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <app-profile></app-profile>
+              <mat-card class="groupAndMygrop">
+                <div class="row">
+                  <div  style="height:250px;overflow-y: scroll;" class="scroll">
+                    <ul class="list-group ml-3" *ngFor="let gplist of groupList;let i = index">
+                      <li class="list-group-item" style="width: 14.9em;height: 3em;margin-left: -15px;display: flex;
+                      justify-content: flex-start;
+                      align-items: center;">
+                             <div>
+                              <mat-icon>supervisor_account</mat-icon>
+                            </div>
+                            <div style="flex: 1;font-size: medium" class="line-clamp">
+                              <div (click)="openDialogWithTemplateRef(myDialog,i)">{{gplist.desg_desc}}</div>
+                            </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                </mat-card>
+                <ng-template #myDialog > 
+                <a class='btn' mat-button (click)="myGroup()" >My Group <mat-icon>group</mat-icon></a>
+                <button mat-button matDialogClose color="primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="material-icons">
+                        clear
+                        </span>
+                </button>
+                <mat-dialog-content >
+                    <ul class="list-group ml-3" *ngFor="let gplist of list">
+                      <!-- <li class="list-group-item" style="width: 25.2em;height: 3em;margin-left: -15px">
+                            <div>
+                              <table>
+                                <tr>
+                                  <td>
+                                      <span class="material-icons" style="margin-left: -0.5em;font-size: 23px"> person</span></td>
+                                  <td >
+                                    
+                                    <div>{{gplist.name}}</div>
+                                  </td>
+                                  <td >
+                                    
+                                    <div><b>{{gplist.email}}</b></div>
+                                  </td>
+                                </tr>
+                              </table>
+                            </div>
+                       </li>  -->
+                       <li class="list-group-item" style="display: flex;
+                       justify-content: flex-start;
+                       align-items: center;">
+                              <div>
+                               <mat-icon>person</mat-icon>
+                             </div>
+                             <div style="flex: 1;font-size: medium" class="line-clamp">
+                              {{gplist.name}}
+                             </div>
+                             <div >
+                              {{gplist.email}}
+                             </div>
+                       </li>
+
+                       
+                      </ul>
+                 </mat-dialog-content>
+                  <mat-dialog-actions align="end">
+                    
+                  </mat-dialog-actions>
+                </ng-template>
+          </div>
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <app-start-post></app-start-post>
+          </div>
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <app-news></app-news>
+          </div>
+      </div>
+  </div>
+
+    

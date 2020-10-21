@@ -3,6 +3,8 @@ import { FixedSizeVirtualScrollStrategy, VIRTUAL_SCROLL_STRATEGY } from '@angula
 import { HostListener } from '@angular/core';
 import { NotificationService } from 'src/app/service/notification.service';
 import { Notification } from './../../model/notification';
+import { HeaderComponent } from '../header/header.component';
+import { UnReadService } from 'src/app/service/unreadCount.service';
 
 
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
@@ -28,7 +30,7 @@ export class NotificationComponent implements OnInit {
 
   }
 
-  constructor(private notificationService: NotificationService) { }
+  constructor(private notificationService: NotificationService, private unReadService: UnReadService) { }
 
   ngOnInit(): void {
     this.getTotalNotificationCount();
@@ -55,6 +57,7 @@ export class NotificationComponent implements OnInit {
   getUnreadNotificationCount(){
     this.notificationService.getUnreadCount().subscribe(data => {
       this.unreadCount = data;
+      this.unReadService.setcanCount(data);
     });
   }
 

@@ -1,5 +1,5 @@
 export class ResponseData {
     dateTime: Date;
-	status: number;
+	status: string;
 	message: string;
 }
