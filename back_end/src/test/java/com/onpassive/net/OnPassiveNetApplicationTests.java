@@ -1,10 +1,10 @@
-package com.onpassive.onet;
+package com.onpassive.net;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FileUploadServiceApplicationTests {
+class OnPassiveNetApplicationTests {
 
 	@Test
 	void contextLoads() {
