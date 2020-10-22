@@ -1,3 +1,4 @@
+import { environment } from './../model/environment';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
@@ -8,7 +9,6 @@ import { Grouplist } from '../module/groups/grouplist';
 })
 export class GroupsService {
 
-  private listGroup = "http://localhost:8080/groups/group"; // URL to web api
   httpOptions = {
     headers: new HttpHeaders(),
     withCredentials: true
@@ -17,7 +17,7 @@ export class GroupsService {
   constructor(private http: HttpClient) { }
 
   getGroupByDesignation(): Observable<Grouplist> {
-    return this.http.get<Grouplist>(`http://localhost:8080/groups/group`);
+    return this.http.get<Grouplist>(environment.baseApplicationUrl+"/groups/group");
   }
 
 

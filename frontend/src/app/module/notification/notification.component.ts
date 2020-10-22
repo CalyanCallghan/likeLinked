@@ -22,7 +22,7 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
 })
 export class NotificationComponent implements OnInit {
 
-  notifications: Notification = new Notification();
+  notifications: any;
   totalCount = 0;
   unreadCount = 0;
 
@@ -38,8 +38,6 @@ export class NotificationComponent implements OnInit {
     this.getAllNotifications();
   }
   makeMeUnread(id:any){
-    console.log("------------->"+id);
-    
     this.notificationService.updateUnread(id,'read').subscribe(data => {
       console.log("data-->"+data);
       this.getTotalNotificationCount();
@@ -50,7 +48,6 @@ export class NotificationComponent implements OnInit {
   getAllNotifications(){
     this.notificationService.getNotifications().subscribe(data => {
       this.notifications = data;
-      console.log("post------->"+ JSON.stringify( this.notifications ));
     });
   }
 

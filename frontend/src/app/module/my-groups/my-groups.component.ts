@@ -30,49 +30,47 @@ export class MyGroupsComponent implements OnInit {
   list = [
     {
       'id': 1,
-      'value': 'PavanKalyan Kodapaka'
+      'value': 'Williams Kavin'
     },
     {
       'id': 2,
-      'value': 'Sunitha'
+      'value': 'Peterson'
     },
     {
       'id': 3,
-      'value': 'Manish'
+      'value': 'Stonies'
     },
     {
       'id': 4,
-      'value': 'Alam'
+      'value': 'Jorden'
     },
     {
       'id': 5,
-      'value': 'Preethi'
+      'value': 'Barney Stinson'
     },
     {
       'id': 6,
-      'value': 'Swarna'
+      'value': 'Roonie'
     },
     {
       'id': 7,
-      'value': 'Sai'
+      'value': 'David Thomos '
     },
     {
       'id': 8,
-      'value': 'Kalyan'
+      'value': 'Jhon Wick'
     },
     {
       'id': 9,
-      'value': 'Chandra'
+      'value': 'Usain bolt'
     },
     {
       'id': 10,
-      'value': 'Mallik'
+      'value': 'Warner Devid'
     }
   ];
   kalyan() {
     this.router.navigate(["/chat"]);
-    //   alert("-----kalyan-----");
-    // this.index = 0;
   }
 
 }

@@ -2,13 +2,14 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Chat } from '../model/chat';
+import { environment } from '../model/environment';
 import { ResponseData } from '../model/response-data';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
-  private baseUrl = 'http://localhost:8080/file';
+  private baseUrl = environment.baseApplicationUrl+"/file";
 
   constructor(private http: HttpClient) { }
 

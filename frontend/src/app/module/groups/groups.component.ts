@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { GroupsService } from 'src/app/service/groups.service';
 import { MyGroupService } from 'src/app/service/my-group.service';
-
 import { Grouplist } from './grouplist';
 
 @Component({
@@ -12,8 +11,12 @@ import { Grouplist } from './grouplist';
   styleUrls: ['./groups.component.css']
 })
 export class GroupsComponent implements OnInit {
+
+  indexId: number;
+  candidate = 1;
+
   bool = false;
-  groupList: Grouplist = new Grouplist();
+  groupList: any;
   desg_desc: any;
   list: any;
   se: any;
@@ -30,29 +33,17 @@ export class GroupsComponent implements OnInit {
 
   ngOnInit(): void {
     this.groupService.getGroupByDesignation().subscribe(result => {
-      console.log(result);
       this.groupList = result;
-      //console.log(this.groupList.size);
-
-      console.log("length--->" + Object.keys(this.groupList).length);
-
       this.se = this.groupList[0].desg_desc;
-      console.log(this.se);
       this.sse = this.groupList[1].desg_desc;
-      console.log(this.sse);
       this.tl = this.groupList[2].desg_desc;
-      console.log(this.tl);
       this.accountant = this.groupList[3].desg_desc;
-      console.log(this.accountant);
       this.pm = this.groupList[4].desg_desc;
-      console.log(this.pm);
-
     });
   }
 
   @ViewChild('secondDialog', { static: true }) secondDialog: TemplateRef<any>;
   openDialogWithTemplateRef(templateRef: TemplateRef<any>, id: number) {
-
 
     console.log("check:: " + id);
 
@@ -70,7 +61,6 @@ export class GroupsComponent implements OnInit {
       this.myGroupService.getMyGroupByPM().subscribe(result => {
         if (result) {
           this.list = result;
-          // console.log('dialog'+this.groupList);
           console.log(this.list);
         }
       });
@@ -80,7 +70,6 @@ export class GroupsComponent implements OnInit {
         if (result) {
           this.list = result;
           console.log(this.list);
-          //console.log('dialog'+this.groupList);
         }
       });
     }
@@ -90,7 +79,6 @@ export class GroupsComponent implements OnInit {
         if (result) {
           this.list = result;
           console.log(this.list);
-          //console.log('dialog'+this.groupList);
         }
       });
     }
@@ -101,16 +89,13 @@ export class GroupsComponent implements OnInit {
         if (result) {
           this.list = result;
           console.log(this.list);
-          //console.log('dialog'+this.groupList);
         }
       });
 
     }
     this.dialog.open(templateRef, {
-
       height: '42%',
       width: '30%',
-
     });
 
   }
@@ -121,6 +106,18 @@ export class GroupsComponent implements OnInit {
 
     this.router.navigate(["/mygroup"]);
     this.dialog.closeAll();
+  }
+
+  openGroupChatBox() {
+    this.indexId = this.candidate++;
+
+    this.dialog.closeAll();
+  }
+
+
+  callClose() {
+    this.indexId = -1;
+
   }
 
 }

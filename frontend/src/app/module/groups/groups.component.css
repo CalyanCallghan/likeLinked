@@ -1,14 +1,41 @@
-.groupAndMygrop{
-    width: 15em;
-    margin-top: 3%;
-    left:7em;
-    border-radius: 1em;
-}
 
 button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disabled), [type="submit"]:not(:disabled) {
     cursor: pointer;
     margin-left: 30%;
 }
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+.card-title{
+    color:white;
+    font-size: 14px;
+    font-weight: 800;
+    font-family: sans-serif;
+}
+
+.group-names{
+    cursor: pointer;
+}
+.material-icons{
+    cursor: pointer;
+}
+.chat-option{
+    cursor: pointer;
+}
+
+ #rightbox{ 
+    float:right;
+} 
+
+#middlebox{ 
+    display:inline-block; 
+
+} 
+#leftbox { 
+   display:inline-block; 
+   
+}  
 .mat-dialog-content {
     display: block;
     margin: 0 -24px;
@@ -17,8 +44,13 @@ button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disab
     max-width: 100%;
     overflow-x: hidden !important;
 }
-::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
-}
 
+.group{
+    width: 57%;
+    left:26%;
+    margin-top: 3%;
+    border-radius: 1em;
+    background-image: url("src/assets/images/logos/header_bg.svg");
+    background-size: 899px 47px;
+    background-repeat: repeat-x;
+}

@@ -1,17 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../model/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
-  private baseUrl = 'http://localhost:8080/notification';
+  private baseUrl = environment.baseApplicationUrl+"/notification";
 
   constructor(private http: HttpClient) { }
 
-  getNotifications(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/getNotifications`);
+  getNotifications(): Observable<Notification> {
+    return this.http.get<Notification>(`${this.baseUrl}/getNotifications`);
   }
 
   getTotalCount(): Observable<any> {
