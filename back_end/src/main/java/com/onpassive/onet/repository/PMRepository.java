@@ -8,7 +8,7 @@ import com.onpassive.onet.model.PMModel;
 
 
 @Repository
-public interface PMRepository extends JpaRepository<PMModel, String> {
+public interface PMRepository extends JpaRepository<PMModel, Integer> {
 
 
 

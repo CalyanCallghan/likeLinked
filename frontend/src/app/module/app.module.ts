@@ -20,8 +20,7 @@ import { NotificationComponent } from './notification/notification.component';
 import { HighlightDirective } from './notification/highlight.directive';
 import { GroupsComponent } from './groups/groups.component';
 import { PersonPostComponent } from './person-post/person-post.component';
-
-
+import { EmployeeListComponent } from './employee-list/employee-list.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +36,9 @@ import { PersonPostComponent } from './person-post/person-post.component';
     NotificationComponent,
     HighlightDirective,
     GroupsComponent,
-    PersonPostComponent
+    PersonPostComponent,
+    GroupsComponent,
+    EmployeeListComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,69 @@
+
+.BGlogout {
+    background-image: url("src/assets/images/logos/BGlogout.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    color:white;
+    font-family: sans-serif;
+    font-size: 10px;
+    text-align: left;
+}
+.text{
+    font-size: 30px;;
+}
+
+.main-title{
+    color:white;
+    font-size: 20px;
+    font-family: monospace;
+    font-weight: bolder;
+    text-align: center;
+}
+.title{
+    margin-left: 1em;
+}
+.btn{
+    background-color:skyblue;
+    color: white;
+    border-radius: 20px;
+    border: 1px solid white;
+    font-size: larger;
+    padding: 10px;
+    margin-left: 10em;
+}
+
+.text-block {
+    position: absolute;
+    top: 50px;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size:x-large;
+  }
+
+  .text-logout{
+    /* position: absolute; */
+   margin-top: -80%;
+    left: 70px;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom: darkgray;
+    /* margin-bottom: 30%; */
+
+  }
+  .logout-text{
+    margin-top: -60%;
+  }
+
+.main-title{
+    color:white;
+    font-size: 20px;
+    font-family: monospace;
+    font-weight: bolder;
+}
+  

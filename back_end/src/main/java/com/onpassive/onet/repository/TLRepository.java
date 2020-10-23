@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.onpassive.onet.model.TLModel;
 
 @Repository
-public interface TLRepository extends JpaRepository<TLModel, String> {
+public interface TLRepository extends JpaRepository<TLModel, Integer> {
 
 
 

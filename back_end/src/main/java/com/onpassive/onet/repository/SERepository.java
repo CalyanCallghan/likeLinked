@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.onpassive.onet.model.SEModel;
 
 @Repository
-public interface SERepository extends JpaRepository<SEModel, String> {
+public interface SERepository extends JpaRepository<SEModel, Integer> {
 
 }

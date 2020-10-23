@@ -7,31 +7,27 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-
-
-@Entity
 @Data
+@AllArgsConstructor
+@Entity
 @Table(name = "se")
+@NoArgsConstructor
 public class SEModel {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	
-	@Column(name="se_id")
-	private String se_id;
-	
-	@Column(name="se_email")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "se_id")
+	private Integer id;
+	@Column(name = "se_email")
 	private String email;
-	
-	@Column(name="name")
+	@Column(name = "name")
 	private String name;
-	
-	@Column(name="phone_no")
-	private String phone_no;
-	
-	@Column(name="profile_pic")
-	private String profile_pic;
+	@Column(name = "phone_no")
+	private String phoneNo;
+	@Column(name = "profile_pic")
+	private String profilePic;
 
-	
 }

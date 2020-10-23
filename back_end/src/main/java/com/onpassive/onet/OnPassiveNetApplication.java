@@ -18,6 +18,7 @@ public class OnPassiveNetApplication extends SpringBootServletInitializer{
 
 	public static void main(String[] args) {
 		SpringApplication.run(OnPassiveNetApplication.class, args);
+		//.allowedOrigins("http://localhost:4200","http://localhost:8080")
 	}
 	
 	@Bean
@@ -26,7 +27,7 @@ public class OnPassiveNetApplication extends SpringBootServletInitializer{
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "DELETE")
-                .allowedOrigins("https://opnetqaui.onpassive.com","https://opnetqaapi.onpassive.com")
+                .allowedOrigins("https://opnetqaapi.onpassive.com","https://opnetqaui.onpassive.com  ")
                 .allowedHeaders("Access-Control-Request-Headers","*");
             }
         };

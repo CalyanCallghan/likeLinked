@@ -1,0 +1,16 @@
+.content { 
+    padding: 16px; 
+}
+.line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+  }
+
+  .postcard{
+    margin-top: 15.3%;
+    right: 6em;
+    width: 32em;
+    border-radius: 1em
+}

@@ -1,4 +1,4 @@
 export class Grouplist {
-    desg_id: String;
-    desg_desc: any;
+    desgId: number;
+    desgdesc: any;
 }

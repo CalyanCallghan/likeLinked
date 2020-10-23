@@ -7,31 +7,27 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Entity
 @Data
+@AllArgsConstructor
+@Entity
 @Table(name = "accounts")
+@NoArgsConstructor
 public class AccountModel {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="acc_id")
-	private String acc_id;
-	
-	  @Column(name="acc_email") private String email;
-	  
-		
-		  @Column(name="name") private String name;
-		  
-			
-			  @Column(name="phone_no") private String phone_no;
-			  
-			  @Column(name="profile_pic") private String profile_pic;
-			 
-	 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "acc_id")
+	private Integer id;
+	@Column(name = "acc_email")
+	private String email;
+	@Column(name = "name")
+	private String name;
+	@Column(name = "phone_no")
+	private String phoneNo;
+	@Column(name = "profile_pic")
+	private String profilePic;
 
-	
-
-
-	
 }

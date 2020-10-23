@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { GroupsService } from 'src/app/service/groups.service';
 import { MyGroupService } from 'src/app/service/my-group.service';
-import { Grouplist } from './grouplist';
 
 @Component({
   selector: 'app-groups',
@@ -34,6 +33,7 @@ export class GroupsComponent implements OnInit {
   ngOnInit(): void {
     this.groupService.getGroupByDesignation().subscribe(result => {
       this.groupList = result;
+      console.log("===========>"+JSON.stringify(result));
       this.se = this.groupList[0].desg_desc;
       this.sse = this.groupList[1].desg_desc;
       this.tl = this.groupList[2].desg_desc;

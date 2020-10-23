@@ -8,7 +8,7 @@ import com.onpassive.onet.model.SSEModel;
 
 
 @Repository
-public interface SSERepository extends JpaRepository<SSEModel, String> {
+public interface SSERepository extends JpaRepository<SSEModel, Integer> {
 
 }
 

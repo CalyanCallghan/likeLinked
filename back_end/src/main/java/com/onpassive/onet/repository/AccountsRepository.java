@@ -7,7 +7,7 @@ import com.onpassive.onet.model.AccountModel;
 
 
 @Repository
-public interface AccountsRepository extends JpaRepository<AccountModel, String> {
+public interface AccountsRepository extends JpaRepository<AccountModel, Integer> {
 
 
 
