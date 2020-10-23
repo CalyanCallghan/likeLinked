@@ -22,12 +22,12 @@ import lombok.Data;
 
 @Entity
 
-@Table(name = "notifications",schema="admin", catalog="admin")
+@Table(name = "notifications",schema = "admin")
 public class Notification {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;	
+	private long id;	
 	
 	@Column(name ="send_from")
 	private String from;
@@ -58,6 +58,12 @@ public class Notification {
 	}
 	public String getMessage() {
 		return message;
+	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
 	}
 	public void setMessage(String message) {
 		this.message = message;

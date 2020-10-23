@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.onpassive.onet.model.Notification;
 import com.onpassive.onet.repository.NotificationRepository;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/notification")
 public class NotificationController {
@@ -31,9 +30,9 @@ public class NotificationController {
 
 	@GetMapping("/getNotifications")
 	public List<Notification> getNotifications() {
-	
+
 		System.out.println("working");
-		
+
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
 		LocalDateTime now = LocalDateTime.now();
 		Date d1 = null;
@@ -42,10 +41,9 @@ public class NotificationController {
 		String dateStart = null;
 		List<Notification> list = new ArrayList<Notification>();
 		list = notificationRepository.findAll();
-		
-		System.out.println("*******"+list);
-		
-		
+
+		System.out.println("*******" + list);
+
 		int i = 0;
 		for (Notification notify : list) {
 			dateStart = notify.getSendDate();
@@ -59,7 +57,7 @@ public class NotificationController {
 				// in milliseconds
 				long diff = d2.getTime() - d1.getTime();
 
-				System.out.println("difference:: "+diff);
+				System.out.println("difference:: " + diff);
 
 				long diffag = 0;
 
@@ -116,7 +114,7 @@ public class NotificationController {
 			list.get(i).setSendDate(notification.getSendDate());
 			i++;
 		}
-		System.out.println("list of notification:::"+ list.get(0).getMessage());
+		System.out.println("list of notification:::" + list.get(0).getMessage());
 		Collections.reverse(list);
 		return list;
 	}
@@ -136,13 +134,12 @@ public class NotificationController {
 		unreadCount = notificationRepository.countByStatus("unread");
 		return unreadCount;
 	}
-	
-	//update unreadCount
+
+	// update unreadCount
 	@PutMapping("notificationUnread/{notificationId}")
-	public int notificationReadByUser(@PathVariable("notificationId") long id,@RequestParam("status") String status) {
-		int count = notificationRepository.updateAsUnread(status,id);
+	public int notificationReadByUser(@PathVariable("notificationId") long id, @RequestParam("status") String status) {
+		int count = notificationRepository.updateAsUnread(status, id);
 		return count;
 	}
-	
-	
+
 }

@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 
-@Table(name = "chatmessage",schema="admin", catalog="admin")
+@Table(name = "chatmessage")
 public class ChatModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

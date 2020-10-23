@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import lombok.Data;
 @Entity
 @Data
-@Table(name = "designation",schema="admin", catalog="admin")
+@Table(name = "designation")
 public class GroupModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

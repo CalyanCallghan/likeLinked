@@ -13,25 +13,17 @@ import com.onpassive.onet.model.TLModel;
 import com.onpassive.onet.repository.GroupRepository;
 import com.onpassive.onet.repository.TLRepository;
 
-
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/groups")
 public class GroupController {
-	 @Autowired
-	 private GroupRepository grouprepository;
-	 @Autowired
-	 private TLRepository tlRepository ;
-	 
-	  @GetMapping("/group")
-	    public List<GroupModel> getAllDesignation() {
-		 
-	        return grouprepository.findAll();
-	    }
-	 
-//	  @GetMapping("/tl")
-//	    public List<TLModel> getAllTLList() {
-//		    List list =tlRepository.findAll();
-//	        return list;
-//	    }
+	@Autowired
+	private GroupRepository grouprepository;
+	@Autowired
+	private TLRepository tlRepository;
+
+	@GetMapping("/group")
+	public List<GroupModel> getAllDesignation() {
+		return grouprepository.findAll();
+	}
+
 }

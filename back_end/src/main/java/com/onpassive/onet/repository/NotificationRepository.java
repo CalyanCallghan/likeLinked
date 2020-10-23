@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.onpassive.onet.model.Notification;
 
-public interface NotificationRepository extends JpaRepository<Notification, Integer> {
+public interface NotificationRepository extends JpaRepository<Notification, Long> {
 	
 	//for all notifications
 	public List<Notification> findAll();

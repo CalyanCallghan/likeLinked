@@ -21,7 +21,6 @@ import com.onpassive.onet.repository.SERepository;
 import com.onpassive.onet.repository.SSERepository;
 import com.onpassive.onet.repository.TLRepository;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/myGroup")
 public class MyGroupController {

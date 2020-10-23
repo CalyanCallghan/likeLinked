@@ -32,7 +32,6 @@ import com.onpassive.onet.util.UploadFileResponse;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@CrossOrigin("*")
 @RequestMapping("/file")
 public class FileController {
 	@Autowired

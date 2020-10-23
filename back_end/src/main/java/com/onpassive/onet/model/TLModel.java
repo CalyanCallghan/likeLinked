@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "tl",schema="mygroup", catalog="mygroup")
+@Table(name = "tl")
 public class TLModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

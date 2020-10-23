@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.onpassive.onet.model.ChatModel;
 import com.onpassive.onet.repository.ChatRepository;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api")
 @RestController
 public class ChatController {
