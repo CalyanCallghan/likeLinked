@@ -21,71 +21,46 @@
          </div>
        </div>
        </mat-card>
-
-      <ng-template #myDialog>
-        <a class='btn' mat-button (click)="myGroup()">My Group <mat-icon>group</mat-icon></a>
-        <button mat-button matDialogClose color="primary">
-          <span class="material-icons">
-            clear
-          </span>
-        </button>
-        <mat-dialog-content>
-          <ul class="list-group ml-3" *ngFor="let gplist of list;let i = index;">
-            <li class="list-group-item" style="width: 25.2em;height: 3em;margin-left: -15px">
-              <div>
-                <table>
-                  <tr>
-                    <td>
-                      <span class="material-icons" style="margin-left: -0.5em;font-size: 23px"> person</span></td>
-                    <td>
-                      <div><b>{{gplist.name}}</b></div>
-                    </td>
-                    <td>
-                      <div>{{gplist.email}}</div>
-                    </td>
-                    <td>
-                      <a (click)="openGroupChatBox()">
-                        <div style="margin-left: 1em;font-size: 23px">
-                          <mat-icon> chat</mat-icon>
-                        </div>
-                      </a>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-            </li>
-          </ul>
-        </mat-dialog-content>
-        <mat-dialog-actions>
-
-        </mat-dialog-actions>
-      </ng-template>
     </div>
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <mat-card class="listOfEmployees" style="overflow-y: auto;height: 32em;">
+        <div class="page-wrapper">
+          <div class="content" fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="16px grid">
+            <div fxFlex.xs="100%" *ngFor="let num of card_data">
+              <mat-card class="mat-elevation-z4" style="width:9em;height: 16em" fxLayout="column" fxLayoutAlign="center center">
+                <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+                  <img src="assets/images/logos/jhonwick.jpg" style="width:6em;border-radius: 50%;flex:2">
+                  <span style="color: rgba(0,0,0,.9);font-weight: 900;padding-top: 0.5em;text-align: center;flex:1" class="center line-clamp">{{num.name}}</span>
+                  <span style="text-align: center;color: rgba(0,0,0,.6);" class="center line-clamp">{{num.title}}</span>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-button>Send message</button>
+                </mat-card-actions>
+              </mat-card>
+            </div>
+          <!-- </cdk-virtual-scroll-viewport> -->
+          </div>
+        </div>
+      </mat-card> 
     </div>
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
       <app-news></app-news>
-
       <div id="boxes">
-
         <div id="rightbox">
           <ng-template [ngIf]="indexId == 1 || indexId == 2 || indexId == 3">
             <app-chat></app-chat>
           </ng-template>
         </div>
-
         <div id="middlebox">
           <ng-template [ngIf]="indexId == 2 || indexId == 3">
             <app-chat></app-chat>
           </ng-template>
         </div>
-
         <div id="leftbox">
           <ng-template [ngIf]="indexId == 3">
             <app-chat></app-chat>
           </ng-template>
         </div>
-
       </div>
     </div>
   </div>

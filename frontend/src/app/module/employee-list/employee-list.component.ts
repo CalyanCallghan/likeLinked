@@ -13,6 +13,5 @@ export class EmployeeListComponent{
   constructor(private employeService:EmployeService){
     this.card_data = this.employeService.getEmployeeDetails();
   }
- 
 
 }

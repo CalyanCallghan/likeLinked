@@ -21,6 +21,8 @@ import { HighlightDirective } from './notification/highlight.directive';
 import { GroupsComponent } from './groups/groups.component';
 import { PersonPostComponent } from './person-post/person-post.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
+import { FlexLayoutModule } from "@angular/flex-layout";
+
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
     AppRoutingModule,
     FormsModule,
     MDBBootstrapModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

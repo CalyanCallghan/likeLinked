@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { EmployeService } from 'src/app/service/employe.service';
 import { GroupsService } from 'src/app/service/groups.service';
 import { MyGroupService } from 'src/app/service/my-group.service';
 
@@ -13,7 +14,6 @@ export class GroupsComponent implements OnInit {
 
   indexId: number;
   candidate = 1;
-
   bool = false;
   groupList: any;
   desg_desc: any;
@@ -25,12 +25,14 @@ export class GroupsComponent implements OnInit {
   pm: any;
   b = true;
   techLead: any;
+  card_data:any[];
   constructor(private groupService: GroupsService,
     private dialog: MatDialog,
     private router: Router,
-    private myGroupService: MyGroupService) { }
+    private myGroupService: MyGroupService,private employeService:EmployeService) { }
 
   ngOnInit(): void {
+    this.card_data = this.employeService.getEmployeeDetails();
     this.groupService.getGroupByDesignation().subscribe(result => {
       this.groupList = result;
       console.log("===========>"+JSON.stringify(result));

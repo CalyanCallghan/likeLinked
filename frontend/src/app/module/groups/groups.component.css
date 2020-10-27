@@ -54,3 +54,24 @@ button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disab
     background-size: 899px 47px;
     background-repeat: repeat-x;
 }
+.listOfEmployees{
+    margin-top: 15.3%;
+    right: 6em;
+    width: 32em;
+    border-radius: 1em;
+    padding:0
+}
+.content { 
+    padding: 16px; 
+}
+.line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+  }
+
+  .example-viewport {
+    height: 125%;
+    width: 100%;
+}
