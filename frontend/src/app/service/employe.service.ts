@@ -1,11 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { EmployeeData } from '../model/employeeData';
+import { environment } from '../model/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   card_data:any[]  = [{
     img: "assets/images/jhonwick.jpg",
@@ -65,7 +69,7 @@ export class EmployeService {
     title: "Project Manager at onpassive "
   }, {
     img: "assets/images/jhonwick.jpg",
-    name: "Amanda Peet ",
+    name: "Amanda Peet",
     title: "Delivery Head at onpassive "
   }, {
     img: "assets/images/jhonwick.jpg",
@@ -83,9 +87,9 @@ export class EmployeService {
     img: "assets/images/jhonwick.jpg",
     name: "Haword Willeam",
     title: "Software Engineer at onpassive "
-  }];;
+  }];
 
-  getEmployeeDetails(){
-    return this.card_data;
+  getEmployeeDetailsByDesignation(desigId:any): Observable<EmployeeData> {
+    return this.http.get<EmployeeData>(environment.baseApplicationUrl+"/myGroup/"+desigId);
   }
 }

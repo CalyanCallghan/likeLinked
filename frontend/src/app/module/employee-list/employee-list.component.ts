@@ -9,9 +9,10 @@ import { EmployeService } from 'src/app/service/employe.service';
 export class EmployeeListComponent{
 
   title = 'card-view-demo';
-  card_data:any[];
+  card_data:any;
   constructor(private employeService:EmployeService){
-    this.card_data = this.employeService.getEmployeeDetails();
+    this.card_data = this.employeService.getEmployeeDetailsByDesignation(1);
   }
+ 
 
 }

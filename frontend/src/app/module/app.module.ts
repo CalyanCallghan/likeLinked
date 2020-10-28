@@ -21,6 +21,7 @@ import { HighlightDirective } from './notification/highlight.directive';
 import { GroupsComponent } from './groups/groups.component';
 import { PersonPostComponent } from './person-post/person-post.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { FlexLayoutModule } from "@angular/flex-layout";
 
 
@@ -52,6 +53,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     AppRoutingModule,
     FormsModule,
     MDBBootstrapModule,
+    PdfViewerModule,
     FlexLayoutModule
   ],
   providers: [],

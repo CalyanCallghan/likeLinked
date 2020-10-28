@@ -7,6 +7,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { ChatComponent } from './chat/chat.component';
 import { GroupsComponent } from './groups/groups.component';
 import { LogoutComponent } from './logout/logout.component';
+import { EmployeeListComponent } from './employee-list/employee-list.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
@@ -14,8 +15,8 @@ const routes: Routes = [
   { path: 'chat' , component: ChatComponent},
   { path: 'notification' , component: NotificationComponent},
   { path: 'groups' , component: GroupsComponent},
-  { path: 'logout' , component: LogoutComponent}
-  
+  { path: 'logout' , component: LogoutComponent},
+  { path: 'employeeList/:desigId' , component: EmployeeListComponent}
 ]; 
 
 @NgModule({

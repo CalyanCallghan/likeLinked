@@ -12,7 +12,8 @@ export class AppComponent implements OnInit{
 
    constructor() { }
    ngOnInit(): void {
-    
+    localStorage.setItem("employeeCode","1020012");
+    localStorage.setItem("designation","SE");
    }
 
 }

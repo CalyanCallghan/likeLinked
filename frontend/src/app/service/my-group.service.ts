@@ -1,6 +1,7 @@
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { EmployeeData } from '../model/employeeData';
 import { environment } from '../model/environment';
 
 @Injectable({
@@ -12,19 +13,8 @@ export class MyGroupService {
     withCredentials: true
   };
   constructor(private http: HttpClient) { }
-  getMyGroupByTL(): Observable<any> {
-    return this.http.get(environment.baseApplicationUrl+"/myGroup/tl");
+  getEmployeeDetailsByDesignation(): Observable<EmployeeData> {
+    return this.http.get<EmployeeData>(environment.baseApplicationUrl+"/myGroup/tl");
   }
-  getMyGroupByPM(): Observable<any> {
-    return this.http.get(environment.baseApplicationUrl+"/myGroup/pm");
-  }
-  getMyGroupBySE(): Observable<any> {
-    return this.http.get(environment.baseApplicationUrl+"/myGroup/se");
-  }
-  getMyGroupBySSE(): Observable<any> {
-    return this.http.get(environment.baseApplicationUrl+"/myGroup/sse");
-  }
-  getMyGroupByAccounts(): Observable<any> {
-    return this.http.get(environment.baseApplicationUrl+"/myGroup/accounts");
-  }
+
 }
