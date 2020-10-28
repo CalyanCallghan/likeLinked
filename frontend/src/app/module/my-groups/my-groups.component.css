@@ -35,3 +35,19 @@
    display:inline-block; 
    
 } 
+.employeeName{
+    flex: 1;
+    font-size: medium;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    word-break: break-all;
+}
+.list-group-item {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125) !important;
+    border: none;
+}
+.list-group {
+    border-radius: 0rem; 
+}
