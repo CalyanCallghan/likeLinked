@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,8 +18,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.onpassive.onet.model.ChatModel;
+import com.onpassive.onet.entity.ChatModel;
 import com.onpassive.onet.repository.ChatRepository;
+
+
+//@CrossOrigin(origins = {"https://opnetqaapi.onpassive.com","https://opnetqaui.onpassive.com"})
+@CrossOrigin(origins = {"http://localhost:8080","http://localhost:4200"})
 
 @RequestMapping("/api")
 @RestController
@@ -25,22 +31,19 @@ public class ChatController {
 	@Autowired
 	ChatRepository chatrepo;
 
-    //sending the message
 	@PostMapping("/sentMessage")
-	public ChatModel sentMessage(@RequestBody ChatModel chat) {
-
+	public ResponseEntity<ChatModel> sentMessage(@RequestBody ChatModel chat) {
 		SimpleDateFormat dateTimeInGMT = new SimpleDateFormat("dd-MMM-yyyy hh:mm aa");
-		// Setting the time zone
 		dateTimeInGMT.setTimeZone(TimeZone.getTimeZone("GMT"));
 		chat.setSendDate(dateTimeInGMT.format(new Date()));
-		return chatrepo.save(chat);
+		
+		return new ResponseEntity<ChatModel>(chatrepo.save(chat), HttpStatus.OK);
 	}
 
-	// getting message
-	@GetMapping("/getMessage/{id}")
-	public List<ChatModel> getMessage(@PathVariable long id) {
-		return chatrepo.findById(id);
-
-	}
+//	@GetMapping("/getMessage/{id}")
+//	public List<ChatModel> getMessage(@PathVariable long id) {
+//		return chatrepo.findById(id);
+//
+//	}
 
 }

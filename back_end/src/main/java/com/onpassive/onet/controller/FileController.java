@@ -14,7 +14,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,8 +28,8 @@ import com.onpassive.onet.model.HomeRequestModel;
 import com.onpassive.onet.service.FileStorageService;
 import com.onpassive.onet.util.UploadFileResponse;
 
-import lombok.extern.slf4j.Slf4j;
-
+//@CrossOrigin(origins = {"https://opnetqaapi.onpassive.com","https://opnetqaui.onpassive.com"})
+@CrossOrigin(origins = {"http://localhost:8080","http://localhost:4200"})
 @RestController
 @RequestMapping("/file")
 public class FileController {
@@ -48,6 +47,7 @@ public class FileController {
 		LocalDateTime dateTime = null;
 		List<String> fileNames = new ArrayList<>();
 		try {
+			System.err.println("data--->"+data);
 			ObjectMapper obj = new ObjectMapper();
 			HomeRequestModel model = obj.readValue(data, HomeRequestModel.class);
 
@@ -55,7 +55,7 @@ public class FileController {
 				fileStorageService.storeFile(file, model);
 				fileNames.add(file.getOriginalFilename());
 			});
-			message = "Uploaded the files successfully. ";
+			message = "Uploaded the files. ";
 			// return ResponseEntity.status(HttpStatus.OK).body(message);
 			return ResponseEntity.ok(new UploadFileResponse(dateTime.now(), HttpStatus.OK, message));
 		} catch (Exception e) {

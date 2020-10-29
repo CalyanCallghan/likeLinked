@@ -1,4 +1,4 @@
-package com.onpassive.onet.model;
+package com.onpassive.onet.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,14 +14,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @Entity
-@Table(name = "accounts")
+@Table(name = "tl")
 @NoArgsConstructor
-public class AccountModel {
+public class TLModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "acc_id")
+	@Column(name = "tl_id")
 	private Integer id;
-	@Column(name = "acc_email")
+	@Column(name = "tl_email")
 	private String email;
 	@Column(name = "name")
 	private String name;

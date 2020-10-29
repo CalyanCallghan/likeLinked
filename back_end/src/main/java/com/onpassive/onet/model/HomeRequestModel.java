@@ -9,8 +9,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class HomeRequestModel {
 	
-private String email;
+private int createdBy;
 private String content;
 private String type;
+private Integer groupId;
+private String format;
+//{"content":"Hey jhon","type":"M","email":"pavan.kalyan@onpassive.com","groupId":1,"format":"image"}
+
 
 }

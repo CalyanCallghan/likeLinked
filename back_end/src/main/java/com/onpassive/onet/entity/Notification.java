@@ -1,4 +1,4 @@
-package com.onpassive.onet.model;
+package com.onpassive.onet.entity;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

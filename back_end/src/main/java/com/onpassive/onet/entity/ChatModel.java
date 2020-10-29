@@ -1,4 +1,4 @@
-package com.onpassive.onet.model;
+package com.onpassive.onet.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

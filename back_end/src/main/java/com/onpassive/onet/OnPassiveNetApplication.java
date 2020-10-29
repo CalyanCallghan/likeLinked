@@ -21,17 +21,18 @@ public class OnPassiveNetApplication extends SpringBootServletInitializer{
 		//.allowedOrigins("http://localhost:4200","http://localhost:8080")
 	}
 	
-	@Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "DELETE")
-                .allowedOrigins("https://opnetqaapi.onpassive.com","https://opnetqaui.onpassive.com  ")
-                .allowedHeaders("Access-Control-Request-Headers","*");
-            }
-        };
-	}
-	
+//	@Bean
+//    public WebMvcConfigurer corsConfigurer() {
+//        return new WebMvcConfigurer() {
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry) {
+//                registry.addMapping("/**")
+//                .allowedMethods("GET", "POST", "PUT", "DELETE")
+//                .allowedOrigins("https://opnetqaapi.onpassive.com","https://opnetqaui.onpassive.com")
+//                .allowedHeaders("Access-Control-Request-Headers","*")
+//                .allowedHeaders("Access-Control-Allow-Origin","*");
+//            }
+//        };
+//	}
 
 }

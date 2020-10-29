@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.onpassive.onet.model.CommentText;
+import com.onpassive.onet.entity.CommentText;
 import com.onpassive.onet.repository.CommentRepository;
 
+//@CrossOrigin(origins = {"https://opnetqaapi.onpassive.com","https://opnetqaui.onpassive.com"})
+@CrossOrigin(origins = {"http://localhost:8080","http://localhost:4200"})
 @RestController
 @RequestMapping("/comment")
 public class CommentController {

@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -15,11 +16,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.onpassive.onet.config.FileStorageProperties;
-
+import com.onpassive.onet.entity.Post;
 import com.onpassive.onet.exception.FileStorageException;
 import com.onpassive.onet.exception.MyFileNotFoundException;
 import com.onpassive.onet.model.HomeRequestModel;
-import com.onpassive.onet.model.Post;
 import com.onpassive.onet.repository.FileRepository;
 import com.onpassive.onet.service.FileStorageService;
 
@@ -53,11 +53,14 @@ public class FileStorageServiceImpl implements FileStorageService {
 			}
 			Path targetLocation = this.fileStorageLocation.resolve(fileName);
 			Post post = new Post();
-			post.setContent(model.getContent());
-			post.setEmail(model.getEmail());
+			post.setDescription(model.getContent());
+			post.setCreatedBy(model.getCreatedBy());
 			post.setType(model.getType());
 			post.setFileName(fileName);
+			post.setCreatedDt(LocalDateTime.now());
+			post.setGroupId(model.getGroupId());
 			post.setFilePath(this.fileStorageLocation.toString());
+			post.setFormat(model.getFormat());
 			// Saving file/copy file to the target location (Replacing existing file with
 			// the same name)
 			Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
@@ -67,6 +70,23 @@ public class FileStorageServiceImpl implements FileStorageService {
 			throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
 		}
 	}
+	
+	public int storeAndUpdateProfileImage(MultipartFile file, int userID) {
+		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+		int count;
+		try {
+			if (fileName.contains("..")) {
+				throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
+			}
+			Path targetLocation = this.fileStorageLocation.resolve(fileName);
+			Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+			count = fileRepository.updateProfilePic(fileName,userID);
+			return count;
+		} catch (IOException ex) {
+			throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
+		}
+	}
+	
 
 	public Resource loadFileAsResource(String fileName) {
 		try {
