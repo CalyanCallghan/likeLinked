@@ -64,7 +64,9 @@ export class CreatePostComponent implements OnInit {
     fileUploadVideo.click();
   }
   createPost() {
-    this.post.email='pavan.kalyan@onpassive.com'
+    this.post.createdBy=Number(localStorage.getItem("employeeCode"));;
+    this.post.groupId = Number(localStorage.getItem("designationId"));
+    this.post.format =  this.format;
     this.mainService.createPost(this.post,this.file)
       .subscribe(data => {
         this.responseData = data;

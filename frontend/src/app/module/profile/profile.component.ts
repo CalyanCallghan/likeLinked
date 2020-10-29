@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { environment } from 'src/app/model/environment';
+import { UploadImageComponent } from '../upload-profile-image/upload-image.component';
 
 @Component({
   selector: 'app-profile',
@@ -6,10 +9,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-
-  constructor() { }
-
+  backendUrl = environment.baseApplicationUrl;
+  constructor(private dialog: MatDialog) { }
+  
   ngOnInit(): void {
+
+  }
+  openUploadDialog() {
+    this.dialog.open(UploadImageComponent);
   }
 
 }

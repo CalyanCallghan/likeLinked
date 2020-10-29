@@ -23,6 +23,9 @@ import { PersonPostComponent } from './person-post/person-post.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { UploadImageComponent } from './upload-profile-image/upload-image.component';
+
 
 
 @NgModule({
@@ -41,7 +44,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     GroupsComponent,
     PersonPostComponent,
     GroupsComponent,
-    EmployeeListComponent
+    EmployeeListComponent,
+    UploadImageComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +58,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     FormsModule,
     MDBBootstrapModule,
     PdfViewerModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ImageCropperModule
   ],
   providers: [],
   bootstrap: [AppComponent]

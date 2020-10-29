@@ -1,5 +1,7 @@
 export class Post{
-    email:string;
+    createdBy:number;
     content:string;
     type:string;
+    format:string;
+    groupId:number;
 }

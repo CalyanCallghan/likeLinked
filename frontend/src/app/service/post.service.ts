@@ -14,10 +14,18 @@ export class PostService {
   constructor(private http: HttpClient) { }
 
   createPost(post: any,file:any): Observable<ResponseData> {
+    console.log("createPost---->");
     const uploadImageData = new FormData();
     uploadImageData.append('files', file);
     uploadImageData.append('data', JSON.stringify(post));
     return this.http.post<ResponseData>(`${this.baseUrl}/uploadFile`,uploadImageData);
+  }
+
+  updateProfilePic(userId: any,file:any): Observable<ResponseData> {
+    const data = new FormData();
+    data.append('file', file);
+    data.append('userId', userId);
+    return this.http.post<ResponseData>(`${environment.baseApplicationUrl}/user/uploadProfileImage`,data);
   }
 
   postMsg(chat:any):Observable<Chat>{

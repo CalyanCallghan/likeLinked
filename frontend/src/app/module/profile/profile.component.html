@@ -1,9 +1,9 @@
 <mat-card class="profilePicAndData">
     <a>
          <div class="container" fxLayoutAlign="center center">
-            <img src="assets/images/logos/defaultimg1.png" style="width: 5em;border-radius: 50%;">
+            <img src="{{backendUrl}}/file/downloadFile/kingsman.jpg" style="width: 5em;border-radius: 50%;">
             <div class="overlay" fxLayoutAlign="center center">
-                <span class="material-icons">camera_alt</span>
+                <span class="material-icons" (click)="openUploadDialog()">camera_alt</span>
             </div>
         </div>
         <div style="font-weight: 600;text-align: center">

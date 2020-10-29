@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { StartPostComponent } from './start-post/start-post.component';
-
 
 @Component({
   selector: 'app-root',
@@ -12,8 +9,9 @@ export class AppComponent implements OnInit{
 
    constructor() { }
    ngOnInit(): void {
-    localStorage.setItem("employeeCode","1020012");
+    localStorage.setItem("employeeCode","007");
     localStorage.setItem("designation","SE");
+    localStorage.setItem("designationId","1");
    }
 
 }

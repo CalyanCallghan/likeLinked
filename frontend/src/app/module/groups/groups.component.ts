@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { EmployeeData } from 'src/app/model/employeeData';
+import { environment } from 'src/app/model/environment';
 import { EmployeService } from 'src/app/service/employe.service';
 import { GroupsService } from 'src/app/service/groups.service';
 import { MyGroupService } from 'src/app/service/my-group.service';
@@ -14,6 +15,7 @@ import { MyGroupService } from 'src/app/service/my-group.service';
 export class GroupsComponent implements OnInit {
   groupList: any;
   card_data:any;
+  backendUrl = environment.baseApplicationUrl;
 
   constructor(private groupService: GroupsService,
     private router: Router, private employeService: EmployeService) { }
