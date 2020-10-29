@@ -1,4 +1,6 @@
+import { Inject } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { Post } from 'src/app/model/post';
 import { ResponseData } from 'src/app/model/response-data';
@@ -20,7 +22,8 @@ export class UploadImageComponent implements OnInit {
   fileToReturn: File;
   userId:string = localStorage.getItem("employeeCode");
   
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService,private dialogRef: MatDialogRef<UploadImageComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: string,) { }
 
   ngOnInit(): void {
 
@@ -54,6 +57,7 @@ export class UploadImageComponent implements OnInit {
           const fileUpload = document.getElementById('cancel') as HTMLInputElement;
           fileUpload.click();
         }
+        this.dialogRef.close({data: this.fileName});
       },error => console.log(error));
   }
   base64ToFile(data, filename) {

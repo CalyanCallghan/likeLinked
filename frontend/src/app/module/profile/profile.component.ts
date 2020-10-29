@@ -10,6 +10,7 @@ import { UploadImageComponent } from '../upload-profile-image/upload-image.compo
 })
 export class ProfileComponent implements OnInit {
   backendUrl = environment.baseApplicationUrl;
+  url:string = "jhonwick.jpg";
   constructor(private dialog: MatDialog) { }
   
   ngOnInit(): void {
@@ -17,6 +18,12 @@ export class ProfileComponent implements OnInit {
   }
   openUploadDialog() {
     this.dialog.open(UploadImageComponent);
+    let dialogRef = this.dialog.open(UploadImageComponent, {
+      data: `Are you sure you want to upload?`
+    })
+    dialogRef.afterClosed().subscribe(res => {
+      console.log(res.data)
+    })
   }
 
 }

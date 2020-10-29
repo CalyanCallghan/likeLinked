@@ -3,13 +3,15 @@ import { NotificationService } from 'src/app/service/notification.service';
 import { UnReadService } from 'src/app/service/unreadCount.service';
 import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 import { Subject } from 'rxjs';
+import { ViewEncapsulation } from '@angular/core';
 
 
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class HeaderComponent implements OnInit {
 

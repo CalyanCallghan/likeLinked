@@ -3,11 +3,12 @@
     <!-- <input class="form-control form-control-sm" style="margin-left: 32em;" type="text" placeholder="Search"
       aria-label="Search" mdbInput> -->
       <mat-search-bar style="margin-left: 36em;"></mat-search-bar>
-    <div>
-      <a class='btn' mat-button  routerLink="/">Home <mat-icon>home</mat-icon></a>
-      <a class='btn' mat-button routerLink="groups">Groups <mat-icon>groups</mat-icon></a>
-      <a class='btn' mat-button routerLink="mygroup">My Group <mat-icon>group</mat-icon></a>
-      <a class='btn' mat-button routerLink="notification" (click)="changeColor()"> Notifications 
+    <div style="display: flex;
+    align-items: center;">
+      <a class='btn header-button' mat-button  routerLink="/">Home <mat-icon>home</mat-icon></a>
+      <a class='btn header-button' mat-button routerLink="groups">Groups <mat-icon>groups</mat-icon></a>
+      <a class='btn header-button' mat-button routerLink="mygroup">My Group <mat-icon>group</mat-icon></a>
+      <a class='btn header-button' mat-button routerLink="notification" (click)="changeColor()"> Notifications 
         <mat-icon matBadge="{{unreadCount}}" matBadgeColor="{{notificationColor}}">notifications_none
         </mat-icon>
       </a>

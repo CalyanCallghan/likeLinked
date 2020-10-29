@@ -38,6 +38,23 @@ body {
 .search{
     margin-left: 32em;
 }
+.iconAndName{
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+.header-button .mat-button-wrapper  {
+
+    display: flex;
+    align-items: center;
+    flex-direction: column-reverse;
+    line-height: 1.5;
+}
+.header-button .material-icons  {
+
+    line-height: 1.25;
+}
+
 
   
 
