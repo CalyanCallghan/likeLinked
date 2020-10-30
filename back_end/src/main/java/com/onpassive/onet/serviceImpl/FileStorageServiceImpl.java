@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -100,6 +101,11 @@ public class FileStorageServiceImpl implements FileStorageService {
 		} catch (MalformedURLException ex) {
 			throw new MyFileNotFoundException("File not found " + fileName, ex);
 		}
+	}
+	
+	@Override
+	public List<Post> getAllPosts(String type) {
+		return fileRepository.returnAllthePosts(type);
 	}
 
 }

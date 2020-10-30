@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.onpassive.onet.entity.Post;
 import com.onpassive.onet.model.HomeRequestModel;
 import com.onpassive.onet.service.FileStorageService;
 import com.onpassive.onet.util.UploadFileResponse;
@@ -84,6 +85,12 @@ public class FileController {
 		return ResponseEntity.ok().contentType(MediaType.parseMediaType(contentType))
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
 				.body(resource);
+	}
+	
+	@GetMapping("/getAllPosts/{type}")
+	public List<Post> getAllPosts(@PathVariable String type) {
+		List<Post> list = fileStorageService.getAllPosts(type);
+		return list;
 	}
 
 }
