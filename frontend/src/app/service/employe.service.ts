@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { EmployeeData } from '../model/employeeData';
+import { EmployeesData } from '../model/employeesData';
 import { environment } from '../model/environment';
+import { UserData } from '../model/userData';
 
 @Injectable({
   providedIn: 'root'
@@ -89,7 +90,10 @@ export class EmployeService {
     title: "Software Engineer at onpassive "
   }];
 
-  getEmployeeDetailsByDesignation(desigId:any): Observable<EmployeeData> {
-    return this.http.get<EmployeeData>(environment.baseApplicationUrl+"/myGroup/"+desigId);
+  getEmployeeDetailsByDesignation(desigId:any): Observable<EmployeesData> {
+    return this.http.get<EmployeesData>(environment.baseApplicationUrl+"/myGroup/"+desigId);
+  }
+  getEmployeeData(emailId:any): Observable<UserData> {
+    return this.http.get<UserData>(environment.baseApplicationUrl+"/user/userDetails/"+emailId);
   }
 }

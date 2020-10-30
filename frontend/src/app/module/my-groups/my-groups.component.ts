@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { PersonPostService } from 'src/app/service/person.service';
 import { StartPostComponent } from '../start-post/start-post.component';
 
 
@@ -11,12 +12,11 @@ import { StartPostComponent } from '../start-post/start-post.component';
 })
 export class MyGroupsComponent implements OnInit {
   indexId: number;
-  constructor(public dialog: MatDialog, private router: Router,
-
-
-  ) {
+  allPosts:any;
+  constructor(public dialog: MatDialog, private router: Router,private personPostService: PersonPostService) {
   }
   ngOnInit(): void {
+    localStorage.setItem("type","M");
   }
   openPostDialog() {
     this.dialog.open(StartPostComponent);
@@ -72,5 +72,14 @@ export class MyGroupsComponent implements OnInit {
   kalyan() {
     this.router.navigate(["/chat"]);
   }
+
+  getMyGroupPost(){
+    let type = localStorage.getItem("type");
+    this.personPostService.getAllPosts(type).subscribe(data => {
+      this.allPosts = data;
+      console.log(JSON.stringify(this.allPosts));
+      console.log("data::"+this.allPosts[0].fileName);
+    });
+  }  
 
 }

@@ -1,6 +1,8 @@
+import { UserData } from './../../model/userData';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from 'src/app/model/environment';
+import { EmployeService } from 'src/app/service/employe.service';
 import { UploadImageComponent } from '../upload-profile-image/upload-image.component';
 
 @Component({
@@ -10,20 +12,27 @@ import { UploadImageComponent } from '../upload-profile-image/upload-image.compo
 })
 export class ProfileComponent implements OnInit {
   backendUrl = environment.baseApplicationUrl;
-  url:string = "jhonwick.jpg";
-  constructor(private dialog: MatDialog) { }
+  picName:string;
+  userdata:UserData= new UserData();
+  userId:string = localStorage.getItem("employeeCode");
+  userEmailId:string = localStorage.getItem("emailId");
+
+  constructor(private dialog: MatDialog,private employeService:EmployeService) { }
   
   ngOnInit(): void {
-
+    this.employeService.getEmployeeData(this.userEmailId).subscribe(data => {
+      this.userdata = data;
+    },error => console.log(error));
   }
   openUploadDialog() {
-    this.dialog.open(UploadImageComponent);
     let dialogRef = this.dialog.open(UploadImageComponent, {
-      data: `Are you sure you want to upload?`
-    })
-    dialogRef.afterClosed().subscribe(res => {
-      console.log(res.data)
-    })
+      data: {animal: this.picName }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('afterClosed event fired--'+result);
+      this.userdata.file_name = result;
+    });
   }
 
 }

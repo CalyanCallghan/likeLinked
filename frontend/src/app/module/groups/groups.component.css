@@ -99,3 +99,10 @@ button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disab
 .list-group {
     border-radius: 0rem; 
 }
+.mygroupBtn{
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 1.5em;
+    height: 2em;
+    align-items: center;
+}

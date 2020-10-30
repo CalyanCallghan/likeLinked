@@ -1,7 +1,8 @@
-import { Post } from './../../model/post';
+import { CreatePost } from '../../model/createPost';
 import { Component, OnInit } from '@angular/core';
 import { ResponseData } from 'src/app/model/response-data';
 import { PostService } from 'src/app/service/post.service';
+import { PersonPostService } from 'src/app/service/person.service';
 
 
 @Component({
@@ -13,15 +14,16 @@ export class CreatePostComponent implements OnInit {
   accept = 'image/*'
   name = 'Angular';
   format: any;
+  allPosts:any;
   url: any;
   pageVariable: number = 1;
   value = 0;
   min: number = 0;
   max: number = 100;
   file: any;
-  post:Post = new Post();
+  post:CreatePost = new CreatePost();
   responseData : ResponseData = new ResponseData();
-  constructor(private mainService: PostService) { }
+  constructor(private mainService: PostService,private personPostService: PersonPostService) { }
 
   ngOnInit(): void { 
     
@@ -76,5 +78,12 @@ export class CreatePostComponent implements OnInit {
           fileUpload.click();
         }
       },error => console.log(error));
+  }
+  getAllPosts(){
+    let type = localStorage.getItem("type");  
+    this.personPostService.getAllPosts(type).subscribe(data => {
+      this.allPosts = data;
+      console.log("output---->"+JSON.stringify(this.allPosts));
+    });
   }
 }

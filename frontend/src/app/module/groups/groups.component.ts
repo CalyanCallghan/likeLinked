@@ -1,11 +1,8 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import { EmployeeData } from 'src/app/model/employeeData';
 import { environment } from 'src/app/model/environment';
 import { EmployeService } from 'src/app/service/employe.service';
 import { GroupsService } from 'src/app/service/groups.service';
-import { MyGroupService } from 'src/app/service/my-group.service';
 
 @Component({
   selector: 'app-groups',
@@ -16,7 +13,8 @@ export class GroupsComponent implements OnInit {
   groupList: any;
   card_data:any;
   backendUrl = environment.baseApplicationUrl;
-
+  designation:string =localStorage.getItem("designation").toLowerCase();
+  canShowButton:boolean = true;
   constructor(private groupService: GroupsService,
     private router: Router, private employeService: EmployeService) { }
 
@@ -24,9 +22,7 @@ export class GroupsComponent implements OnInit {
     this.groupService.getGroupByDesignation().subscribe(result => {
       this.groupList = result;
     },error => console.log(error));
-
-    let designationId = localStorage.getItem("designation").toLowerCase();
-    this.employeService.getEmployeeDetailsByDesignation(designationId).subscribe(result => {
+    this.employeService.getEmployeeDetailsByDesignation(this.designation).subscribe(result => {
       this.card_data = result;
     },error => console.log(error));
   }
@@ -37,6 +33,11 @@ export class GroupsComponent implements OnInit {
     this.employeService.getEmployeeDetailsByDesignation(des).subscribe(result => {
       this.card_data = result;
     },error => console.log(error));
+    if(des != designation){
+      this.canShowButton = false;
+    }else{
+      this.canShowButton = true;
+    }
   }
 
 }

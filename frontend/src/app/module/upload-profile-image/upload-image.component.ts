@@ -2,7 +2,6 @@ import { Inject } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
-import { Post } from 'src/app/model/post';
 import { ResponseData } from 'src/app/model/response-data';
 import { PostService } from 'src/app/service/post.service';
 
@@ -22,8 +21,10 @@ export class UploadImageComponent implements OnInit {
   fileToReturn: File;
   userId:string = localStorage.getItem("employeeCode");
   
-  constructor(private postService: PostService,private dialogRef: MatDialogRef<UploadImageComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: string,) { }
+  constructor(private postService: PostService,public dialogRef: MatDialogRef<UploadImageComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+      console.log("data-->"+this.data.animal);
+     }
 
   ngOnInit(): void {
 
@@ -36,6 +37,7 @@ export class UploadImageComponent implements OnInit {
     this.imageChangedEvent = event;
     this.photoUploaded = false;
     this.fileName = event.target.files[0].name;
+    this.data.animal = this.fileName ;
     console.log("fileName---->"+this.fileName);
     
   }
@@ -45,19 +47,19 @@ export class UploadImageComponent implements OnInit {
       event.base64,
       this.fileName,
     )
-    console.log(this.fileToReturn);
   }
 
   uploadMyProfile(){
+    this.data.animal = this.fileName ;
+    console.log("data-->"+this.data.animal);
+    this.data.animal = this.fileName ;
     this.postService.updateProfilePic(this.userId, this.fileToReturn)
       .subscribe(data => {
         this.responseData = data;
         console.log(JSON.stringify(this.responseData));
         if(this.responseData.status == "OK"){
-          const fileUpload = document.getElementById('cancel') as HTMLInputElement;
-          fileUpload.click();
+
         }
-        this.dialogRef.close({data: this.fileName});
       },error => console.log(error));
   }
   base64ToFile(data, filename) {
@@ -70,5 +72,8 @@ export class UploadImageComponent implements OnInit {
         u8arr[n] = bstr.charCodeAt(n);
     }
     return new File([u8arr], filename, { type: mime });
+  }
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

@@ -1,7 +1,9 @@
  <div>
     <h1 mat-dialog-title>Add profile photo</h1>
+    <input matInput [(ngModel)]="data.animal" value="{{fileName}}" style="display: none;">
     <div mat-dialog-content *ngIf="photoUploaded" fxLayoutAlign="center center">
         <!-- <input type="file" (change)="fileChangeEvent($event)" /> -->
+        
         <input type="file" id="fileUpload" name="fileUpload" multiple="multiple" accept="image/*" 
                          style="display:none;" (change)="fileChangeEvent($event)" />
         <button mat-button (click)="onClick()" color="primary">
@@ -13,7 +15,7 @@
             [resizeToWidth]="256" format="png" (imageCropped)="imageCropped($event)"></image-cropper>
     </div>
     <div mat-dialog-actions style="padding-left: 8em">
-        <button mat-button color="primary" *ngIf="!photoUploaded" (click)="uploadMyProfile()">Upload</button>
-        <button mat-button mat-dialog-close color="warn" id='cancel' name='cancel'>Close</button>
+        <button mat-button color="primary" *ngIf="!photoUploaded" (click)="uploadMyProfile()" [mat-dialog-close]="data.animal">Upload</button>
+        <button mat-button  color="warn" (click)="onNoClick()">Close</button>
     </div>
 </div>

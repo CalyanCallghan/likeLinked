@@ -1,7 +1,7 @@
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { EmployeeData } from '../model/employeeData';
+import { EmployeesData } from '../model/employeesData';
 import { environment } from '../model/environment';
 
 @Injectable({
@@ -13,8 +13,8 @@ export class MyGroupService {
     withCredentials: true
   };
   constructor(private http: HttpClient) { }
-  getEmployeeDetailsByDesignation(): Observable<EmployeeData> {
-    return this.http.get<EmployeeData>(environment.baseApplicationUrl+"/myGroup/tl");
+  getEmployeeDetailsByDesignation(): Observable<EmployeesData> {
+    return this.http.get<EmployeesData>(environment.baseApplicationUrl+"/myGroup/tl");
   }
 
 }

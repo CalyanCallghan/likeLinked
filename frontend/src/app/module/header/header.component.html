@@ -2,13 +2,20 @@
     <img id="omIcon" src="assets/images/logos/logo.svg" style="width: 3em"/>
     <!-- <input class="form-control form-control-sm" style="margin-left: 32em;" type="text" placeholder="Search"
       aria-label="Search" mdbInput> -->
-      <mat-search-bar style="margin-left: 36em;"></mat-search-bar>
+      <mat-search-bar style="margin-left: 36em;" [matAutocomplete]="auto" [formControl]="searchCtrl"
+      matTooltip="Type to filter the Name list" matTooltipPosition="after" (onOpen)="clearValue()"></mat-search-bar>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let element of filteredName | async" [value]="element.firstName">
+          <span style="font-size: 12px;"> {{ element.firstName}} {{element.lastName}}</span>
+         
+        </mat-option>
+      </mat-autocomplete>
     <div style="display: flex;
     align-items: center;">
-      <a class='btn header-button' mat-button  routerLink="/">Home <mat-icon>home</mat-icon></a>
-      <a class='btn header-button' mat-button routerLink="groups">Groups <mat-icon>groups</mat-icon></a>
-      <a class='btn header-button' mat-button routerLink="mygroup">My Group <mat-icon>group</mat-icon></a>
-      <a class='btn header-button' mat-button routerLink="notification" (click)="changeColor()"> Notifications 
+      <a class='btn header-button' mat-button  routerLink="/"><span class="header-icon-names">Home</span><mat-icon>home</mat-icon></a>
+      <a class='btn header-button' mat-button routerLink="groups"><span class="header-icon-names">Groups</span> <mat-icon>groups</mat-icon></a>
+      <a class='btn header-button' mat-button routerLink="mygroup"><span class="header-icon-names">My Group</span><mat-icon>group</mat-icon></a>
+      <a class='btn header-button' mat-button routerLink="notification" (click)="changeColor()"><span class="header-icon-names">Notifications</span> 
         <mat-icon matBadge="{{unreadCount}}" matBadgeColor="{{notificationColor}}">notifications_none
         </mat-icon>
       </a>

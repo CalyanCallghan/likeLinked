@@ -1,14 +1,14 @@
 <mat-card class="profilePicAndData">
     <a>
          <div class="container" fxLayoutAlign="center center">
-            <img src="{{backendUrl}}/file/downloadFile/kingsman.jpg" style="width: 5em;border-radius: 50%;">
+            <img src="{{backendUrl}}/file/downloadFile/{{userdata.file_name}}" style="width: 5em;border-radius: 50%;">
             <div class="overlay" fxLayoutAlign="center center">
                 <span class="material-icons" (click)="openUploadDialog()">camera_alt</span>
             </div>
         </div>
         <div style="font-weight: 600;text-align: center">
-            Ted Mobey
+            {{userdata.first_name}} {{userdata.last_name}}
         </div>
     </a>
-    <p style="font-size: 13px;text-align: center">mosbey.ted@onpassive.com</p>
+    <p style="font-size: 13px;text-align: center">{{userdata.email}}</p>
 </mat-card>

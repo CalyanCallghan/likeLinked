@@ -27,6 +27,9 @@
     </div>
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
       <mat-card class="listOfEmployees" style="overflow-y: auto;height: 32em;">
+        <div class="mygroupBtn" *ngIf="canShowButton">
+          <button type="button" class="btn btn-primary" style="margin-top: 1em;" routerLink="mygroup">My Group</button>
+        </div>
         <div class="page-wrapper">
           <div class="content" fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="16px grid">
             <div fxFlex.xs="100%" *ngFor="let num of card_data">

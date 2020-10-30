@@ -1,98 +1,36 @@
-<!-- <mat-card style="overflow-y: scroll;"> -->
-    <cdk-virtual-scroll-viewport class="example-viewport" style="
+<cdk-virtual-scroll-viewport class="example-viewport" style="
       margin-top: 3.3%;
       right: 6em;
       width: 32em;
-      border-radius: 1em">
-        <mat-card class="example-card" >
-            <mat-card-header>
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title>Jhon Wick</mat-card-title>
-            </mat-card-header>
-            <img mat-card-image src="assets/images/logos/BingWallpaper_1.jpg" alt="Photo of a Shiba Inu" style="margin-top: 1em;">
-            <mat-card-content>
-              <p>
-                The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                bred for hunting.
-              </p>
-            </mat-card-content>
-             <mat-card-actions> 
-             <button mat-button>Like</button>
-              <button mat-button (click)="showComment()">Comment</button>
-              <div *ngIf='canShowComment'>
-                <div>
-                  <mat-form-field appearance="fill" style="width: 100%" >
-                      <mat-label>Comment</mat-label>
-                      <textarea matInput [(ngModel)]="comment.comment"></textarea>
-                  </mat-form-field>
-                </div>
-                <div align="end">
-                    <button mat-button (click)="postComment()" disabled='false'>Post</button>
-                </div>
-              </div>
+      border-radius: 1em" >
+  <div style="display: none;">{{allPosts[0].email}}</div>
+  <div *ngFor="let num of allPosts">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Jhon Cena</mat-card-title>
+      </mat-card-header>
 
-              
-             
-           </mat-card-actions> 
-          </mat-card>
-        <br>
-          <mat-card class="example-card">
-            <mat-card-header>
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title>Marshal Erikson</mat-card-title>
-            </mat-card-header>
-            <img mat-card-image src="assets/images/logos/BingWallpaper_2.jpg" alt="Photo of a Shiba Inu" style="margin-top: 1em;">
-            <mat-card-content>
-              <p>
-                The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                bred for hunting.
-              </p>
-            </mat-card-content>
-            <mat-card-actions>
-              <button mat-button>Like</button>
-              <button mat-button>Comment</button>
-            </mat-card-actions>
-          </mat-card>
-          <mat-card class="example-card">
-            <mat-card-header>
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title>Lilly Aldron</mat-card-title>
-            </mat-card-header>
-            <img mat-card-image src="assets/images/logos/BingWallpaper_3.jpg" alt="Photo of a Shiba Inu" style="margin-top: 1em;">
-            <mat-card-content>
-              <p>
-                The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                bred for hunting.
-              </p>
-            </mat-card-content>
-            <mat-card-actions>
-              <button mat-button>Like</button>
-              <button mat-button>Comment</button>
-            </mat-card-actions>
-          </mat-card>
-          <br>
-          <mat-card class="example-card">
-            <mat-card-header>
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title>Jhon Cena</mat-card-title>
-            </mat-card-header>
-            <img mat-card-image src="assets/images/logos/Omail_SVG-02.svg" alt="Photo of a Shiba Inu" style="margin-top: 1em;">
-            <mat-card-content>
-              <p>
-                The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                bred for hunting.
-              </p>
-            </mat-card-content>
-            <mat-card-actions>
-              <button mat-button>Like</button>
-              <button mat-button>Comment</button>
-            </mat-card-actions>
-          </mat-card>
-        </cdk-virtual-scroll-viewport>
-        <!-- </mat-card> -->
-          
-        
+      <video style="width: 34em;" *ngIf="num.format==='video'" [autoplay]="true" src="assets/images/logos/chating.webm" class="video-example"
+        controls style="margin-top: 1em;"></video>
+      <img mat-card-image *ngIf="num.format==='image'" src="assets/images/logos/BingWallpaper_1.jpg" alt="Photo of a Shiba Inu"
+        style="margin-top: 1em;">
+      <pdf-viewer *ngIf="num.format==='pdf'" src="assets/images/logos/angular7_tutorial.pdf" [show-all]="false" [(page)]="pageVariable"
+        [render-text]="true" [original-size]="false" (after-load-complete)="afterLoadComplete($event)"
+        style="display: block;width: 34em;"></pdf-viewer>
+        <mat-slider style="width: 34em;" [max]="max" [min]="min" [thumbLabel]="true" *ngIf="format==='pdf'"
+        (change)="someFucn($event.value)">
+    </mat-slider>
+      <mat-card-content>
+        <p>
+          {{num.description}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>Like</button>
+        <button mat-button>Comment</button>
+      </mat-card-actions>
+    </mat-card>
+    <br>
+  </div>
+</cdk-virtual-scroll-viewport>
