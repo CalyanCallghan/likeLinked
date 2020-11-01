@@ -27,17 +27,16 @@ export class GroupsComponent implements OnInit {
     },error => console.log(error));
   }
 
-  showMeEmplyeeList(designation: any) {
-    let des = designation.toLowerCase();
-    console.log("des----->"+des);
+  showMeEmplyeeList(desig: any) {
+    let des = desig.toLowerCase();
     this.employeService.getEmployeeDetailsByDesignation(des).subscribe(result => {
       this.card_data = result;
     },error => console.log(error));
-    if(des != designation){
+    if(des != this.designation){
       this.canShowButton = false;
     }else{
       this.canShowButton = true;
-    }
+    }    
   }
 
 }

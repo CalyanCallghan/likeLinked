@@ -1,7 +1,6 @@
 package com.onpassive.onet.controller;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,16 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.onpassive.onet.entity.User;
-import com.onpassive.onet.model.HomeRequestModel;
 import com.onpassive.onet.model.UserDetails;
 import com.onpassive.onet.repository.UserRepository;
 import com.onpassive.onet.service.FileStorageService;
 import com.onpassive.onet.service.UserService;
 import com.onpassive.onet.util.UploadFileResponse;
 
-@CrossOrigin(origins = {"http://localhost:8080","http://localhost:4200"})
+@CrossOrigin(origins = {"http://localhost:8086","http://localhost:4200"})
 @RestController
 @RequestMapping("/user")
 public class UserController {

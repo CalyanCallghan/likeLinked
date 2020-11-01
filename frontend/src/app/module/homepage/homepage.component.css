@@ -1,6 +1,24 @@
 .iconsAndName{
     width: 57%;
-    left:26%;
+    left:5.8em;
     margin-top: 3%;
     border-radius: 1em;
 }
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+/* @media (min-width: 992px) {  
+    .iconsAndName{
+        color: yellow;
+        background-color: brown;
+    }
+ }
+
+
+@media (min-width: 1200px) {
+    .iconsAndName{
+        color: brown;
+        background-color: yellow;
+    }
+} */

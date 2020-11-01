@@ -1,9 +1,9 @@
 export class PostData{
-    id:number;
-    email:string;
-    filePath:string;
+    postId:number;
     fileName:string;
-    description:string;
-    type:string;
-    format:string;
+    postContent:string;
+    postFormat:string;
+    firstName:string;
+    lastName:string;
+    userProfile:string;
 }

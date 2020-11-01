@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.onpassive.onet.entity.Post;
 import com.onpassive.onet.model.HomeRequestModel;
+import com.onpassive.onet.model.PostDetails;
 
 public interface FileStorageService {
 	public String storeFile(MultipartFile file,HomeRequestModel model);
@@ -14,5 +14,5 @@ public interface FileStorageService {
 
 	public Resource loadFileAsResource(String fileName);
 	
-	public List<Post> getAllPosts(String type);
+	public List<PostDetails> getAllPosts(String type);
 }

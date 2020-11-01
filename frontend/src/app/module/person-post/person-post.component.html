@@ -1,29 +1,28 @@
-<cdk-virtual-scroll-viewport class="example-viewport" style="
+ <cdk-virtual-scroll-viewport class="example-viewport" style="
       margin-top: 3.3%;
       right: 6em;
       width: 32em;
-      border-radius: 1em" >
-  <div style="display: none;">{{allPosts[0].email}}</div>
-  <div *ngFor="let num of allPosts">
+      border-radius: 1em;" >
+  <div *ngFor="let data of postData">
     <mat-card class="example-card">
       <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>Jhon Cena</mat-card-title>
+        <img src="{{backendUrl}}/file/downloadFile/{{data.userProfile}}" mat-card-avatar>
+        <mat-card-title>{{data.firstName}} {{data.lastName}}</mat-card-title>
       </mat-card-header>
 
-      <video style="width: 34em;" *ngIf="num.format==='video'" [autoplay]="true" src="assets/images/logos/chating.webm" class="video-example"
+      <video style="width: 34em;" *ngIf="data.postFormat==='video'" [autoplay]="true" src="{{backendUrl}}/file/downloadFile/{{data.fileName}}" class="video-example"
         controls style="margin-top: 1em;"></video>
-      <img mat-card-image *ngIf="num.format==='image'" src="assets/images/logos/BingWallpaper_1.jpg" alt="Photo of a Shiba Inu"
+      <img mat-card-image *ngIf="data.postFormat==='image'" src="{{backendUrl}}/file/downloadFile/{{data.fileName}}" alt="Photo of a Shiba Inu"
         style="margin-top: 1em;">
-      <pdf-viewer *ngIf="num.format==='pdf'" src="assets/images/logos/angular7_tutorial.pdf" [show-all]="false" [(page)]="pageVariable"
+      <pdf-viewer *ngIf="data.postFormat==='pdf'" src="{{backendUrl}}/file/downloadFile/{{data.fileName}}" [show-all]="false" [(page)]="pageVariable"
         [render-text]="true" [original-size]="false" (after-load-complete)="afterLoadComplete($event)"
         style="display: block;width: 34em;"></pdf-viewer>
-        <mat-slider style="width: 34em;" [max]="max" [min]="min" [thumbLabel]="true" *ngIf="format==='pdf'"
-        (change)="someFucn($event.value)">
-    </mat-slider>
+        <mat-slider style="width: 34em;" [max]="max" [min]="min" [thumbLabel]="true" *ngIf="data.postFormat==='pdf'"
+          (change)="someFucn($event.value)">
+        </mat-slider>
       <mat-card-content>
         <p>
-          {{num.description}}
+          {{data.postContent}}
         </p>
       </mat-card-content>
       <mat-card-actions>

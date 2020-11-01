@@ -1,7 +1,3 @@
-button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disabled), [type="submit"]:not(:disabled) {
-    cursor: pointer;
-    margin-left: 30%;
-}
 ::-webkit-scrollbar {
     width: 0px;
     background: transparent;
@@ -13,40 +9,9 @@ button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disab
     font-family: sans-serif;
 }
 
-.group-names{
-    cursor: pointer;
-}
-.material-icons{
-    cursor: pointer;
-}
-.chat-option{
-    cursor: pointer;
-}
-
- #rightbox{ 
-    float:right;
-} 
-
-#middlebox{ 
-    display:inline-block; 
-
-} 
-#leftbox { 
-   display:inline-block; 
-   
-}  
-.mat-dialog-content {
-    display: block;
-    margin: 0 -24px;
-    padding: 10px 24px;
-    max-height: 65vh;
-    max-width: 100%;
-    overflow-x: hidden !important;
-}
-
 .group{
     width: 57%;
-    left:26%;
+    left:5.8em;
     margin-top: 3%;
     border-radius: 1em;
     background-image: url("src/assets/images/logos/header_bg.svg");
@@ -99,10 +64,14 @@ button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disab
 .list-group {
     border-radius: 0rem; 
 }
-.mygroupBtn{
+.mygroupBtnDiv{
     display: flex;
     flex-direction: row-reverse;
     margin-right: 1.5em;
     height: 2em;
     align-items: center;
+}
+.myGroupBtn{
+    margin-top: 1em;
+    text-align: center;
 }

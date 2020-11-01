@@ -21,7 +21,7 @@ import com.onpassive.onet.repository.SSERepository;
 import com.onpassive.onet.repository.TLRepository;
 
 //@CrossOrigin(origins = {"https://opnetqaapi.onpassive.com","https://opnetqaui.onpassive.com"})
-@CrossOrigin(origins = { "http://localhost:8080", "http://localhost:4200" })
+@CrossOrigin(origins = { "http://localhost:8086", "http://localhost:4200" })
 @RestController
 @RequestMapping("/myGroup")
 public class MyGroupController {

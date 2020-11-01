@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { PostData } from 'src/app/model/postData';
 import { CreatePostComponent } from '../create-post/create-post.component';
 
 
@@ -10,15 +11,24 @@ import { CreatePostComponent } from '../create-post/create-post.component';
   styleUrls: ['./start-post.component.css']
 })
 export class StartPostComponent implements OnInit {
-  
+  postData: PostData = new PostData();
+  @Output() addNewPost = new EventEmitter<PostData>();
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
+
   }
 
   openPostDialog() {
-    console.log("-----dialog-----");
-   this.dialog.open(CreatePostComponent);
- }
+    let dialogRef = this.dialog.open(CreatePostComponent, {
+      data: { postData: this.postData }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('afterClosed CreatePostComponent-----' + result);
+      console.log('afterClosed CreatePostComponent-----' + JSON.stringify(result));
+      this.addNewPost.emit(result);
+    });
+  }
 
 }

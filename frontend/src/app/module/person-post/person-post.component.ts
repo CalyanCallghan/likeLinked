@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CreatePost } from 'src/app/model/createPost';
 import { FixedSizeVirtualScrollStrategy } from '@angular/cdk/scrolling';
 
@@ -8,6 +8,8 @@ import { VIRTUAL_SCROLL_STRATEGY } from '@angular/cdk/scrolling';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { PersonPostService } from 'src/app/service/person.service';
 import { Comment } from 'src/app/model/comment';
+import { environment } from 'src/app/model/environment';
+import { PostData } from 'src/app/model/postData';
 
 
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
@@ -20,13 +22,13 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
   selector: 'app-person-post',
   templateUrl: './person-post.component.html',
   styleUrls: ['./person-post.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{ provide: VIRTUAL_SCROLL_STRATEGY, useClass: CustomVirtualScrollStrategy }]
 })
 export class PersonPostComponent implements OnInit {
   comment: Comment = new Comment();
+  backendUrl = environment.baseApplicationUrl;
   canShowComment:boolean = false;
-  allPosts: any;
+  @Input() postData: PostData[];
   pageVariable: number = 1;
   value = 0;
   min: number = 0;
@@ -35,7 +37,7 @@ export class PersonPostComponent implements OnInit {
   constructor(private personPostService: PersonPostService) { }
 
   ngOnInit(): void {
-    this.getAllPosts();
+    //this.getAllPosts();
   }
 
   postComment() {
@@ -58,15 +60,14 @@ export class PersonPostComponent implements OnInit {
        this.max = pdf.numPages;
   }
 
-  getAllPosts(){
+  /*getAllPosts(){
     let type = localStorage.getItem("type");  
     console.log("type--->"+type);
     this.personPostService.getAllPosts(type).subscribe(data => {
       this.allPosts = data;
-      console.log("output---->"+JSON.stringify(this.allPosts));
-      console.log("data::"+this.allPosts[0].fileName);
+      console.log("all post data---->"+JSON.stringify(this.allPosts));
     });
-  } 
+  } */
 
 }
 

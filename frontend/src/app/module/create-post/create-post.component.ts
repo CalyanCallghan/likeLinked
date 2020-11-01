@@ -1,8 +1,11 @@
 import { CreatePost } from '../../model/createPost';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit } from '@angular/core';
 import { ResponseData } from 'src/app/model/response-data';
 import { PostService } from 'src/app/service/post.service';
 import { PersonPostService } from 'src/app/service/person.service';
+import { Output } from '@angular/core';
+import { PostData } from 'src/app/model/postData';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 @Component({
@@ -14,19 +17,31 @@ export class CreatePostComponent implements OnInit {
   accept = 'image/*'
   name = 'Angular';
   format: any;
-  allPosts:any;
+  allPosts: any;
   url: any;
   pageVariable: number = 1;
   value = 0;
   min: number = 0;
   max: number = 100;
   file: any;
-  post:CreatePost = new CreatePost();
-  responseData : ResponseData = new ResponseData();
-  constructor(private mainService: PostService,private personPostService: PersonPostService) { }
+  post: CreatePost = new CreatePost();
+  postData: PostData = new PostData();
+  responseData: ResponseData = new ResponseData();
+  constructor(private mainService: PostService, private personPostService: PersonPostService,
+    public dialogRef: MatDialogRef<CreatePostComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
-  ngOnInit(): void { 
-    
+
+  ngOnInit(): void {
+     this.postData = {
+       "postId": 1,
+       "fileName": "ted_mosbey.jpg",
+       "postContent": "Your Google Account was just signed in to from a new Windows device. You're getting this email to make sure it was you.",
+       "postFormat": "image",
+       "firstName": "Ted",
+       "lastName": "Mobsey",
+       "userProfile": "defaultimg.png"
+     }
   }
 
   someFucn(newVal: any) {
@@ -66,24 +81,23 @@ export class CreatePostComponent implements OnInit {
     fileUploadVideo.click();
   }
   createPost() {
-    this.post.createdBy=Number(localStorage.getItem("employeeCode"));;
+    this.post.createdBy = Number(localStorage.getItem("employeeCode"));;
     this.post.groupId = Number(localStorage.getItem("designationId"));
-    this.post.format =  this.format;
-    this.mainService.createPost(this.post,this.file)
+    this.post.format = this.format;
+    this.mainService.createPost(this.post, this.file)
       .subscribe(data => {
         this.responseData = data;
         console.log(JSON.stringify(this.responseData));
-        if(this.responseData.status == "OK"){
-          const fileUpload = document.getElementById('cancel') as HTMLInputElement;
-          fileUpload.click();
+        if (this.responseData.status == "OK") {
+          this.dialogRef.close(this.postData);
         }
-      },error => console.log(error));
+      }, error => console.log(error));
   }
-  getAllPosts(){
-    let type = localStorage.getItem("type");  
+  getAllPosts() {
+    let type = localStorage.getItem("type");
     this.personPostService.getAllPosts(type).subscribe(data => {
       this.allPosts = data;
-      console.log("output---->"+JSON.stringify(this.allPosts));
+      console.log("output---->" + JSON.stringify(this.allPosts));
     });
   }
 }

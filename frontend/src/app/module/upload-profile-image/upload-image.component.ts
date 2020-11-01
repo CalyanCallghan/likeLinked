@@ -58,7 +58,7 @@ export class UploadImageComponent implements OnInit {
         this.responseData = data;
         console.log(JSON.stringify(this.responseData));
         if(this.responseData.status == "OK"){
-
+          this.dialogRef.close(this.fileName);
         }
       },error => console.log(error));
   }

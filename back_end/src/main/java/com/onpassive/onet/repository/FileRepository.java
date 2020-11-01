@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.onpassive.onet.entity.Post;
+import com.onpassive.onet.model.PostDetails;
 
 
 @Repository
@@ -18,6 +19,7 @@ public interface FileRepository extends CrudRepository<Post,Integer>{
 	@Query(value ="update user u set u.file_name=?1 where u.emp_id = ?2",nativeQuery = true)
 	int updateProfilePic(String fileName,long userId);
 	
-	@Query("SELECT p FROM Post p WHERE LOWER(p.type) = LOWER(:type) order by p.id desc")
-    public List<Post> returnAllthePosts(String type);
+	@Query("select new com.onpassive.onet.model.PostDetails(p.postId,p.fileName,p.description,p.format,u.firstName,u.lastName,u.fileName) from Post p, User u where p.createdBy= u.empId and p.type=:type order by p.postId desc")
+	public List<PostDetails> returnAllthePosts(String type);
+
 }

@@ -21,6 +21,7 @@ import com.onpassive.onet.entity.Post;
 import com.onpassive.onet.exception.FileStorageException;
 import com.onpassive.onet.exception.MyFileNotFoundException;
 import com.onpassive.onet.model.HomeRequestModel;
+import com.onpassive.onet.model.PostDetails;
 import com.onpassive.onet.repository.FileRepository;
 import com.onpassive.onet.service.FileStorageService;
 
@@ -104,7 +105,7 @@ public class FileStorageServiceImpl implements FileStorageService {
 	}
 	
 	@Override
-	public List<Post> getAllPosts(String type) {
+	public List<PostDetails> getAllPosts(String type) {
 		return fileRepository.returnAllthePosts(type);
 	}
 

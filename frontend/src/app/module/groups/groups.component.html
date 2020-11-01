@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" style="overflow-y: auto;height: 32em;">
   <div class="row">
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
       <app-profile></app-profile>
@@ -27,8 +27,9 @@
     </div>
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
       <mat-card class="listOfEmployees" style="overflow-y: auto;height: 32em;">
-        <div class="mygroupBtn" *ngIf="canShowButton">
-          <button type="button" class="btn btn-primary" style="margin-top: 1em;" routerLink="mygroup">My Group</button>
+        <div class="mygroupBtnDiv" *ngIf="canShowButton">
+          <button mat-button class="myGroupBtn" color="primary" routerLink="/mygroup">My Group</button>
+          <!-- <button mat-button color="primary" *ngIf="!photoUploaded" (click)="uploadMyProfile()" [mat-dialog-close]="data.animal">Upload</button> -->
         </div>
         <div class="page-wrapper">
           <div class="content" fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="16px grid">

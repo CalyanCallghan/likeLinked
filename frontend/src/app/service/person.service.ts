@@ -15,7 +15,7 @@ export class PersonPostService {
         this.baseUrl = environment.baseApplicationUrl+"/comment/userComment";
         return this.http.post<Comment>(`${this.baseUrl}`, commentModel);
     }
-    getAllPosts(type:string):Observable<PostData>{
-        return this.http.get<PostData>(environment.baseApplicationUrl+"/file/getAllPosts/"+type);
+    getAllPosts(type:string):Observable<PostData[]>{
+        return this.http.get<PostData[]>(environment.baseApplicationUrl+"/file/getAllPosts/"+type);
     }
 }
