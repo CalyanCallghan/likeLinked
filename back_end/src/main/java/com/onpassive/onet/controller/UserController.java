@@ -1,7 +1,6 @@
 package com.onpassive.onet.controller;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +18,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.onpassive.onet.entity.User;
 import com.onpassive.onet.model.UserDetails;
 import com.onpassive.onet.repository.UserRepository;
-import com.onpassive.onet.service.FileStorageService;
+import com.onpassive.onet.service.PostStorageService;
 import com.onpassive.onet.service.UserService;
 import com.onpassive.onet.util.UploadFileResponse;
 
-@CrossOrigin(origins = {"http://localhost:8086","http://localhost:4200"})
+@CrossOrigin("*")
+//@CrossOrigin(origins = {"https://opnetqaapi.onpassive.com","https://opnetqaui.onpassive.com"})
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -34,7 +35,7 @@ public class UserController {
 	UserRepository userRepository;
 	
 	@Autowired
-	private FileStorageService fileStorageService;
+	private PostStorageService postStorageService;
 	
 	@GetMapping("/getAllUsers")
 	public List<User> getUsers() {
@@ -47,14 +48,12 @@ public class UserController {
 		String message = "";
 		LocalDateTime dateTime = null;
 		try {
-			Arrays.asList(files).stream().forEach(file -> {
-				fileStorageService.storeAndUpdateProfileImage(file, userId);
-			});
+			String fileName = postStorageService.storeAndUpdateProfileImage(files[0], userId);
 			message = "Profile image updated. ";
-			return ResponseEntity.ok(new UploadFileResponse(dateTime.now(), HttpStatus.OK, message));
+			return ResponseEntity.ok(new UploadFileResponse(dateTime.now(), HttpStatus.OK, message,fileName));
 		} catch (Exception e) {
 			message = "Fail to profile image!!!";
-			return ResponseEntity.ok(new UploadFileResponse(dateTime.now(), HttpStatus.EXPECTATION_FAILED, message));
+			return ResponseEntity.ok(new UploadFileResponse(dateTime.now(), HttpStatus.EXPECTATION_FAILED, message,""));
 		}
 	}
 	

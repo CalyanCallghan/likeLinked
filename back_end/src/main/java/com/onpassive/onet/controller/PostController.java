@@ -26,19 +26,22 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.onpassive.onet.model.HomeRequestModel;
 import com.onpassive.onet.model.PostDetails;
-import com.onpassive.onet.repository.FileRepository;
-import com.onpassive.onet.service.FileStorageService;
+import com.onpassive.onet.repository.PostRepository;
+import com.onpassive.onet.service.PostStorageService;
 import com.onpassive.onet.util.UploadFileResponse;
 
 //@CrossOrigin(origins = {"https://opnetqaapi.onpassive.com","https://opnetqaui.onpassive.com"})
-@CrossOrigin(origins = {"http://localhost:8086","http://localhost:4200"})
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/file")
-public class FileController {
+public class PostController {
 	@Autowired
 	HttpServletRequest request;
 	@Autowired
-	private FileStorageService fileStorageService;
+	private PostStorageService postStorageService;
+	
+	@Autowired
+	private PostRepository fileRepository;
 
 	// For uploading files to File system
 	@SuppressWarnings("static-access")
@@ -47,23 +50,26 @@ public class FileController {
 			@RequestParam("data") String data) {
 		String message = "";
 		LocalDateTime dateTime = null;
-		List<String> fileNames = new ArrayList<>();
+		//List<String> fileNames = new ArrayList<>();
+		int postId = 0;
+		PostDetails postDetails = null;
+		
 		try {
-			System.err.println("data--->"+data);
 			ObjectMapper obj = new ObjectMapper();
 			HomeRequestModel model = obj.readValue(data, HomeRequestModel.class);
 
-			Arrays.asList(files).stream().forEach(file -> {
-				fileStorageService.storeFile(file, model);
-				fileNames.add(file.getOriginalFilename());
-			});
+			//Arrays.asList(files).stream().forEach(file -> {
+			postId  = postStorageService.storeFile(files[0], model);
+				//fileNames.add(files[0].getOriginalFilename());
+			//});
 			message = "Uploaded the files. ";
+			postDetails = fileRepository.specificPostData(postId);
 			// return ResponseEntity.status(HttpStatus.OK).body(message);
-			return ResponseEntity.ok(new UploadFileResponse(dateTime.now(), HttpStatus.OK, message));
+			return ResponseEntity.ok(new UploadFileResponse(dateTime.now(), HttpStatus.OK, message,postDetails));
 		} catch (Exception e) {
 			message = "Fail to upload files!!!";
 			// return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(message);
-			return ResponseEntity.ok(new UploadFileResponse(dateTime.now(), HttpStatus.EXPECTATION_FAILED, message));
+			return ResponseEntity.ok(new UploadFileResponse(dateTime.now(), HttpStatus.EXPECTATION_FAILED, message,postDetails));
 		}
 
 	}
@@ -73,7 +79,7 @@ public class FileController {
 	public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
 		String contentType = null;
 		// Load file as Resource
-		Resource resource = fileStorageService.loadFileAsResource(fileName);
+		Resource resource = postStorageService.loadFileAsResource(fileName);
 		try {
 			contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
 		} catch (IOException ex) {
@@ -90,7 +96,7 @@ public class FileController {
 	
 	@GetMapping("/getAllPosts/{type}")
 	public List<PostDetails> getAllPosts(@PathVariable String type) {
-		List<PostDetails> list = fileStorageService.getAllPosts(type);
+		List<PostDetails> list = fileRepository.allthePostsData(type);
 		return list;
 	}
 

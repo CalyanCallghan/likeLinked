@@ -18,6 +18,7 @@ import com.onpassive.onet.exception.ResourceNotFoundException;
 import com.onpassive.onet.repository.CommentRepository;
 import com.onpassive.onet.repository.PostRepository;
 @CrossOrigin(origins = "*" )
+//@CrossOrigin(origins = {"https://opnetqaapi.onpassive.com","https://opnetqaui.onpassive.com"})
 @RestController
 @RequestMapping("/comment")
 public class CommentController {

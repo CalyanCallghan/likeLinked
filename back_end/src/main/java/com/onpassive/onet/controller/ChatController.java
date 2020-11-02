@@ -23,7 +23,7 @@ import com.onpassive.onet.repository.ChatRepository;
 
 
 //@CrossOrigin(origins = {"https://opnetqaapi.onpassive.com","https://opnetqaui.onpassive.com"})
-@CrossOrigin(origins = {"http://localhost:8086","http://localhost:4200"})
+@CrossOrigin("*")
 
 @RequestMapping("/api")
 @RestController

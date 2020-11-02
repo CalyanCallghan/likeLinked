@@ -22,19 +22,19 @@ import com.onpassive.onet.exception.FileStorageException;
 import com.onpassive.onet.exception.MyFileNotFoundException;
 import com.onpassive.onet.model.HomeRequestModel;
 import com.onpassive.onet.model.PostDetails;
-import com.onpassive.onet.repository.FileRepository;
-import com.onpassive.onet.service.FileStorageService;
+import com.onpassive.onet.repository.PostRepository;
+import com.onpassive.onet.service.PostStorageService;
 
 @Service
-public class FileStorageServiceImpl implements FileStorageService {
+public class PostStorageServiceImpl implements PostStorageService {
 
 	private final Path fileStorageLocation;
 
 	@Autowired
-	private FileRepository fileRepository;
+	private PostRepository postRepository;
 
 	@Autowired
-	public FileStorageServiceImpl(FileStorageProperties fileStorageProperties) {
+	public PostStorageServiceImpl(FileStorageProperties fileStorageProperties) {
 		this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir()).toAbsolutePath().normalize();
 		try {
 			Files.createDirectories(this.fileStorageLocation);
@@ -44,7 +44,7 @@ public class FileStorageServiceImpl implements FileStorageService {
 		}
 	}
 
-	public String storeFile(MultipartFile file, HomeRequestModel model) {
+	public int storeFile(MultipartFile file, HomeRequestModel model) {
 		// Normalize file name
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 		try {
@@ -66,14 +66,14 @@ public class FileStorageServiceImpl implements FileStorageService {
 			// Saving file/copy file to the target location (Replacing existing file with
 			// the same name)
 			Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
-			fileRepository.save(post);
-			return fileName;
+			Post postId = postRepository.save(post);
+			return postId.getPostId();
 		} catch (IOException ex) {
 			throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
 		}
 	}
 	
-	public int storeAndUpdateProfileImage(MultipartFile file, int userID) {
+	public String storeAndUpdateProfileImage(MultipartFile file, int userID) {
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 		int count;
 		try {
@@ -82,8 +82,8 @@ public class FileStorageServiceImpl implements FileStorageService {
 			}
 			Path targetLocation = this.fileStorageLocation.resolve(fileName);
 			Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
-			count = fileRepository.updateProfilePic(fileName,userID);
-			return count;
+			count = postRepository.updateProfilePic(fileName,userID);
+			return fileName;
 		} catch (IOException ex) {
 			throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
 		}
@@ -104,9 +104,4 @@ public class FileStorageServiceImpl implements FileStorageService {
 		}
 	}
 	
-	@Override
-	public List<PostDetails> getAllPosts(String type) {
-		return fileRepository.returnAllthePosts(type);
-	}
-
 }

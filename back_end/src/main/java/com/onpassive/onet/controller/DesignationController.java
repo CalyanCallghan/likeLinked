@@ -12,7 +12,7 @@ import com.onpassive.onet.entity.Designation;
 import com.onpassive.onet.repository.DesignationRepository;
 
 //@CrossOrigin(origins = {"https://opnetqaapi.onpassive.com","https://opnetqaui.onpassive.com"})
-@CrossOrigin(origins = { "http://localhost:8086", "http://localhost:4200" })
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/groups")
 public class DesignationController {
