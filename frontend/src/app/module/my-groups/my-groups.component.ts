@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { PostData } from 'src/app/model/postData';
 import { PersonPostService } from 'src/app/service/person.service';
 import { StartPostComponent } from '../start-post/start-post.component';
 
@@ -12,7 +13,7 @@ import { StartPostComponent } from '../start-post/start-post.component';
 })
 export class MyGroupsComponent implements OnInit {
   indexId: number;
-  allPosts:any;
+  allPosts:PostData[];
   constructor(public dialog: MatDialog, private router: Router,private personPostService: PersonPostService) {
   }
   ngOnInit(): void {

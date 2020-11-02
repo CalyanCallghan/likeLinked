@@ -16,7 +16,7 @@ export class UploadImageComponent implements OnInit {
   croppedImage: any = '';
   photoUploaded:boolean = true;
   afterConversion:any;
-  fileName:any;
+  fileName:string;
   responseData : ResponseData = new ResponseData();
   fileToReturn: File;
   userId:string = localStorage.getItem("employeeCode");
@@ -39,7 +39,6 @@ export class UploadImageComponent implements OnInit {
     this.fileName = event.target.files[0].name;
     this.data.animal = this.fileName ;
     console.log("fileName---->"+this.fileName);
-    
   }
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;

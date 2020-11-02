@@ -3,9 +3,14 @@ import { Component, EventEmitter, Inject, OnInit } from '@angular/core';
 import { ResponseData } from 'src/app/model/response-data';
 import { PostService } from 'src/app/service/post.service';
 import { PersonPostService } from 'src/app/service/person.service';
-import { Output } from '@angular/core';
 import { PostData } from 'src/app/model/postData';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SearchService } from 'src/app/service/search.service';
+import { Observable} from 'rxjs';
+import { FormControl, Validators } from '@angular/forms';
+import { startWith, map } from 'rxjs/operators';
+import { UserData } from 'src/app/model/userData';
 
 
 @Component({
@@ -26,24 +31,33 @@ export class CreatePostComponent implements OnInit {
   file: any;
   post: CreatePost = new CreatePost();
   postData: PostData = new PostData();
+  searchTerm: String;
+  length: number;
+  searchCtrl: FormControl;
+  filteredName: Observable<any[]>;
+  userData: any[] = [];
   responseData: ResponseData = new ResponseData();
+  userList: any[] = [];
+  dataaaa:any;
+  hashTagCount:number =0;
   constructor(private mainService: PostService, private personPostService: PersonPostService,
     public dialogRef: MatDialogRef<CreatePostComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, public snackBar: MatSnackBar,private searchService : SearchService) { }
 
 
   ngOnInit(): void {
-     this.postData = {
-       "postId": 1,
-       "fileName": "ted_mosbey.jpg",
-       "postContent": "Your Google Account was just signed in to from a new Windows device. You're getting this email to make sure it was you.",
-       "postFormat": "image",
-       "firstName": "Ted",
-       "lastName": "Mobsey",
-       "userProfile": "defaultimg.png"
-     }
-  }
+    this.searchService.getAllUserDetails().subscribe(data => {
+      this.userData = data;
+    });
 
+    this.searchCtrl = new FormControl();
+    this.filteredName = this.searchCtrl.valueChanges
+      .pipe(startWith(''), map(element => element ? this.filteredname(element) : this.userData.slice()));
+  }
+  filteredname(firstName: string) {
+    return this.userData.filter(element => 
+      element.firstName.toLowerCase().indexOf(firstName.toLowerCase()) === 0);
+  }
   someFucn(newVal: any) {
     this.pageVariable = newVal;
   }
@@ -81,15 +95,21 @@ export class CreatePostComponent implements OnInit {
     fileUploadVideo.click();
   }
   createPost() {
+    let hashTagsContent = "";
+    for (let i = 0; i < this.hashTagCount; i++) {      
+      hashTagsContent = hashTagsContent+" #"+(<HTMLInputElement>document.getElementById("name"+i)).value;
+    }    
     this.post.createdBy = Number(localStorage.getItem("employeeCode"));;
     this.post.groupId = Number(localStorage.getItem("designationId"));
     this.post.format = this.format;
+    this.post.content = this.post.content+hashTagsContent;
     this.mainService.createPost(this.post, this.file)
       .subscribe(data => {
         this.responseData = data;
         console.log(JSON.stringify(this.responseData));
         if (this.responseData.status == "OK") {
-          this.dialogRef.close(this.postData);
+          this.dialogRef.close(this.responseData.postDetails);
+          this.snackBar.open(this.responseData.message, "X", { duration: 5000 });
         }
       }, error => console.log(error));
   }
@@ -97,7 +117,15 @@ export class CreatePostComponent implements OnInit {
     let type = localStorage.getItem("type");
     this.personPostService.getAllPosts(type).subscribe(data => {
       this.allPosts = data;
-      console.log("output---->" + JSON.stringify(this.allPosts));
     });
+  }
+
+  add() {
+    this.hashTagCount++;
+    this.userList.push({});    
+  }
+  callSomeFunction(data:any){
+    console.log("userId--->"+data);
+    //console.log("data after -- >"+JSON.stringify(this.userData.splice(2,1)));
   }
 }

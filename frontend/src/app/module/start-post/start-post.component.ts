@@ -25,7 +25,7 @@ export class StartPostComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('afterClosed CreatePostComponent-----' + result);
+      console.log('afterClosed CreatePostComponent-- ---' + result);
       console.log('afterClosed CreatePostComponent-----' + JSON.stringify(result));
       this.addNewPost.emit(result);
     });

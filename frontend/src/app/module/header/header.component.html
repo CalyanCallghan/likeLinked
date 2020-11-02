@@ -16,8 +16,8 @@
       <a class='btn header-button' mat-button routerLink="groups"><span class="header-icon-names">Groups</span> <mat-icon>groups</mat-icon></a>
       <a class='btn header-button' mat-button routerLink="mygroup"><span class="header-icon-names">My Group</span><mat-icon>group</mat-icon></a>
       <a class='btn header-button' mat-button routerLink="notification" (click)="changeColor()"><span class="header-icon-names">Notifications</span> 
-        <mat-icon matBadge="{{unreadCount}}" matBadgeColor="{{notificationColor}}">notifications_none
-        </mat-icon>
+        <mat-icon>notifications_none</mat-icon> 
+        <!-- matBadge="{{unreadCount}}" matBadgeColor="{{notificationColor}}" -->
       </a>
 
       <!-- <a class='btn' mat-button>Learning <mat-icon>library_books</mat-icon></a> -->

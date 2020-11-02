@@ -17,9 +17,49 @@
             </mat-select>
           </mat-form-field>
     </div>
-    <div>
+     <div>
         <mat-form-field style="width: 34em;"><textarea matInput [(ngModel)]="post.content"></textarea></mat-form-field>
-    </div>
+        <form #formRef="ngForm">
+            <div class="table-responsive">
+            <table class="table" >
+              <tr *ngFor="let test of userList; let i=index" >
+                  <td style="padding-right: 0px;width:10px">#</td>
+                <td>
+                    <input matInput type="text"  id="name{{i}}"  style="width: 20em;" 
+                    [matAutocomplete]="auto" [formControl]="searchCtrl" />
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let element of filteredName | async" [value]="element.firstName" (onSelectionChange)="callSomeFunction(element.firstName)">
+                          <span style="font-size: 12px;"> {{ element.firstName}} {{element.lastName}}</span>
+                        </mat-option>
+                      </mat-autocomplete>
+                </td>
+                </tr>
+            </table>
+            </div>
+            <button [disabled]="!formRef.form.valid" (click)="add()" mat-button color="primary">add hashtag</button>
+        </form>
+       
+           <!-- <form #formRef="ngForm">
+            <div class="table-responsive">
+            <table class="table">
+              <tr  >
+                <td>
+                  #
+                      
+                </td>
+                </tr>
+            </table>
+            </div>
+            <button [disabled]="!formRef.form.valid" (click)="add([i])">add hashtag</button>
+        </form>
+        <br /> {{ userList | json}} 
+        <mat-form-field style="width: 34em;"><textarea matInput [(ngModel)]="post.content"></textarea>
+            
+        </mat-form-field>
+        <div>
+            <button mat-button (click)="add([i])">Add Hashtag</button>
+        </div> -->
+    </div> 
     <div>
         <img style="width: 34em;" *ngIf="format==='image' && url" [src]="url" class="example-form">
         <video style="width: 34em;" *ngIf="format==='video' && url" [src]="url" class="example-form" controls></video>
