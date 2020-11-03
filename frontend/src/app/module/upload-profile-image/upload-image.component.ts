@@ -1,6 +1,7 @@
 import { Inject } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { ResponseData } from 'src/app/model/response-data';
 import { PostService } from 'src/app/service/post.service';
@@ -22,7 +23,7 @@ export class UploadImageComponent implements OnInit {
   userId:string = localStorage.getItem("employeeCode");
   
   constructor(private postService: PostService,public dialogRef: MatDialogRef<UploadImageComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: any, public snackBar: MatSnackBar) {
       console.log("data-->"+this.data.animal);
      }
 
@@ -58,8 +59,16 @@ export class UploadImageComponent implements OnInit {
         console.log(JSON.stringify(this.responseData));
         if(this.responseData.status == "OK"){
           this.dialogRef.close(this.fileName);
+          this.snackBar.open(this.responseData.message, "X", { duration: 5000 });
         }
-      },error => console.log(error));
+      },error => {
+        if(error.error.status=="EXPECTATION_FAILED" && error.error.message=="Fail to upload files!!!") {
+          this.snackBar.open("Please try again", "X", {duration:5000});
+        } else {
+          this.snackBar.open("Sorry file is not uploaded Successfully!", "X", {duration:5000});
+        }
+        console.log(error);
+      });
   }
   base64ToFile(data, filename) {
     const arr = data.split(',');

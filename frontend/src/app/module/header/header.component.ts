@@ -7,6 +7,9 @@ import { ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { SearchService } from 'src/app/service/search.service';
 import { startWith, map } from 'rxjs/operators';
+import { EmployeService } from 'src/app/service/employe.service';
+import { UserData } from 'src/app/model/userData';
+import { environment } from 'src/app/model/environment';
 
 
 
@@ -26,9 +29,13 @@ export class HeaderComponent implements OnInit {
   searchCtrl: FormControl;
   filteredName: Observable<any[]>;
   userlist: any[] = [];
+  userdata:UserData= new UserData();
+  userId:string = localStorage.getItem("employeeCode");
+  userEmailId:string = localStorage.getItem("emailId");
+  backendUrl = environment.baseApplicationUrl;
 
   constructor(private notificationService: NotificationService, private unReadService: UnReadService
-    ,private searchService : SearchService) { }
+    ,private searchService: SearchService,private employeService:EmployeService) { }
 
   ngOnInit(): void {
     this.something();
@@ -37,15 +44,17 @@ export class HeaderComponent implements OnInit {
       .subscribe((count) => {
         this.unreadCount = count;
       });
-      this.searchService.getAllUserDetails().subscribe(data => {
-        this.userlist = data;
-       console.log("fromDB--->"+JSON.stringify(this.userlist));
-       
-     });
- 
-       this.searchCtrl = new FormControl();
-       this.filteredName = this.searchCtrl.valueChanges
-       .pipe(startWith(''),map( element => element ? this.filteredname(element) : this.userlist.slice() ) );
+    this.searchService.getAllUserDetails().subscribe(data => {
+      this.userlist = data;
+      console.log("fromDB--->" + JSON.stringify(this.userlist));
+
+    });
+    this.searchCtrl = new FormControl();
+    this.filteredName = this.searchCtrl.valueChanges
+      .pipe(startWith(''), map(element => element ? this.filteredname(element) : this.userlist.slice()));
+    this.employeService.getEmployeeData(this.userEmailId).subscribe(data => {
+      this.userdata = data;
+    }, error => console.log(error));
   }
   something() {
     this.notificationService.getUnreadCount().subscribe(data => {
@@ -56,18 +65,18 @@ export class HeaderComponent implements OnInit {
   changeColor() {
     this.notificationColor = '';
   }
-  
+
   filteredname(firstName: string) {
-    console.log("userInput---->"+firstName);
-    return this.userlist.filter(element => 
+    console.log("userInput---->" + firstName);
+    return this.userlist.filter(element =>
       element.firstName.toLowerCase().indexOf(firstName.toLowerCase()) === 0);
   }
-  clearValue(){
-   this.ngOnInit();
+  clearValue() {
+    this.ngOnInit();
   }
 
 }
 
 export class UserDetails {
-  constructor(public email: string,public firstName:string,public lastName:string) {}
+  constructor(public email: string, public firstName: string, public lastName: string) { }
 }

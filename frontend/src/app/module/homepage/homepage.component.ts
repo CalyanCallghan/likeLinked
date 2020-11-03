@@ -12,9 +12,10 @@ export class HomepageComponent implements OnInit {
   postData:PostData[];
   constructor(private personPostService: PersonPostService){
 
-   }
+  }
 
   ngOnInit(): void {
+    localStorage.setItem("type","A");
     this.getAllPosts();
   }
 

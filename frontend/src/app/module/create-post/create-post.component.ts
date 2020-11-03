@@ -1,5 +1,5 @@
 import { CreatePost } from '../../model/createPost';
-import { Component, EventEmitter, Inject, OnInit } from '@angular/core';
+import { Component, Inject, NgZone, OnInit,ViewChild } from '@angular/core';
 import { ResponseData } from 'src/app/model/response-data';
 import { PostService } from 'src/app/service/post.service';
 import { PersonPostService } from 'src/app/service/person.service';
@@ -10,7 +10,9 @@ import { SearchService } from 'src/app/service/search.service';
 import { Observable} from 'rxjs';
 import { FormControl, Validators } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
-import { UserData } from 'src/app/model/userData';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import {take} from 'rxjs/operators';
+
 
 
 @Component({
@@ -21,7 +23,7 @@ import { UserData } from 'src/app/model/userData';
 export class CreatePostComponent implements OnInit {
   accept = 'image/*'
   name = 'Angular';
-  format: any;
+  format: string="none";
   allPosts: any;
   url: any;
   pageVariable: number = 1;
@@ -40,19 +42,26 @@ export class CreatePostComponent implements OnInit {
   userList: any[] = [];
   dataaaa:any;
   hashTagCount:number =0;
+  textareaPost = new FormControl('', [Validators.required]);
+  selected = 'A';
+  @ViewChild('autosize') autosize: CdkTextareaAutosize;
   constructor(private mainService: PostService, private personPostService: PersonPostService,
     public dialogRef: MatDialogRef<CreatePostComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, public snackBar: MatSnackBar,private searchService : SearchService) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, public snackBar: MatSnackBar,private searchService : SearchService,private _ngZone: NgZone) { }
 
 
   ngOnInit(): void {
+    this.post.type='A';
     this.searchService.getAllUserDetails().subscribe(data => {
       this.userData = data;
     });
-
     this.searchCtrl = new FormControl();
     this.filteredName = this.searchCtrl.valueChanges
       .pipe(startWith(''), map(element => element ? this.filteredname(element) : this.userData.slice()));
+  }
+  triggerResize() {
+    this._ngZone.onStable.pipe(take(1))
+        .subscribe(() => this.autosize.resizeToFitContent(true));
   }
   filteredname(firstName: string) {
     return this.userData.filter(element => 
@@ -111,7 +120,14 @@ export class CreatePostComponent implements OnInit {
           this.dialogRef.close(this.responseData.postDetails);
           this.snackBar.open(this.responseData.message, "X", { duration: 5000 });
         }
-      }, error => console.log(error));
+      },error => {
+        if(error.error.status=="EXPECTATION_FAILED" && error.error.message=="Fail to upload files!!!") {
+          this.snackBar.open("Please try again", "X", {duration:5000});
+        } else {
+          this.snackBar.open("Sorry file is not uploaded Successfully!", "X", {duration:5000});
+        }
+        console.log(error);
+      });
   }
   getAllPosts() {
     let type = localStorage.getItem("type");
@@ -125,7 +141,6 @@ export class CreatePostComponent implements OnInit {
     this.userList.push({});    
   }
   callSomeFunction(data:any){
-    console.log("userId--->"+data);
-    //console.log("data after -- >"+JSON.stringify(this.userData.splice(2,1)));
+    
   }
 }

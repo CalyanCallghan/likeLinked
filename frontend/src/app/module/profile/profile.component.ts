@@ -30,8 +30,9 @@ export class ProfileComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('afterClosed event fired--'+result);
-      this.userdata.file_name = result;
+      if(result !== undefined){
+        this.userdata.file_name = result;
+      }
     });
   }
 

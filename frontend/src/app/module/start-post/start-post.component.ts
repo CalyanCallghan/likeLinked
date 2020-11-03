@@ -13,6 +13,7 @@ import { CreatePostComponent } from '../create-post/create-post.component';
 export class StartPostComponent implements OnInit {
   postData: PostData = new PostData();
   @Output() addNewPost = new EventEmitter<PostData>();
+  type:string = localStorage.getItem("type");
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -25,9 +26,12 @@ export class StartPostComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('afterClosed CreatePostComponent-- ---' + result);
-      console.log('afterClosed CreatePostComponent-----' + JSON.stringify(result));
-      this.addNewPost.emit(result);
+      let length = Object.keys(result).length;
+      this.postData = result;
+      if(length != 0){
+        if(this.type == this.postData.type)
+          this.addNewPost.emit(result);
+        }
     });
   }
 

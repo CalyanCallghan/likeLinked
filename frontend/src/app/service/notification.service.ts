@@ -11,8 +11,8 @@ export class NotificationService {
 
   constructor(private http: HttpClient) { }
 
-  getNotifications(): Observable<Notification> {
-    return this.http.get<Notification>(`${this.baseUrl}/getNotifications`);
+  getNotifications(): Observable<Notification[]> {
+    return this.http.get<Notification[]>(`${this.baseUrl}/getNotifications`);
   }
 
   getTotalCount(): Observable<any> {

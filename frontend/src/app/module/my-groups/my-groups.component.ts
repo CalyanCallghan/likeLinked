@@ -13,12 +13,10 @@ import { StartPostComponent } from '../start-post/start-post.component';
 })
 export class MyGroupsComponent implements OnInit {
   indexId: number;
-  allPosts:PostData[];
+  postData:PostData[];
   constructor(public dialog: MatDialog, private router: Router,private personPostService: PersonPostService) {
   }
-  ngOnInit(): void {
-    localStorage.setItem("type","M");
-  }
+ 
   openPostDialog() {
     this.dialog.open(StartPostComponent);
   }
@@ -74,13 +72,19 @@ export class MyGroupsComponent implements OnInit {
     this.router.navigate(["/chat"]);
   }
 
-  getMyGroupPost(){
-    let type = localStorage.getItem("type");
-    this.personPostService.getAllPosts(type).subscribe(data => {
-      this.allPosts = data;
-      console.log(JSON.stringify(this.allPosts));
-      console.log("data::"+this.allPosts[0].fileName);
-    });
-  }  
 
+  getAllPosts(){
+    this.personPostService.getAllPosts("M").subscribe(data => {
+      this.postData = data;
+    });
+  } 
+
+  addNewPostItem(event:PostData){
+    this.postData.unshift(event);
+  }
+
+  ngOnInit(): void {
+    localStorage.setItem("type","A");
+    this.getAllPosts();
+  }
 }
