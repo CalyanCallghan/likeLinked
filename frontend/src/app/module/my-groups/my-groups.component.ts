@@ -84,7 +84,7 @@ export class MyGroupsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    localStorage.setItem("type","A");
+    localStorage.setItem("type","M");
     this.getAllPosts();
   }
 }

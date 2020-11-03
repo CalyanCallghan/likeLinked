@@ -10,14 +10,14 @@
         <mat-card-title>{{data.firstName}} {{data.lastName}}</mat-card-title>
       </mat-card-header>
 
-      <video style="width: 34em;" *ngIf="data.postFormat==='video'" [autoplay]="true" src="{{backendUrl}}/file/downloadFile/{{data.fileName}}" class="video-example"
+      <video style="width: 32em;" *ngIf="data.postFormat==='video'" [autoplay]="true" src="{{backendUrl}}/file/downloadFile/{{data.fileName}}" class="video-example"
         controls style="margin-top: 1em;"></video>
       <img mat-card-image *ngIf="data.postFormat==='image'" src="{{backendUrl}}/file/downloadFile/{{data.fileName}}" alt="Photo of a Shiba Inu"
-        style="margin-top: 1em;">
+        style="margin-top: 1em;width: 32em;">
       <pdf-viewer *ngIf="data.postFormat==='pdf'" src="{{backendUrl}}/file/downloadFile/{{data.fileName}}" [show-all]="false" [(page)]="pageVariable"
         [render-text]="true" [original-size]="false" (after-load-complete)="afterLoadComplete($event)"
-        style="display: block;width: 34em;"></pdf-viewer>
-        <mat-slider style="width: 34em;" [max]="max" [min]="min" [thumbLabel]="true" *ngIf="data.postFormat==='pdf'"
+        style="display: block;width: 30em;"></pdf-viewer>
+        <mat-slider style="width: 30em;" [max]="max" [min]="min" [thumbLabel]="true" *ngIf="data.postFormat==='pdf'"
           (change)="someFucn($event.value)">
         </mat-slider>
       <mat-card-content>

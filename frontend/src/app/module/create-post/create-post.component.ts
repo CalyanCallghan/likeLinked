@@ -115,7 +115,6 @@ export class CreatePostComponent implements OnInit {
     this.mainService.createPost(this.post, this.file)
       .subscribe(data => {
         this.responseData = data;
-        console.log(JSON.stringify(this.responseData));
         if (this.responseData.status == "OK") {
           this.dialogRef.close(this.responseData.postDetails);
           this.snackBar.open(this.responseData.message, "X", { duration: 5000 });
@@ -141,6 +140,6 @@ export class CreatePostComponent implements OnInit {
     this.userList.push({});    
   }
   callSomeFunction(data:any){
-    
+    this.userData  = this.userData.filter(word => word.userId != data);
   }
 }

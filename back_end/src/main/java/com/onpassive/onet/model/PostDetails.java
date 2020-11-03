@@ -12,6 +12,7 @@ public class PostDetails {
 	private String fileName;
 	private String postContent;
 	private String postFormat;
+	private String type;
 	private String firstName;
 	private String lastName;
 	private String userProfile;
