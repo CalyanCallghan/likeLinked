@@ -21,8 +21,8 @@ import lombok.NoArgsConstructor;
 public class Post {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "post_id")
-	private Integer postId;
+//	@Column(name = "id")
+	private Integer id;
 	@Column(name = "created_by")
 	private int createdBy;
 	@Column(name = "file_Path")
@@ -42,7 +42,7 @@ public class Post {
 	
 	@Override
 	public String toString() {
-		return "Post [postId=" + postId + ", createdBy=" + createdBy + ", filePath=" + filePath + ", fileName=" + fileName
+		return "Post [id=" + id + ", createdBy=" + createdBy + ", filePath=" + filePath + ", fileName=" + fileName
 				+ ", description=" + description + ", type=" + type + ", groupId=" + groupId + ", createdDt="
 				+ createdDt + "]";
 	}

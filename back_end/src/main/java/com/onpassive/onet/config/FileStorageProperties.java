@@ -8,5 +8,6 @@ import lombok.Data;
 @Data
 @ConfigurationProperties(prefix = "file")
 public class FileStorageProperties {
+	
     private String uploadDir;
 }

@@ -7,10 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.onpassive.onet.model.AuditModel;
+
 @Entity
 
 @Table(name = "chatmessage")
-public class ChatModel {
+public class ChatModel{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")

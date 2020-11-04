@@ -16,6 +16,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.onpassive.onet.model.AuditModel;
@@ -28,26 +29,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "comments")
-public class Comment extends AuditModel {
-    @Id
+public class Comment extends AuditModel{
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-   // @Column(name="comment_id")
     private Integer id;
+    
     @NotNull
     @Column(name="content")
     private String content;
-    
-    @Column(name="is_liked")
-    private boolean isLiked;
+
     @NotNull
     @Column(name="emp_id")
     private String empId;
-    
-	/*
-	 * @Column(name="created_dt") private LocalDateTime createdDt;
-	 * 
-	 * @Column(name="updated_dt") private LocalDateTime updatedDt;
-	 */
+  
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "post_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -55,13 +50,5 @@ public class Comment extends AuditModel {
     @JsonIdentityReference(alwaysAsId=true)
     @JsonProperty("post_id")
     private Post post;
-
-	/*
-	 * @ManyToOne(fetch = FetchType.LAZY, optional = false)
-	 * 
-	 * @JoinColumn(name = "post_id", nullable = false)
-	 
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Post post;*/
     
 }

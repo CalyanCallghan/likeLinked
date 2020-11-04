@@ -1,8 +1,9 @@
 package com.onpassive.onet.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,10 +22,11 @@ import com.onpassive.onet.repository.SSERepository;
 import com.onpassive.onet.repository.TLRepository;
 
 //@CrossOrigin(origins = {"https://opnetqaapi.onpassive.com","https://opnetqaui.onpassive.com"})
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @RestController
 @RequestMapping("/myGroup")
 public class MyGroupController {
+	private static final Logger logger = LoggerFactory.getLogger(MyGroupController.class);
 
 	@Autowired
 	private TLRepository tlRepository;
@@ -39,28 +41,31 @@ public class MyGroupController {
 
 	@GetMapping("/tl")
 	public List<TLModel> getAllTLList() {
-		List<TLModel> TLmodel = new ArrayList<TLModel>();
-		TLmodel = tlRepository.findAll();
-		return TLmodel;
+		logger.info("--------getAllTLList------start");
+		return tlRepository.findAll();
 	}
 
 	@GetMapping("/pm")
 	public List<PMModel> getAllDesignation() {
+		logger.info("--------getAllDesignation-----start");
 		return pmRepository.findAll();
 	}
 
 	@GetMapping("/sse")
 	public List<SSEModel> getAllSSEList() {
+		logger.info("--------getAllSSEList------start");
 		return sseRepository.findAll();
 	}
 
 	@GetMapping("/se")
 	public List<SEModel> getAllSEList() {
+		logger.info("--------getAllSEList-------start");
 		return seRepository.findAll();
 	}
 
 	@GetMapping("/accounts")
 	public List<AccountModel> getAllAccountsList() {
+		logger.info("--------getAllAccountsList-------start");
 		return accountsRepository.findAll();
 	}
 }

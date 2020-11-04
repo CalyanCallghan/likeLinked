@@ -2,19 +2,18 @@ package com.onpassive.onet.controller;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,10 +30,11 @@ import com.onpassive.onet.service.PostStorageService;
 import com.onpassive.onet.util.UploadFileResponse;
 
 //@CrossOrigin(origins = {"https://opnetqaapi.onpassive.com","https://opnetqaui.onpassive.com"})
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @RestController
 @RequestMapping("/file")
 public class PostController {
+	private static final Logger logger = LoggerFactory.getLogger(PostController.class);
 	@Autowired
 	HttpServletRequest request;
 	@Autowired
@@ -48,6 +48,7 @@ public class PostController {
 	@PostMapping("/uploadFile")
 	public ResponseEntity<UploadFileResponse> uploadFile(@RequestParam("files") MultipartFile[] files,
 			@RequestParam("data") String data) {
+		logger.debug("data---uploadFile------>"+data);
 		String message = "";
 		LocalDateTime dateTime = null;
 		//List<String> fileNames = new ArrayList<>();
@@ -62,12 +63,13 @@ public class PostController {
 			postId  = postStorageService.storeFile(files[0], model);
 				//fileNames.add(files[0].getOriginalFilename());
 			//});
-			message = "Uploaded the files. ";
+			message = "Uploaded the file successfully.";
 			postDetails = fileRepository.specificPostData(postId);
 			// return ResponseEntity.status(HttpStatus.OK).body(message);
 			return ResponseEntity.ok(new UploadFileResponse(dateTime.now(), HttpStatus.OK, message,postDetails));
 		} catch (Exception e) {
 			message = "Fail to upload files!!!";
+			logger.error("error occured at uploadFile---->"+e.getMessage());
 			// return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(message);
 			return ResponseEntity.ok(new UploadFileResponse(dateTime.now(), HttpStatus.EXPECTATION_FAILED, message,postDetails));
 		}
@@ -78,6 +80,7 @@ public class PostController {
 	@GetMapping("/downloadFile/{fileName:.+}")
 	public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
 		String contentType = null;
+		logger.debug("fileName-----downloadFile------>"+fileName);
 		// Load file as Resource
 		Resource resource = postStorageService.loadFileAsResource(fileName);
 		try {
@@ -95,9 +98,10 @@ public class PostController {
 	}
 	
 	@GetMapping("/getAllPosts/{type}")
-	public List<PostDetails> getAllPosts(@PathVariable String type) {
-		List<PostDetails> list = fileRepository.allthePostsData(type);
-		return list;
+	public ResponseEntity<List<PostDetails>> getAllPosts(@PathVariable String type) {
+		logger.debug("type---getAllPosts------>"+type);
+		List<PostDetails> data= postStorageService.getAllPosts(type);
+		return new ResponseEntity<List<PostDetails>>(data, new HttpHeaders(), HttpStatus.OK);
 	}
 
 }

@@ -67,7 +67,7 @@ public class PostStorageServiceImpl implements PostStorageService {
 			// the same name)
 			Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 			Post postId = postRepository.save(post);
-			return postId.getPostId();
+			return postId.getId();
 		} catch (IOException ex) {
 			throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
 		}
@@ -102,6 +102,11 @@ public class PostStorageServiceImpl implements PostStorageService {
 		} catch (MalformedURLException ex) {
 			throw new MyFileNotFoundException("File not found " + fileName, ex);
 		}
+	}
+
+	
+	public List<PostDetails> getAllPosts(String type) {
+		return postRepository.allthePostsData(type);
 	}
 	
 }

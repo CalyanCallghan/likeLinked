@@ -3,6 +3,8 @@ package com.onpassive.onet.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,12 +24,13 @@ import com.onpassive.onet.service.PostStorageService;
 import com.onpassive.onet.service.UserService;
 import com.onpassive.onet.util.UploadFileResponse;
 
-@CrossOrigin("*")
 //@CrossOrigin(origins = {"https://opnetqaapi.onpassive.com","https://opnetqaui.onpassive.com"})
-
+//@CrossOrigin("*")
 @RestController
 @RequestMapping("/user")
 public class UserController {
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
 	@Autowired
 	UserService userService;
 	
@@ -39,17 +42,20 @@ public class UserController {
 	
 	@GetMapping("/getAllUsers")
 	public List<User> getUsers() {
+		logger.info("<-----getUsers-------start--->");
 	    return userService.findAll();
 	}
 	
 	@PostMapping("/uploadProfileImage")
 	public ResponseEntity<UploadFileResponse> uploadProfileImage(@RequestParam("file") MultipartFile[] files,
 			@RequestParam("userId") int userId) {
+		logger.debug("<-----uploadProfileImage-------start---userId>"+userId);
+
 		String message = "";
 		LocalDateTime dateTime = null;
 		try {
 			String fileName = postStorageService.storeAndUpdateProfileImage(files[0], userId);
-			message = "Profile image updated. ";
+			message = "Profile image uploaded successfully.";
 			return ResponseEntity.ok(new UploadFileResponse(dateTime.now(), HttpStatus.OK, message,fileName));
 		} catch (Exception e) {
 			message = "Fail to profile image!!!";
@@ -60,6 +66,7 @@ public class UserController {
 	
 	@GetMapping("/userDetails/{emailId}")
 	public UserDetails getUserDetails(@PathVariable("emailId") String emailId) {
+		logger.debug("<-----getUserDetails-------start---emailId>"+emailId);
 		UserDetails userDetails = userRepository.findUserByEmailId(emailId);
 		return userDetails;
 	}

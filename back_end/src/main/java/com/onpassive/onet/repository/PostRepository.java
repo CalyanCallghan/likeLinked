@@ -19,10 +19,10 @@ public interface PostRepository extends CrudRepository<Post,Integer>{
 	@Query(value ="update user u set u.file_name=?1 where u.emp_id = ?2",nativeQuery = true)
 	int updateProfilePic(String fileName,long userId);
 	
-	@Query("select new com.onpassive.onet.model.PostDetails(p.postId,p.fileName,p.description,p.format,p.type,u.firstName,u.lastName,u.fileName) from Post p, User u where p.createdBy= u.empId and p.type=:type order by p.postId desc")
+	@Query("select new com.onpassive.onet.model.PostDetails(p.id,p.fileName,p.description,p.format,p.type,u.firstName,u.lastName,u.fileName) from Post p, User u where p.createdBy= u.empId and p.type=:type order by p.id desc")
 	public List<PostDetails> allthePostsData(String type);
 	
-	@Query("select new com.onpassive.onet.model.PostDetails(p.postId,p.fileName,p.description,p.format,p.type,u.firstName,u.lastName,u.fileName) from Post p, User u where p.createdBy= u.empId and p.postId=:postId ")
+	@Query("select new com.onpassive.onet.model.PostDetails(p.id,p.fileName,p.description,p.format,p.type,u.firstName,u.lastName,u.fileName) from Post p, User u where p.createdBy= u.empId and p.id=:postId ")
 	public PostDetails specificPostData(int postId);
 
 
