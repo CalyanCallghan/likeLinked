@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
+import { EmployeesData } from 'src/app/model/employeesData';
 import { environment } from 'src/app/model/environment';
 import { EmployeService } from 'src/app/service/employe.service';
 import { GroupsService } from 'src/app/service/groups.service';
@@ -11,7 +12,7 @@ import { GroupsService } from 'src/app/service/groups.service';
 })
 export class GroupsComponent implements OnInit {
   groupList: any;
-  card_data:any;
+  card_data:EmployeesData[];
   backendUrl = environment.baseApplicationUrl;
   designation:string =localStorage.getItem("designation").toLowerCase();
   canShowButton:boolean = true;

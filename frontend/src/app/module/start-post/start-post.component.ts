@@ -28,7 +28,7 @@ export class StartPostComponent implements OnInit {
       let type = localStorage.getItem("type");
       let length = Object.keys(result).length;
       if(length != 0){
-        if(type == this.postData.type)
+        if(type == result.type)
           this.addNewPost.emit(result);
         }
     });

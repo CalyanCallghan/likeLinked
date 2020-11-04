@@ -22,3 +22,6 @@
   object-fit: cover
 }
 
+.likebtn{
+  border-radius: 10px;
+}

@@ -1,8 +1,8 @@
- <cdk-virtual-scroll-viewport class="example-viewport" style="
+<cdk-virtual-scroll-viewport class="example-viewport" style="
       margin-top: 3.3%;
       right: 6em;
       width: 32em;
-      border-radius: 1em;" >
+      border-radius: 1em;">
   <div *ngFor="let data of postData">
     <mat-card class="example-card">
       <mat-card-header>
@@ -10,26 +10,72 @@
         <mat-card-title>{{data.firstName}} {{data.lastName}}</mat-card-title>
       </mat-card-header>
 
-      <video style="width: 32em;" *ngIf="data.postFormat==='video'" [autoplay]="true" src="{{backendUrl}}/file/downloadFile/{{data.fileName}}" class="video-example"
-        controls style="margin-top: 1em;"></video>
-      <img mat-card-image *ngIf="data.postFormat==='image'" src="{{backendUrl}}/file/downloadFile/{{data.fileName}}" alt="Photo of a Shiba Inu"
-        style="margin-top: 1em;width: 32em;">
-      <pdf-viewer *ngIf="data.postFormat==='pdf'" src="{{backendUrl}}/file/downloadFile/{{data.fileName}}" [show-all]="false" [(page)]="pageVariable"
-        [render-text]="true" [original-size]="false" (after-load-complete)="afterLoadComplete($event)"
-        style="display: block;width: 30em;"></pdf-viewer>
-        <mat-slider style="width: 30em;" [max]="max" [min]="min" [thumbLabel]="true" *ngIf="data.postFormat==='pdf'"
-          (change)="someFucn($event.value)">
-        </mat-slider>
+      <video style="width: 32em;" *ngIf="data.postFormat==='video'" [autoplay]="true"
+        src="{{backendUrl}}/file/downloadFile/{{data.fileName}}" class="video-example" controls
+        style="margin-top: 1em;"></video>
+      <img mat-card-image *ngIf="data.postFormat==='image'" src="{{backendUrl}}/file/downloadFile/{{data.fileName}}"
+        alt="Photo of a Shiba Inu" style="margin-top: 1em;width: 32em;">
+      <pdf-viewer *ngIf="data.postFormat==='pdf'" src="{{backendUrl}}/file/downloadFile/{{data.fileName}}"
+        [show-all]="false" [(page)]="pageVariable" [render-text]="true" [original-size]="false"
+        (after-load-complete)="afterLoadComplete($event)" style="display: block;width: 30em;"></pdf-viewer>
+      <mat-slider style="width: 30em;" [max]="max" [min]="min" [thumbLabel]="true" *ngIf="data.postFormat==='pdf'"
+        (change)="someFucn($event.value)">
+      </mat-slider>
       <mat-card-content>
         <p>
           {{data.postContent}}
         </p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button>Like</button>
-        <button mat-button>Comment</button>
+        <div class="CommentSection"></div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-12 modal-footer buttons">
+              <button class="btn btn-success btn-sm pr-2" (click)=countLike()>Like {{postLikeCount}} </button>
+
+              <!-- *ngIf="tmp!=data.postId;" -->
+
+              <ng-container >
+                 <button class="btn btn-primary btn-sm pr-2" (click)="showCommentsForm(data.postId)" >Comment {{commentCount}}</button>
+              </ng-container>
+
+          
+            </div>
+            <ng-container *ngIf="tmp == data.postId;">
+            <div class="col-12" *ngIf="showForm">
+              <form [formGroup]="commentsForm" name="commentsForm" (ngSubmit)="onSubmit(data.postId)">
+                <div class="col-12 col-sm-12 form-group">
+                  <textarea formControlName="comment" [(ngModel)]="comment.content"
+                    class="form-control"></textarea>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-sm btn-primary">Post</button>
+                </div>
+
+              </form>
+
+              <div *ngFor="let commentByPostId of CommentData"  >
+               <textarea value="{{commentByPostId[2]}}" readonly class="form-control" cols="80"
+                  rows="2"></textarea>
+                <button class="likebtn" (click)="specificCommentLike(commentByPostId[0])"><img src="assets\images\logos\like.svg"
+                    width="20px" height="20px">
+                  <b *ngIf="commentByPostId.postId == 1">{{commentLikesCount}}</b>
+                </button>
+                <br><br>
+
+              </div>
+
+            </div>
+          </ng-container>
+          </div>
+        </div>
       </mat-card-actions>
     </mat-card>
     <br>
   </div>
+ 
+
+
+  
 </cdk-virtual-scroll-viewport>

@@ -1,15 +1,17 @@
 
 import { Component, Input, OnInit } from '@angular/core';
-import { CreatePost } from 'src/app/model/createPost';
 import { FixedSizeVirtualScrollStrategy } from '@angular/cdk/scrolling';
 
 
 import { VIRTUAL_SCROLL_STRATEGY } from '@angular/cdk/scrolling';
-import { ChangeDetectionStrategy } from '@angular/core';
 import { PersonPostService } from 'src/app/service/person.service';
-import { Comment } from 'src/app/model/comment';
 import { environment } from 'src/app/model/environment';
 import { PostData } from 'src/app/model/postData';
+import { CommentModel } from 'src/app/model/comment';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CommentLike } from 'src/app/model/commentLike';
+import { LikeModel } from 'src/app/model/like';
+import { CommentData } from 'src/app/model/commentData';
 
 
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
@@ -25,49 +27,120 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
   providers: [{ provide: VIRTUAL_SCROLL_STRATEGY, useClass: CustomVirtualScrollStrategy }]
 })
 export class PersonPostComponent implements OnInit {
-  comment: Comment = new Comment();
+  comment: CommentModel = new CommentModel();
+  likeModel: LikeModel = new LikeModel();
+  commentLike: CommentLike = new CommentLike();
   backendUrl = environment.baseApplicationUrl;
-  canShowComment:boolean = false;
+  canShowComment: boolean = false;
   @Input() postData: PostData[];
   pageVariable: number = 1;
   value = 0;
   min: number = 0;
   max: number = 100;
+  count: number;
+  showForm: boolean = false;
+  canShow: boolean = false;
+  CommentData: CommentData[];
+  commentLikesCount: number;
+  postLikeCount: number;
+  commentCount: number;
+  tmp: number = 0;
+  htmlYouWantToAdd;
+
+
+  commentsForm = new FormGroup({
+    comment: new FormControl('', [Validators.required])
+  });
 
   constructor(private personPostService: PersonPostService) { }
 
   ngOnInit(): void {
-    //this.getAllPosts();
+    console.log();
+
+    this.count = 0;
+    this.getLikesCount();
+    this.getCountOfCommentsByPostId();
+  }
+  addHTML() {
+    this.htmlYouWantToAdd = "<b>Some HTML you want to display</b>";
   }
 
-  postComment() {
-    this.personPostService.doComment(this.comment).subscribe(data => {
-      console.log(JSON.stringify(this.comment));
-      //this.canShowComment = false;
-      this.comment.comment = "";
-    }, error => console.log(error));
-  }
-  
-  showComment(){
-    this.canShowComment = true;
-  }
   someFucn(newVal: any) {
     this.pageVariable = newVal;
   }
 
-  
+
   afterLoadComplete(pdf: any) {
-       this.max = pdf.numPages;
+    this.max = pdf.numPages;
   }
 
-  /*getAllPosts(){
-    let type = localStorage.getItem("type");  
-    console.log("type--->"+type);
-    this.personPostService.getAllPosts(type).subscribe(data => {
-      this.allPosts = data;
-      console.log("all post data---->"+JSON.stringify(this.allPosts));
+  showComment() {
+    this.canShowComment = true;
+  }
+
+  getLikesCount() {
+    this.personPostService.getLikesCount().subscribe(data => {
+      this.postLikeCount = data;
+      console.log("all likesCount data---->" + JSON.stringify(this.postLikeCount));
     });
-  } */
+  }
+
+  getCountOfCommentsByPostId() {
+    this.personPostService.getCountOfCommentsByPostId().subscribe(data => {
+      this.commentCount = data;
+      console.log("all CommentCount data---->" + JSON.stringify(this.commentCount));
+    });
+  }
+
+
+  showCommentsForm(postId: number) {
+    this.tmp = postId;
+    this.canShow = true;
+    console.log("showCommentsForm------>" + postId);
+
+    this.showForm = true;
+    this.personPostService.getCommentsByPostId(postId).subscribe(data => {
+      this.CommentData = data;
+      console.log("commentsByPostId------>" + JSON.stringify(this.CommentData));
+
+    });
+
+    this.personPostService.getCommentLikesByCommentId().subscribe(data => {
+      this.commentLikesCount = data;
+      console.log("commentsLikesCountByCommentId------>" + JSON.stringify(this.commentLikesCount));
+
+    });
+
+  }
+
+  specificCommentLike(commentId: number) {
+    console.log("specificCommentLike----->" + commentId);
+    this.commentLike.empId = '10120049';
+    this.commentLike.isLiked = true;
+    this.commentLike.commmentId = commentId;
+    this.personPostService.setSpecificCommentLike(this.commentLike).subscribe(data => {
+      console.log(data);
+
+    });
+  }
+
+  countLike() {
+    this.likeModel.isLiked = true;
+    this.likeModel.empId = '10120049';
+    this.personPostService.likesCount(this.likeModel).subscribe(data => {
+      this.likeModel = data;
+      console.log(this.likeModel);
+    }, error => console.log(error));
+  }
+
+  onSubmit(postId: number) {
+    this.comment.empId = '10120049';
+    console.log(this.comment.content);
+    this.personPostService.doComment(this.comment, postId).subscribe(data => {
+      console.log(data);
+    });
+    this.comment.content = '';
+  }
 
 }
 

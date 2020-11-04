@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { EmployeesData } from 'src/app/model/employeesData';
 import { PostData } from 'src/app/model/postData';
+import { EmployeService } from 'src/app/service/employe.service';
 import { PersonPostService } from 'src/app/service/person.service';
 import { StartPostComponent } from '../start-post/start-post.component';
 
@@ -14,7 +16,19 @@ import { StartPostComponent } from '../start-post/start-post.component';
 export class MyGroupsComponent implements OnInit {
   indexId: number;
   postData:PostData[];
-  constructor(public dialog: MatDialog, private router: Router,private personPostService: PersonPostService) {
+  card_data:EmployeesData[];
+  designation:string = localStorage.getItem("designation").toLowerCase();;
+  constructor(public dialog: MatDialog, private router: Router,
+    private personPostService: PersonPostService, private employeService: EmployeService) {
+
+  }
+  
+  ngOnInit(): void {
+    localStorage.setItem("type","M");
+    this.getAllPosts();
+    this.employeService.getEmployeeDetailsByDesignation(this.designation).subscribe(result => {
+      this.card_data = result;
+    },error => console.log(error));
   }
  
   openPostDialog() {
@@ -83,8 +97,4 @@ export class MyGroupsComponent implements OnInit {
     this.postData.unshift(event);
   }
 
-  ngOnInit(): void {
-    localStorage.setItem("type","M");
-    this.getAllPosts();
-  }
 }

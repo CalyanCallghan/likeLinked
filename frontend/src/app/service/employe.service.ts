@@ -12,8 +12,8 @@ export class EmployeService {
 
   constructor(private http: HttpClient) { }
 
-  getEmployeeDetailsByDesignation(desigId:any): Observable<EmployeesData> {
-    return this.http.get<EmployeesData>(environment.baseApplicationUrl+"/myGroup/"+desigId);
+  getEmployeeDetailsByDesignation(desigId:any): Observable<EmployeesData[]> {
+    return this.http.get<EmployeesData[]>(environment.baseApplicationUrl+"/myGroup/"+desigId);
   }
   getEmployeeData(emailId:any): Observable<UserData> {
     return this.http.get<UserData>(environment.baseApplicationUrl+"/user/userDetails/"+emailId);

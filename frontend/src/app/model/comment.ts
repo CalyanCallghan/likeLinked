@@ -1,3 +1,4 @@
-export class Comment{
-    comment:string;
+export class CommentModel{
+    content:string;
+    empId:string;
 }
