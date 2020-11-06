@@ -46,7 +46,6 @@ export class MyGroupsComponent implements OnInit {
 
 
   getAllPosts(){
-    alert();
     this.personPostService.getAllPosts("M").subscribe(data => {
       this.postData = data;
     });

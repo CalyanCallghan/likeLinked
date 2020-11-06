@@ -22,24 +22,12 @@ export class HomepageComponent implements OnInit {
 
   getAllPosts(){
     this.personPostService.getAllPosts("A").subscribe(data => {
-      console.log("----data---"+JSON.stringify(data));
       this.postData = data;
-      console.log("--post data-"+JSON.stringify(this.postData));
     });
   } 
   addNewPostItem(event:PostData){
     this.postData.unshift(event);
   }
-  
-  commentCountOfPost(countOfComment:number,indexId:number){
-    alert(countOfComment+"-----------"+indexId);
-    this.postData[indexId].commentCount = countOfComment;
-  }
 
-  likeCountOfPost(countOfLike:number,indexId:number){
-    alert(countOfLike+"-----------"+indexId);
-    console.log(JSON.stringify(this.postData))
-    this.postData[indexId].likeCount = countOfLike;
-  }
 
 }

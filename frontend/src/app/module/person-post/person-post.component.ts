@@ -50,11 +50,10 @@ export class PersonPostComponent implements OnInit {
     comment: new FormControl('', [Validators.required])
   });
 
-  constructor(private personPostService: PersonPostService, private homePageComponent : HomepageComponent
-    ) { }
+  constructor(private personPostService: PersonPostService) { }
 
   ngOnInit(): void {
-  
+    console.log("all post data-----in person post->"+this.postData);
   }
  
   someFucn(newVal: any) {
@@ -93,6 +92,7 @@ export class PersonPostComponent implements OnInit {
     this.commentLike.commmentId = commentId;
     this.personPostService.setSpecificCommentLike(this.commentLike).subscribe(data => {
       console.log(data);
+      
 
     });
   }
@@ -101,13 +101,7 @@ export class PersonPostComponent implements OnInit {
     let empId =  Number(localStorage.getItem("employeeCode"));
     this.personPostService.likesCount(empId,postId).subscribe(data => {
       console.log(data);
-      this.homePageComponent.likeCountOfPost(data,index);
-      // let type = localStorage.getItem("type");
-      // if(type == "M"){
-      //   this.myGroupsComponent.likeCountOfPost(data,index);
-      // }else if(type == "A"){
-      //   this.homePageComponent.likeCountOfPost(data,index);
-      // }
+      this.postData[index].likeCount=data;
     }, error => console.log(error));
   }
 
@@ -119,15 +113,8 @@ export class PersonPostComponent implements OnInit {
       this.showCommentsForm(postId);
       this.personPostService.getCountOfCommentsByPostId(postId).subscribe(data => {
         this.commentCount = data;
-        console.log("all CommentCount data---->" + JSON.stringify(this.commentCount));
-        this.homePageComponent.commentCountOfPost(this.commentCount,index);
-      
-        // let type = localStorage.getItem("type");
-        // if(type == "M"){
-        //   this.myGroupsComponent.commentCountOfPost(this.commentCount,index);
-        // }else if(type == "A"){
-        //   this.homePageComponent.commentCountOfPost(this.commentCount,index);
-        // }
+        console.log("all CommentCount data---->" +this.commentCount);
+        this.postData[index].commentCount=data;
       });
     });
     this.comment.content = '';
