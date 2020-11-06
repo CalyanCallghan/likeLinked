@@ -16,4 +16,18 @@ public class PostDetails {
 	private String firstName;
 	private String lastName;
 	private String userProfile;
+	private long likeCount;
+	private long commentCount;
+	
+	public PostDetails(int postId, String fileName, String postContent, String postFormat, String type,
+			String firstName, String lastName, String userProfile) {
+		this.postId = postId;
+		this.fileName = fileName;
+		this.postContent = postContent;
+		this.postFormat = postFormat;
+		this.type = type;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.userProfile = userProfile;
+	}
 }

@@ -12,7 +12,7 @@ import com.onpassive.onet.model.AuditModel;
 @Entity
 
 @Table(name = "chatmessage")
-public class ChatModel{
+public class ChatModel extends AuditModel{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")

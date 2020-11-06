@@ -17,6 +17,7 @@ import com.onpassive.onet.model.AuditModel;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -29,10 +30,10 @@ public class PostLike extends AuditModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-
+	
 	@Column(name = "emp_id")
 	private String empId;
-
+	
 	@Column(name = "is_liked")
 	private boolean isLiked;
 

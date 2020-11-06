@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "accounts")
 @NoArgsConstructor
-public class AccountModel{
+public class AccountModel extends AuditModel{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "acc_id")

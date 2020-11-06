@@ -21,7 +21,7 @@ import com.onpassive.onet.entity.ChatModel;
 import com.onpassive.onet.repository.ChatRepository;
 
 //@CrossOrigin(origins = {"https://opnetqaapi.onpassive.com","https://opnetqaui.onpassive.com"})
-//@CrossOrigin("*")
+@CrossOrigin("*")
 @RequestMapping("/api")
 @RestController
 public class ChatController {
@@ -33,11 +33,9 @@ public class ChatController {
 
 	@PostMapping("/sentMessage")
 	public ResponseEntity<ChatModel> sentMessage(@RequestBody ChatModel chat) {
-		
 		SimpleDateFormat dateTimeInGMT = new SimpleDateFormat("dd-MMM-yyyy hh:mm aa");
 		dateTimeInGMT.setTimeZone(TimeZone.getTimeZone("GMT"));
 		chat.setSendDate(dateTimeInGMT.format(new Date()));
-		
 		return new ResponseEntity<ChatModel>(chatrepo.save(chat), HttpStatus.OK);
 	}
 

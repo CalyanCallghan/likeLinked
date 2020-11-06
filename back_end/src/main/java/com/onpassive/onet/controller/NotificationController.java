@@ -18,7 +18,7 @@ import com.onpassive.onet.repository.NotificationRepository;
 import com.onpassive.onet.service.NotificationService;
 
 //@CrossOrigin(origins = {"https://opnetqaapi.onpassive.com","https://opnetqaui.onpassive.com"})
-//@CrossOrigin("*")
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/notification")
 public class NotificationController {

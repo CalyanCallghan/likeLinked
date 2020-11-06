@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.onpassive.onet.model.AuditModel;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "designation")
 @NoArgsConstructor
-public class Designation {
+public class Designation extends AuditModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "desg_id")

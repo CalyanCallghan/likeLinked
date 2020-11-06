@@ -1,7 +1,5 @@
 package com.onpassive.onet.entity;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,22 +23,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "comment_like")
 public class CommentLike extends AuditModel {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column(name = "emp_id")
 	private String empId;
 
 	@Column(name = "is_liked")
 	private boolean isLiked;
-	
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
+
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "comment_id", nullable = false)
-    private Comment comment;
+	@JoinColumn(name = "comment_id", nullable = false)
+	private Comment comment;
 
-
-	
 }

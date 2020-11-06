@@ -1,7 +1,9 @@
 package com.onpassive.onet.controller;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +16,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +33,7 @@ import com.onpassive.onet.service.PostStorageService;
 import com.onpassive.onet.util.UploadFileResponse;
 
 //@CrossOrigin(origins = {"https://opnetqaapi.onpassive.com","https://opnetqaui.onpassive.com"})
-//@CrossOrigin("*")
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/file")
 public class PostController {
@@ -41,7 +44,7 @@ public class PostController {
 	private PostStorageService postStorageService;
 	
 	@Autowired
-	private PostRepository fileRepository;
+	private PostRepository postRepository;
 
 	// For uploading files to File system
 	@SuppressWarnings("static-access")
@@ -64,7 +67,7 @@ public class PostController {
 				//fileNames.add(files[0].getOriginalFilename());
 			//});
 			message = "Uploaded the file successfully.";
-			postDetails = fileRepository.specificPostData(postId);
+			postDetails = postRepository.specificPostData(postId);
 			// return ResponseEntity.status(HttpStatus.OK).body(message);
 			return ResponseEntity.ok(new UploadFileResponse(dateTime.now(), HttpStatus.OK, message,postDetails));
 		} catch (Exception e) {
@@ -102,6 +105,28 @@ public class PostController {
 		logger.debug("type---getAllPosts------>"+type);
 		List<PostDetails> data= postStorageService.getAllPosts(type);
 		return new ResponseEntity<List<PostDetails>>(data, new HttpHeaders(), HttpStatus.OK);
+	}
+	@GetMapping("/getAllPostsWithCommentsAndLikes/{type}")
+	public ResponseEntity<List<PostDetails>> getAllPostsWithCommentsAndLikes(@PathVariable String type) {
+		logger.debug("type---getAllPosts------>"+type);
+		List<PostDetails> postDetails = new ArrayList<>();
+		List<Object[]> allPosts =postRepository.allthePostsDataWithCountAndLike(type);
+		for(Object[] postDAta : allPosts)
+	    {	
+			System.err.println(postDAta[0]);
+			System.err.println(postDAta[1]);
+			System.err.println(postDAta[2]);
+			System.err.println(postDAta[3]);
+			System.err.println(postDAta[4]);
+			System.err.println(postDAta[5]);
+			System.err.println(postDAta[6]);
+			System.err.println(postDAta[7]);
+			System.err.println(postDAta[8]);
+			System.err.println(postDAta[9]);
+			System.err.println("------------");
+			postDetails.add(new PostDetails(((Integer)postDAta[0]),((String)postDAta[1]),((String)postDAta[2]),((String)postDAta[3]),((String)postDAta[4]),((String)postDAta[5]),((String)postDAta[6]),((String)postDAta[7]),(((BigInteger)postDAta[8]).longValue()),(((BigInteger)postDAta[9]).longValue())));
+		}
+		return new ResponseEntity<List<PostDetails>>(postDetails, new HttpHeaders(), HttpStatus.OK);
 	}
 
 }

@@ -25,7 +25,7 @@ import com.onpassive.onet.service.UserService;
 import com.onpassive.onet.util.UploadFileResponse;
 
 //@CrossOrigin(origins = {"https://opnetqaapi.onpassive.com","https://opnetqaui.onpassive.com"})
-//@CrossOrigin("*")
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/user")
 public class UserController {

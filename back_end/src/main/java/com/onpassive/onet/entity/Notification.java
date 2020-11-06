@@ -1,11 +1,15 @@
 package com.onpassive.onet.entity;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.onpassive.onet.model.AuditModel;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @Table(name = "notifications")
-public class Notification {
+public class Notification extends AuditModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -25,6 +29,7 @@ public class Notification {
 	@Column(name ="send_from")
 	private String from;
 	
+
 	@Column(name ="sendTo")
 	private String sendTo;
 	

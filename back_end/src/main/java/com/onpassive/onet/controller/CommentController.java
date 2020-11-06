@@ -1,14 +1,16 @@
 package com.onpassive.onet.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,16 +22,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.onpassive.onet.entity.Comment;
 import com.onpassive.onet.entity.CommentLike;
-import com.onpassive.onet.entity.PostLike;
 import com.onpassive.onet.entity.SubComment;
 import com.onpassive.onet.exception.ResourceNotFoundException;
 import com.onpassive.onet.model.CommentDetails;
 import com.onpassive.onet.repository.CommentLikeRepository;
 import com.onpassive.onet.repository.CommentRepository;
-import com.onpassive.onet.repository.LikeRepository;
+import com.onpassive.onet.repository.PostLikeRepository;
 import com.onpassive.onet.repository.PostRepository;
 import com.onpassive.onet.repository.SubCommentRepository;
+import com.onpassive.onet.service.CommentsAndLikesService;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/comment")
 public class CommentController {
@@ -41,13 +44,16 @@ public class CommentController {
 	private CommentRepository commentRepository;
 
 	@Autowired
-	private LikeRepository likeRepository;
+	private PostLikeRepository likeRepository;
 
 	@Autowired
 	private SubCommentRepository subCommentRepository;
 
 	@Autowired
 	private CommentLikeRepository commentlikeRepository;
+	
+	@Autowired
+	private CommentsAndLikesService commentService;
 
 	// to store post comments
 	@PostMapping("/posts/{postId}/comments")
@@ -60,15 +66,14 @@ public class CommentController {
 
 	// to get comments of post through postId
 	@GetMapping("/posts/{postId}/comments")
-	public List<Object[]> getAllCommentsByPostId(@PathVariable(value = "postId") Integer postId) {
-//		System.out.println("****************" + postId);
-//		List<CommentDetails> commentDtetails = new ArrayList<>();
-//		List<Object[]> ll =commentRepository.getAllCommentsByPostId(postId);
-//		for(Object[] objArr : ll)
-//		{
-//			commentDtetails.add((CommentDetails) Arrays.asList(objArr));
-//		}
-		return commentRepository.getAllCommentsByPostId(postId);
+	public ResponseEntity<List<CommentDetails>> getAllCommentsByPostId(@PathVariable(value = "postId") Integer postId) {
+	List<CommentDetails> commentDtetails = new ArrayList<>();
+		List<Object[]> allComments =commentRepository.getAllCommentsByPostId(postId);
+		for(Object[] objArr : allComments)
+	    {
+			commentDtetails.add(new CommentDetails(((Integer)objArr[0]),((String)objArr[1]),((String)objArr[2])));
+		}
+		return new ResponseEntity<List<CommentDetails>>(commentDtetails, new HttpHeaders(), HttpStatus.OK);
 	}
 
 	// to update comment of post by commentId
@@ -98,22 +103,18 @@ public class CommentController {
 	}
 
 	// to store post likes by individual employees
-	@PostMapping("/posts/{postId}/likes")
-	public PostLike createLikes(@PathVariable(value = "postId") Integer postId, @Valid @RequestBody PostLike likes) {
-		return postRepository.findById(postId).map(post -> {
-			likes.setEmpId("100120049");
-			likes.setLiked(true);
-			likes.setPost(post);
-			System.out.println("okay");
-			return likeRepository.save(likes);
-		}).orElseThrow(() -> new ResourceNotFoundException("PostId " + postId + " not found"));
+	@GetMapping("/posts/{employeeId}/{postId}/likes")
+	public long updateOrcreateLikes(@PathVariable(value = "postId") int postId, @PathVariable(value = "employeeId") int employeeId) {
+		long count =0;
+		System.err.println("postId---->"+postId+"----employeeId--->"+employeeId);
+		count = commentService.updateAndReturnLikesCount(employeeId, postId);
+		return count;
 	}
 
 	// to get post like count
 	@GetMapping("/posts/{postId}/postLikesCount")
 	public long likesCount(@PathVariable(value = "postId") Integer postId) {
-
-		long likesCount = likeRepository.countByIsliked();
+		long likesCount = likeRepository.countByIsliked(postId);
 		System.out.println("checkCount:::" + likesCount);
 		return likesCount;
 	}
