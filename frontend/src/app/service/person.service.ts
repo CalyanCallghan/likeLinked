@@ -12,48 +12,41 @@ import { PostData } from '../model/postData';
     providedIn: 'root'
 })
 export class PersonPostService {
-    baseUrl: string;
+    private baseUrl = environment.baseApplicationUrl+"/comment";
+
     constructor(private http: HttpClient) { }
 
     getAllPosts(type: string): Observable<PostData[]> {
-        return this.http.get<PostData[]>(environment.baseApplicationUrl + "/file/getAllPosts/" + type);
+        return this.http.get<PostData[]>(environment.baseApplicationUrl + "/file/getAllPostsWithCommentsAndLikes/" + type);
     }
-    likesCount(likeModel: LikeModel): Observable<LikeModel> {
-        this.baseUrl = 'http://localhost:8080/comment';
-        return this.http.post<LikeModel>(`${this.baseUrl}` + "/posts/1/likes", likeModel);
+    likesCount(empId:number,postId:number): Observable<number> {
+        return this.http.get<number>(`${this.baseUrl}` + "/posts/"+empId+"/"+postId+"/likes");
     }
 
-    getLikesCount(): Observable<any> {
-        this.baseUrl = 'http://localhost:8080/comment';
+    getLikesCount(postId): Observable<any> {
         return this.http.get<any>(`${this.baseUrl}` + "/posts/1/postLikesCount");
     }
 
-
     doComment(commentModel: CommentModel,postId:number): Observable<CommentModel> {
         console.log("from service--->" + JSON.stringify(commentModel));
-        this.baseUrl = 'http://localhost:8080/comment';
         return this.http.post<CommentModel>(`${this.baseUrl}` + "/posts/"+postId+"/comments", commentModel);
 
     }
 
     setSpecificCommentLike(commentLike: CommentLike): Observable<CommentLike> {
-        this.baseUrl = 'http://localhost:8080/comment';
         return this.http.post<CommentLike>(`${this.baseUrl}` + "/Comment/"+commentLike.commmentId+"/likes", commentLike);
 
     }
 
     getCommentsByPostId(postId:number): Observable<CommentData[]> {
-        this.baseUrl = 'http://localhost:8080/comment';
         return this.http.get<CommentData[]>(`${this.baseUrl}` + "/posts/"+postId+"/comments");
     }
 
-    getCountOfCommentsByPostId(): Observable<any> {
-        this.baseUrl = 'http://localhost:8080/comment';
-        return this.http.get<any>(`${this.baseUrl}` + "/posts/1/commentCount");
+    getCountOfCommentsByPostId(postId:number): Observable<any> {
+        return this.http.get<any>(`${this.baseUrl}` + "/posts/"+postId+"/commentCount");
     }
 
     getCommentLikesByCommentId(): Observable<any> {
-        this.baseUrl = 'http://localhost:8080/comment';
         return this.http.get<any>(`${this.baseUrl}` + "/Comment/1/commentLikesCount");
     }
 }

@@ -72,6 +72,7 @@ export class HeaderComponent implements OnInit {
       element.firstName.toLowerCase().indexOf(firstName.toLowerCase()) === 0);
   }
   clearValue() {
+    console.log("0----clkear----");
     this.ngOnInit();
   }
 

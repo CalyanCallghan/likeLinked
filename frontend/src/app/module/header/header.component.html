@@ -3,11 +3,10 @@
     <!-- <input class="form-control form-control-sm" style="margin-left: 32em;" type="text" placeholder="Search"
       aria-label="Search" mdbInput> -->
       <mat-search-bar style="margin-left: 36em;" [matAutocomplete]="auto" [formControl]="searchCtrl"
-      matTooltip="Type to filter the Name list" matTooltipPosition="after" (onOpen)="clearValue()"></mat-search-bar>
+      matTooltipPosition="after" (onOpen)="clearValue()"></mat-search-bar>
       <mat-autocomplete #auto="matAutocomplete">
         <mat-option *ngFor="let element of filteredName | async" [value]="element.firstName">
           <span style="font-size: 12px;"> {{ element.firstName}} {{element.lastName}}</span>
-         
         </mat-option>
       </mat-autocomplete>
     <div style="display: flex;

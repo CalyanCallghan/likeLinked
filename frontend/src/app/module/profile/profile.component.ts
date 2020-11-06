@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.employeService.getEmployeeData(this.userEmailId).subscribe(data => {
       this.userdata = data;
+      console.log("data-->"+JSON.stringify(this.userdata ))
     },error => console.log(error));
   }
   openUploadDialog() {

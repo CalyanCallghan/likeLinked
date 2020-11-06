@@ -7,4 +7,7 @@ export class PostData{
     firstName:string;
     lastName:string;
     userProfile:string;
+    likeCount:number;
+    commentCount:number;
+
 }

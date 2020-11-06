@@ -3,7 +3,7 @@
       right: 6em;
       width: 32em;
       border-radius: 1em;">
-  <div *ngFor="let data of postData">
+  <div *ngFor="let data of postData;let i = index">
     <mat-card class="example-card">
       <mat-card-header>
         <img src="{{backendUrl}}/file/downloadFile/{{data.userProfile}}" mat-card-avatar>
@@ -32,19 +32,19 @@
         <div class="container">
           <div class="row">
             <div class="col-12 modal-footer buttons">
-              <button class="btn btn-success btn-sm pr-2" (click)=countLike()>Like {{postLikeCount}} </button>
+              <button class="btn btn-success btn-sm pr-2" (click)=countLike(data.postId,i)>Like {{data.likeCount}} </button>
 
               <!-- *ngIf="tmp!=data.postId;" -->
 
               <ng-container >
-                 <button class="btn btn-primary btn-sm pr-2" (click)="showCommentsForm(data.postId)" >Comment {{commentCount}}</button>
+                 <button class="btn btn-primary btn-sm pr-2" (click)="showCommentsForm(data.postId)" >Comment {{data.commentCount}}</button>
               </ng-container>
 
           
             </div>
             <ng-container *ngIf="tmp == data.postId;">
             <div class="col-12" *ngIf="showForm">
-              <form [formGroup]="commentsForm" name="commentsForm" (ngSubmit)="onSubmit(data.postId)">
+              <form [formGroup]="commentsForm" name="commentsForm" (ngSubmit)="onSubmit(data.postId,i)">
                 <div class="col-12 col-sm-12 form-group">
                   <textarea formControlName="comment" [(ngModel)]="comment.content"
                     class="form-control"></textarea>
@@ -55,12 +55,12 @@
 
               </form>
 
-              <div *ngFor="let commentByPostId of CommentData"  >
-               <textarea value="{{commentByPostId[2]}}" readonly class="form-control" cols="80"
+              <div *ngFor="let commentByPostId of commentData" >
+               <textarea value="{{commentByPostId.content}}" readonly class="form-control" cols="80"
                   rows="2"></textarea>
-                <button class="likebtn" (click)="specificCommentLike(commentByPostId[0])"><img src="assets\images\logos\like.svg"
+                <button class="likebtn" (click)="specificCommentLike(commentByPostId.commentId)"><img src="assets\images\logos\like.svg"
                     width="20px" height="20px">
-                  <b *ngIf="commentByPostId.postId == 1">{{commentLikesCount}}</b>
+                  <b *ngIf="commentByPostId.commentId == 4">{{commentLikesCount}}</b>
                 </button>
                 <br><br>
 
