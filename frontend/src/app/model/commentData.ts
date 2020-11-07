@@ -1,5 +1,7 @@
 export class CommentData{
-    content:string;
-    empId:string;
     commentId:number;
+	firstName:string;
+	lastName:string;
+	 profileImage:string; 
+	content:string;
 }

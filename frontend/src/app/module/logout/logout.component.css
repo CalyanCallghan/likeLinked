@@ -1,5 +1,4 @@
-
-.BGlogout {
+.bgcolor{   
     background-image: url("src/assets/images/logos/BGlogout.svg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -11,6 +10,13 @@
     font-family: sans-serif;
     font-size: 10px;
     text-align: left;
+    
+    /* top: 0; 
+    left: 0;  */
+    min-width: 100%;
+    min-height: 100%;
+    background-size: full;
+    
 }
 .text{
     font-size: 30px;;
@@ -24,7 +30,9 @@
     text-align: center;
 }
 .title{
-    margin-left: 1em;
+  
+    margin: 0 auto;
+
 }
 .btn{
     background-color:skyblue;
@@ -32,8 +40,9 @@
     border-radius: 20px;
     border: 1px solid white;
     font-size: larger;
-    padding: 10px;
-    margin-left: 10em;
+    padding: 14px;
+    margin-left: 16em;
+    margin-top: 3em;
 }
 
 .text-block {
@@ -46,18 +55,19 @@
   }
 
   .text-logout{
-    /* position: absolute; */
+   
    margin-top: -80%;
     left: 70px;
     color: white;
     padding-left: 20px;
     padding-right: 20px;
     border-bottom: darkgray;
-    /* margin-bottom: 30%; */
+
 
   }
   .logout-text{
     margin-top: -60%;
+    margin-left: 2em;
   }
 
 .main-title{
@@ -66,4 +76,3 @@
     font-family: monospace;
     font-weight: bolder;
 }
-  

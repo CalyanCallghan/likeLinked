@@ -27,7 +27,7 @@
                   <td style="padding-right: 0px;width:10px">#</td>
                 <td>
                     <input matInput type="text"  id="name{{i}}"  style="width: 20em;" 
-                    [matAutocomplete]="auto" [formControl]="searchCtrl" />
+                    [matAutocomplete]="auto" [formControl]="searchCtrl+i" />
                     <mat-autocomplete #auto="matAutocomplete">
                         <mat-option *ngFor="let element of filteredName | async" [value]="element.firstName" (onSelectionChange)="callSomeFunction(element.userId)">
                           <span style="font-size: 12px;"> {{ element.firstName}} {{element.lastName}}</span>

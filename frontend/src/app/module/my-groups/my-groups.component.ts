@@ -5,13 +5,14 @@ import { EmployeesData } from 'src/app/model/employeesData';
 import { PostData } from 'src/app/model/postData';
 import { EmployeService } from 'src/app/service/employe.service';
 import { PersonPostService } from 'src/app/service/person.service';
+import { GroupsComponent } from '../groups/groups.component';
 import { StartPostComponent } from '../start-post/start-post.component';
 
 
 @Component({
   selector: 'app-my-groups',
   templateUrl: './my-groups.component.html',
-  styleUrls: ['./my-groups.component.css']
+  styleUrls: ['./my-groups.component.css'], 
 })
 export class MyGroupsComponent implements OnInit {
   indexId: number;

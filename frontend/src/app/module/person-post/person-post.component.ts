@@ -106,7 +106,7 @@ export class PersonPostComponent implements OnInit {
   }
 
   onSubmit(postId: number,index:number) {
-    this.comment.empId = '10120049';
+    this.comment.empId = localStorage.getItem("employeeCode");
     console.log(this.comment.content);
     this.personPostService.doComment(this.comment, postId).subscribe(data => {
       console.log(data);

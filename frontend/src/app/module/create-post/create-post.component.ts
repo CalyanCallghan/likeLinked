@@ -35,7 +35,11 @@ export class CreatePostComponent implements OnInit {
   postData: PostData = new PostData();
   searchTerm: String;
   length: number;
-  searchCtrl: FormControl;
+  searchCtrl0: FormControl;
+   searchCtrl1: FormControl;
+  searchCtrl2: FormControl;
+  searchCtrl3: FormControl;
+  searchCtrl4: FormControl;
   filteredName: Observable<any[]>;
   userData: any[] = [];
   responseData: ResponseData = new ResponseData();
@@ -55,8 +59,26 @@ export class CreatePostComponent implements OnInit {
     this.searchService.getAllUserDetails().subscribe(data => {
       this.userData = data;
     });
-    this.searchCtrl = new FormControl();
-    this.filteredName = this.searchCtrl.valueChanges
+    this.searchCtrl0 = new FormControl();
+    this.searchCtrl1 = new FormControl();
+    this.searchCtrl2 = new FormControl();
+    this.searchCtrl3 = new FormControl();
+    this.searchCtrl4 = new FormControl();
+    
+
+    this.filteredName = this.searchCtrl0.valueChanges
+      .pipe(startWith(''), map(element => element ? this.filteredname(element) : this.userData.slice()));
+
+    this.filteredName = this.searchCtrl1.valueChanges
+      .pipe(startWith(''), map(element => element ? this.filteredname(element) : this.userData.slice()));
+
+    this.filteredName = this.searchCtrl2.valueChanges
+      .pipe(startWith(''), map(element => element ? this.filteredname(element) : this.userData.slice()));
+
+    this.filteredName = this.searchCtrl3.valueChanges
+      .pipe(startWith(''), map(element => element ? this.filteredname(element) : this.userData.slice()));
+
+    this.filteredName = this.searchCtrl4.valueChanges
       .pipe(startWith(''), map(element => element ? this.filteredname(element) : this.userData.slice()));
   }
   triggerResize() {

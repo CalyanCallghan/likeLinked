@@ -1,66 +1,113 @@
 <main class="mt-n5">
-    <div class="container">
-  
-      <div class="row d-flex flex-row-reverse">
-  
-        <div class="col-md-6 mb-4 d-flex flex-row-reverse">
-  
-          <mdb-card class="chat-room small-chat wide" id="myForm">
-            <mdb-card-header class="white d-flex justify-content-between p-2" id="toggle" style="cursor: pointer;">
-              <div class="heading d-flex justify-content-start">
-                <div class="profile-photo">
-                  <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="avatar"
-                       class="avatar rounded-circle mr-2 ml-0">
-                </div>
-                <div class="data">
-                  <p class="name mb-0"><strong>Williams Kavin</strong></p>
-                </div>
+  <div class="container">
+
+    <div class="row d-flex flex-row-reverse">
+
+      <div class="col-md-6 mb-4 d-flex flex-row-reverse">
+
+        <mdb-card class="chat-room small-chat wide" id="myForm">
+          <mdb-card-header class="white d-flex justify-content-between p-2" id="toggle" style="cursor: pointer;">
+            <div class="heading d-flex justify-content-start">
+              <div class="profile-photo">
+                <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="avatar"
+                  class="avatar rounded-circle mr-2 ml-0">
               </div>
-              <div class="icons grey-text">
-                <a type="button" id="closeButton" (click)=" closePopup()">
-                  <mdb-icon fas icon="times" class="mr-2" ></mdb-icon>
-                </a>
+              <div class="data">
+                <p class="name mb-0"><strong>Williams Kavin</strong></p>
               </div>
-            </mdb-card-header>
-            <div class="my-custom-scrollbar">
-              <mdb-card-body class="p-3">
-                <div class="chat-message" *ngFor="let num of chatResponse">
-                  <mdb-card bgColor="bg-primary" class="rounded w-50 float-right z-depth-0 mb-2" *ngIf="num.from==='preethi'" > 
-                    <mdb-card-body class="p-2">
-                      <mdb-card-text class="text-white">{{num.msg}}</mdb-card-text>
-                    </mdb-card-body>
-                  </mdb-card>
-                  <mdb-card bgColor="bg-light" class="rounded w-75 z-depth-0 mb-2 message-text" *ngIf="num.from==='kalyan'">
-                    <mdb-card-body class="p-2">
-                      <mdb-card-text class="black-text">{{num.msg}}
-                      </mdb-card-text>
-                    </mdb-card-body>
-                  </mdb-card>
-                
-                </div>
-              </mdb-card-body>
             </div>
-            <mdb-card-footer class="text-muted white pt-1 pb-2 px-3">
-              <mat-form-field style="width: 100%;"><textarea matInput [(ngModel)]="chat.msg"></textarea></mat-form-field>
-              <div>
-                <a>
-                  <mdb-icon far icon="file-image" class="mr-2"></mdb-icon>
-                </a>
-                <a>
-                  <mdb-icon fas icon="file-pdf" class="mr-2"></mdb-icon>
-                </a>
-                <button mat-button class="float-right" color='primary' (click)="sendMsg()">send</button>
+            <div class="icons grey-text">
+              <a type="button" id="closeButton" (click)=" closePopup()">
+                <mdb-icon fas icon="times" class="mr-2"></mdb-icon>
+              </a>
+            </div>
+          </mdb-card-header>
+          <div class="my-custom-scrollbar">
+            <mdb-card-body class="p-3">
+              <div class="chat-message" *ngFor="let num of chatResponse">
+                <mdb-card bgColor="bg-primary" class="rounded w-50 float-right z-depth-0 mb-2"
+                  *ngIf="num.from==='preethi'">
+                  <mdb-card-body class="p-2">
+                    <mdb-card-text class="text-white">{{num.msg}}</mdb-card-text>
+                  </mdb-card-body>
+                </mdb-card>
+                <mdb-card bgColor="bg-light" class="rounded w-75 z-depth-0 mb-2 message-text"
+                  *ngIf="num.from==='kalyan'">
+                  <mdb-card-body class="p-2">
+                    <mdb-card-text class="black-text">{{num.msg}}
+                    </mdb-card-text>
+                  </mdb-card-body>
+                </mdb-card>
+
               </div>
-            </mdb-card-footer>
-  
-          </mdb-card>
-  
-        </div>
-  
+            </mdb-card-body>
+          </div>
+          <mdb-card-footer class="text-muted white pt-1 pb-2 px-3">
+            <input type="file" id="fileUpload" name="fileUpload" multiple="multiple" accept="{{accept}}"
+              style="display:none;" (change)="onSelectFile($event)" />
+
+            <input type="file" id="fileUploadVideo" name="fileUploadVideo" multiple="multiple"
+              accept="video/mp4,video/x-m4v,video/*" style="display:none;" (change)="onSelectFile($event)" />
+
+            <input type="file" id="fileUploadAttachment" name="fileUploadAttachment" multiple="multiple"
+              accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf" style="display:none;"
+              (change)="onSelectFile($event)" />
+
+            <div>
+              <div class="notification" *ngIf="showNotification">
+
+                <div style="width: 14.9em;height: 3em;margin-left: -15px;display: flex;
+               justify-content: flex-start;
+               align-items: center;">
+                  <img style="width: 2em;" *ngIf="format==='image' && url" [src]="url" class="example-form">
+
+                  <video style="width: 2em;" *ngIf="format==='video' && url" [src]="url" class="example-form"
+                    controls></video>
+                  <pdf-viewer *ngIf="format==='pdf' && url" [src]="url" [show-all]="false" [(page)]="pageVariable"
+                    [render-text]="true" [original-size]="false" (after-load-complete)="afterLoadComplete($event)"
+                    style="display: block;width: 2em;"></pdf-viewer>
+
+                  <div class="col-md-11 fileName">
+                    <div style="cursor: default;margin-left: 0.5em;font-size: 12px;
+                    color: black;">{{fileName}}</div>
+                  </div>
+                  <div class="col-md-2">
+                    <div (click)="onCloseClick()">x</div>
+                  </div>
+                </div>
+                <div>
+                  <mat-slider style="width: 2em;" [max]="max" [min]="min" [thumbLabel]="true"
+                    *ngIf="format==='pdf' && url" (change)="chatFucn($event.value)">
+                  </mat-slider>
+                </div>
+
+              </div>
+            </div>
+
+            <mat-form-field style="width: 100%;"><textarea matInput [(ngModel)]="chat.msg"></textarea></mat-form-field>
+            <div>
+              <button mat-button (click)="onClick()">
+                <mat-icon>image</mat-icon>
+              </button>
+              <button mat-button (click)="onClickVideo()">
+                <mat-icon>videocam</mat-icon>
+              </button>
+              <button mat-button (click)="onClickAttachment()">
+                <mat-icon>attach_file</mat-icon>
+                
+              </button>
+              <button mat-button class="float-right" color='primary' (click)="sendMsg()">
+                <img src="assets\images\logos\send-icon.webp" style="width: 30px;height: 30px;">
+              </button>
+            </div>
+          </mdb-card-footer>
+
+        </mdb-card>
+
       </div>
-      <!-- Grid row -->
-  
+
     </div>
-  </main>
+    <!-- Grid row -->
 
-
+  </div>
+</main>

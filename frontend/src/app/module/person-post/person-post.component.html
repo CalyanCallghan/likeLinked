@@ -9,10 +9,10 @@
         <img src="{{backendUrl}}/file/downloadFile/{{data.userProfile}}" mat-card-avatar>
         <mat-card-title>{{data.firstName}} {{data.lastName}}</mat-card-title>
       </mat-card-header>
-
+      <div style="width: 30em;"></div>
       <video style="width: 32em;" *ngIf="data.postFormat==='video'" [autoplay]="true"
         src="{{backendUrl}}/file/downloadFile/{{data.fileName}}" class="video-example" controls
-        style="margin-top: 1em;"></video>
+        style="margin-top: 1em;" muted></video>
       <img mat-card-image *ngIf="data.postFormat==='image'" src="{{backendUrl}}/file/downloadFile/{{data.fileName}}"
         alt="Photo of a Shiba Inu" style="margin-top: 1em;width: 32em;">
       <pdf-viewer *ngIf="data.postFormat==='pdf'" src="{{backendUrl}}/file/downloadFile/{{data.fileName}}"
@@ -53,17 +53,16 @@
 
               </form>
 
-              <div *ngFor="let commentByPostId of commentData" >
-               <textarea value="{{commentByPostId.content}}" readonly class="form-control" cols="80"
-                  rows="2"></textarea>
-                  <mat-card style="background-color: #fafafa;height: 5.3em">
+              <div *ngFor="let dataOfUser of commentData" >
+               <!-- <textarea value="{{commentByPostId.content}}" readonly class="form-control" cols="80" rows="2"></textarea> -->
+                  <mat-card style="background-color:#e4e2e2;">
                     <mat-card-header>
-                      <img src="assets/images/logos/jhonwick.jpg" mat-card-avatar>
-                      <mat-card-title style="font-size: 17px;">Kalyan Kodapaka</mat-card-title>
+                      <img src="{{backendUrl}}/file/downloadFile/{{dataOfUser.profileImage}}" mat-card-avatar>
+                      <mat-card-title style="font-size: 17px;">{{dataOfUser.firstName}} {{dataOfUser.lastName}}</mat-card-title>
                     </mat-card-header>
                     <mat-card-content>
-                      <p style="margin-top: 7px;">
-                        Yeah Its very nice broo
+                      <p style="margin-top: 7px;padding-left: 4.2em;color: rgba(0,0,0,.6);">
+                        {{dataOfUser.content}}
                       </p>
                     </mat-card-content> 
                  </mat-card>
@@ -83,8 +82,4 @@
     </mat-card>
     <br>
   </div>
- 
-
-
-  
-</cdk-virtual-scroll-viewport>
+ </cdk-virtual-scroll-viewport>

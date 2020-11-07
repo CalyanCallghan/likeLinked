@@ -26,6 +26,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { UploadImageComponent } from './upload-profile-image/upload-image.component';
 import { NgMatSearchBarModule } from 'ng-mat-search-bar';
+import { LayoutComponent } from './layout/layout.component';
 
 
 
@@ -46,7 +47,8 @@ import { NgMatSearchBarModule } from 'ng-mat-search-bar';
     PersonPostComponent,
     GroupsComponent,
     EmployeeListComponent,
-    UploadImageComponent
+    UploadImageComponent,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,
