@@ -48,7 +48,7 @@ public class PostStorageServiceImpl implements PostStorageService {
 		// Normalize file name
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 		try {
-			
+
 			// Check if the file's name contains invalid characters
 			if (fileName.contains("..")) {
 				throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
@@ -72,7 +72,7 @@ public class PostStorageServiceImpl implements PostStorageService {
 			throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
 		}
 	}
-	
+
 	public String storeAndUpdateProfileImage(MultipartFile file, int userID) {
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 		int count;
@@ -82,13 +82,12 @@ public class PostStorageServiceImpl implements PostStorageService {
 			}
 			Path targetLocation = this.fileStorageLocation.resolve(fileName);
 			Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
-			count = postRepository.updateProfilePic(fileName,userID);
+			count = postRepository.updateProfilePic(fileName, userID);
 			return fileName;
 		} catch (IOException ex) {
 			throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
 		}
 	}
-	
 
 	public Resource loadFileAsResource(String fileName) {
 		try {
@@ -104,9 +103,24 @@ public class PostStorageServiceImpl implements PostStorageService {
 		}
 	}
 
-	
 	public List<PostDetails> getAllPosts(String type) {
 		return postRepository.allthePostsData(type);
 	}
-	
+
+	@Override
+	public int saveData(HomeRequestModel model) {
+		Post post = new Post();
+		try {
+			post.setDescription(model.getContent());
+			post.setCreatedBy(model.getCreatedBy());
+			post.setType(model.getType());
+			post.setGroupId(model.getGroupId());
+			post = postRepository.save(post);
+			return post.getId();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return post.getId();
+
+	}
 }

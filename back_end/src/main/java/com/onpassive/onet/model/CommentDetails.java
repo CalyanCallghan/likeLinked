@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CommentDetails {
 	private int commentId;
-	private String empId;
+	private String firstName;
+	private String lastName;
+	private String profileImage;
 	private String content;	
 }
 

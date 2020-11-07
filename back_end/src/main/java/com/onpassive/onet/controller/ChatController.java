@@ -21,7 +21,7 @@ import com.onpassive.onet.entity.ChatModel;
 import com.onpassive.onet.repository.ChatRepository;
 
 //@CrossOrigin(origins = {"https://opnetqaapi.onpassive.com","https://opnetqaui.onpassive.com"})
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @RequestMapping("/api")
 @RestController
 public class ChatController {

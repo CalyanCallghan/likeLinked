@@ -24,17 +24,16 @@ public class OnetApplication extends SpringBootServletInitializer{
 		SpringApplication.run(OnetApplication.class, args);
 	}
 	
-//	@Bean
-//	public CorsFilter corsFilter() {
-//	    final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//	    final CorsConfiguration config = new CorsConfiguration();
-//	    config.setAllowCredentials(true);
-//	    //config.setAllowedOrigins(Arrays.asList("https://opnetqaapi.onpassive.com", "https://opnetqaui.onpassive.com"));
-//	    config.setAllowedOrigins(Arrays.asList("\"https://opnetqaapi.onpassive.com", "https://opnetqaui.onpassive.com"));
-//	    config.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept","Authorization"));
-//	    config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH"));
-//	    source.registerCorsConfiguration("/**", config);
-//	    return new CorsFilter(source);
-//	}
+	@Bean
+	public CorsFilter corsFilter() {
+	    final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	    final CorsConfiguration config = new CorsConfiguration();
+	    config.setAllowCredentials(true);
+	    config.setAllowedOrigins(Arrays.asList("https://opnetqaapi.onpassive.com", "https://opnetqaui.onpassive.com"));
+	    config.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept","Authorization"));
+	    config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH"));
+	    source.registerCorsConfiguration("/**", config);
+	    return new CorsFilter(source);
+	}
 
 }

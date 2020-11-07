@@ -32,7 +32,7 @@ import com.onpassive.onet.repository.PostRepository;
 import com.onpassive.onet.repository.SubCommentRepository;
 import com.onpassive.onet.service.CommentsAndLikesService;
 
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @RestController
 @RequestMapping("/comment")
 public class CommentController {
@@ -71,7 +71,7 @@ public class CommentController {
 		List<Object[]> allComments =commentRepository.getAllCommentsByPostId(postId);
 		for(Object[] objArr : allComments)
 	    {
-			commentDtetails.add(new CommentDetails(((Integer)objArr[0]),((String)objArr[1]),((String)objArr[2])));
+			commentDtetails.add(new CommentDetails(((Integer)objArr[0]),((String)objArr[1]),((String)objArr[2]),((String)objArr[3]),((String)objArr[4])));
 		}
 		return new ResponseEntity<List<CommentDetails>>(commentDtetails, new HttpHeaders(), HttpStatus.OK);
 	}

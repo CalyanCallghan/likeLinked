@@ -33,7 +33,7 @@ import com.onpassive.onet.service.PostStorageService;
 import com.onpassive.onet.util.UploadFileResponse;
 
 //@CrossOrigin(origins = {"https://opnetqaapi.onpassive.com","https://opnetqaui.onpassive.com"})
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @RestController
 @RequestMapping("/file")
 public class PostController {
@@ -63,11 +63,18 @@ public class PostController {
 			HomeRequestModel model = obj.readValue(data, HomeRequestModel.class);
 
 			//Arrays.asList(files).stream().forEach(file -> {
-			postId  = postStorageService.storeFile(files[0], model);
+			//postId  = postStorageService.storeFile(files[0], model);
+			if(files.length>0)
+				postId  = postStorageService.storeFile(files[0], model);
+					//fileNames.add(files[0].getOriginalFilename());
+				//});
+				else
+				postId = postStorageService.saveData(model);
 				//fileNames.add(files[0].getOriginalFilename());
 			//});
 			message = "Uploaded the file successfully.";
 			postDetails = postRepository.specificPostData(postId);
+			
 			// return ResponseEntity.status(HttpStatus.OK).body(message);
 			return ResponseEntity.ok(new UploadFileResponse(dateTime.now(), HttpStatus.OK, message,postDetails));
 		} catch (Exception e) {

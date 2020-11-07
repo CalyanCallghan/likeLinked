@@ -17,4 +17,6 @@ public interface PostStorageService {
 
 	public List<PostDetails> getAllPosts(String type);
 
+	public int saveData(HomeRequestModel model);
+
 }

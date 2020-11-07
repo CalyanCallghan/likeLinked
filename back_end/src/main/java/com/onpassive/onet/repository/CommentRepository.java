@@ -17,7 +17,10 @@ public interface CommentRepository extends CrudRepository<Comment, Integer> {
 	//select new com.onpassive.onet.model.CommentDetails(c.id,c.empId,c.content) from Post p, Comment c where p.id= c.post_id:=postId
 //	select * from comments c, post p where p.id = c.post_id and c.post_id=1 ;
 	
-	@Query(value = "select comments.id,comments.emp_id,comments.content from comments , post  where post.id = comments.post_id and comments.post_id=:postId",nativeQuery = true)
+	
+	//
+	@Query(value = "select comments.id,user.first_name,user.last_name,user.profile_pic_name,comments.content from comments, post, user"
+			+ " where comments.emp_id= user.emp_Id and post.id = comments.post_id and comments.post_id=:postId",nativeQuery = true)
 //	select c.id,c.emp_id,c.content from comments c, post p where p.id = c.post_id and c.post_id=1 ;
 	public List<Object[]> getAllCommentsByPostId(int postId);
 	
