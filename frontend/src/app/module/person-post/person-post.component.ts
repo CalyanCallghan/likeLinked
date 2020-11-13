@@ -14,6 +14,7 @@ import { LikeModel } from 'src/app/model/like';
 import { CommentData } from 'src/app/model/commentData';
 import { HomepageComponent } from '../homepage/homepage.component';
 import { MyGroupsComponent } from '../my-groups/my-groups.component';
+import { SubCommentModel } from 'src/app/model/subcomment';
 
 
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
@@ -31,6 +32,8 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
 })
 export class PersonPostComponent implements OnInit {
   comment: CommentModel = new CommentModel();
+  subComment: SubCommentModel = new SubCommentModel();
+
   likeModel: LikeModel = new LikeModel();
   commentLike: CommentLike = new CommentLike();
   backendUrl = environment.baseApplicationUrl;
@@ -46,8 +49,14 @@ export class PersonPostComponent implements OnInit {
   postLikeCount: number;
   commentCount: number;
   tmp: number = 0;
+ 
+
   commentsForm = new FormGroup({
     comment: new FormControl('', [Validators.required])
+  });
+
+  subCommentsForm = new FormGroup({
+    subComment: new FormControl('', [Validators.required])
   });
 
   constructor(private personPostService: PersonPostService) { }
@@ -99,7 +108,15 @@ export class PersonPostComponent implements OnInit {
 
   countLike(postId:number,index:number)  {
     let empId =  Number(localStorage.getItem("employeeCode"));
-    this.personPostService.likesCount(empId,postId).subscribe(data => {
+    this.personPostService.postLikesCount(empId,postId).subscribe(data => {
+      console.log(data);
+      this.postData[index].likeCount=data;
+    }, error => console.log(error));
+  }
+
+  subCountLike(commentId:number,index:number)  {
+    let empId =  Number(localStorage.getItem("employeeCode"));
+    this.personPostService.postLikesCount(empId,commentId).subscribe(data => {
       console.log(data);
       this.postData[index].likeCount=data;
     }, error => console.log(error));
@@ -108,16 +125,24 @@ export class PersonPostComponent implements OnInit {
   onSubmit(postId: number,index:number) {
     this.comment.empId = localStorage.getItem("employeeCode");
     console.log(this.comment.content);
-    this.personPostService.doComment(this.comment, postId).subscribe(data => {
+    this.personPostService.commentToPost(this.comment, postId).subscribe(data => {
       console.log(data);
       this.showCommentsForm(postId);
-      this.personPostService.getCountOfCommentsByPostId(postId).subscribe(data => {
+      this.personPostService.postCommentsCount(postId).subscribe(data => {
         this.commentCount = data;
         console.log("all CommentCount data---->" +this.commentCount);
         this.postData[index].commentCount=data;
       });
     });
     this.comment.content = '';
+  }
+
+  onSubmitSubComment(postId: number,index:number){
+    this.comment.empId = localStorage.getItem("employeeCode");
+    console.log(this.subComment.content);
+
+    
+
   }
 
 }

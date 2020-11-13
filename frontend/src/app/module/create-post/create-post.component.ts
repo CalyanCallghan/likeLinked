@@ -49,6 +49,7 @@ export class CreatePostComponent implements OnInit {
   textareaPost = new FormControl('', [Validators.required]);
   selected = 'A';
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
+  type:string="";
   constructor(private mainService: PostService, private personPostService: PersonPostService,
     public dialogRef: MatDialogRef<CreatePostComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, public snackBar: MatSnackBar,private searchService : SearchService,private _ngZone: NgZone) { }
@@ -98,6 +99,7 @@ export class CreatePostComponent implements OnInit {
   }
   onSelectFile(event: any) {
     this.file = event.target.files && event.target.files[0];
+    
     if (this.file) {
       var reader = new FileReader();
       reader.readAsDataURL(this.file);
@@ -138,8 +140,16 @@ export class CreatePostComponent implements OnInit {
       .subscribe(data => {
         this.responseData = data;
         if (this.responseData.status == "OK") {
+          this.type = localStorage.getItem("type");
           this.dialogRef.close(this.responseData.postDetails);
-          this.snackBar.open(this.responseData.message, "X", { duration: 5000 });
+          console.log("type--->"+this.type+"<--->"+this.responseData.postDetails.type+"<--");
+          if(this.type == this.responseData.postDetails.type){
+            this.snackBar.open("Post uploaded successfully", "X", { duration: 5000 });
+          }else if(this.type == "A" && this.responseData.postDetails.type == "M"){
+            this.snackBar.open("Post uploaded successfully to MyGroup page. ", "X", { duration: 5000 });
+          }else if(this.type == "M" && this.responseData.postDetails.type == "A"){
+            this.snackBar.open("Post uploaded successfully to Home page. ", "X", { duration: 5000 });
+          }
         }
       },error => {
         if(error.error.status=="EXPECTATION_FAILED" && error.error.message=="Fail to upload files!!!") {

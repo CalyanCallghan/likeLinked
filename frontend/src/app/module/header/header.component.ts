@@ -1,8 +1,9 @@
+import { Notifications } from './../../model/notification';
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from 'src/app/service/notification.service';
 import { UnReadService } from 'src/app/service/unreadCount.service';
 import { takeUntil } from 'rxjs/internal/operators/takeUntil';
-import { Observable, Subject } from 'rxjs';
+import {Observable, Subject } from 'rxjs';
 import { ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { SearchService } from 'src/app/service/search.service';
@@ -10,6 +11,7 @@ import { startWith, map } from 'rxjs/operators';
 import { EmployeService } from 'src/app/service/employe.service';
 import { UserData } from 'src/app/model/userData';
 import { environment } from 'src/app/model/environment';
+
 
 
 
@@ -33,17 +35,20 @@ export class HeaderComponent implements OnInit {
   userId:string = localStorage.getItem("employeeCode");
   userEmailId:string = localStorage.getItem("emailId");
   backendUrl = environment.baseApplicationUrl;
+  notifications : Notifications[];
+  colorStatus: string;
 
   constructor(private notificationService: NotificationService, private unReadService: UnReadService
     ,private searchService: SearchService,private employeService:EmployeService) { }
 
-  ngOnInit(): void {
-    this.something();
-    this.unReadService.getCount()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((count) => {
-        this.unreadCount = count;
-      });
+  ngOnInit(): void {    
+    this.getUnreadCount();
+    this.getAllNotifications();
+    // this.unReadService.getCount()
+    //   .pipe(takeUntil(this.destroy$))
+    //   .subscribe((count) => {
+    //     this.unreadCount = count;
+    //   });
     this.searchService.getAllUserDetails().subscribe(data => {
       this.userlist = data;
       console.log("fromDB--->" + JSON.stringify(this.userlist));
@@ -56,7 +61,7 @@ export class HeaderComponent implements OnInit {
       this.userdata = data;
     }, error => console.log(error));
   }
-  something() {
+  getUnreadCount() {
     this.notificationService.getUnreadCount().subscribe(data => {
       this.unReadService.setcanCount(data);
     });
@@ -75,8 +80,31 @@ export class HeaderComponent implements OnInit {
     console.log("0----clkear----");
     this.ngOnInit();
   }
+  onButtonGroupClick($event){
+    let clickedElement = $event.target || $event.srcElement;
+    if( clickedElement.nodeName === "BUTTON" ) {
+  
+      let isCertainButtonAlreadyActive = clickedElement.parentElement.querySelector(".active");
+      // if a Button already has Class: .active
+      if( isCertainButtonAlreadyActive ) {
+        isCertainButtonAlreadyActive.classList.remove("active");
+      }
+  
+      clickedElement.className += " active";
+    }
+  
+  }
+  getAllNotifications(){
+    this.notificationService.getNotifications().subscribe(data => {
+    console.log("notification ----> ", JSON.stringify(data));
+    this.notifications = data;
+    console.log("notification---sdfs--> ", this.notifications[0].status);
+    this.colorStatus = this.notifications[0].status;
+    });
+  }
 
 }
+
 
 export class UserDetails {
   constructor(public email: string, public firstName: string, public lastName: string) { }

@@ -5,7 +5,8 @@
     accept="video/mp4,video/x-m4v,video/*" style="display:none;" (change)="onSelectFile($event)" />
 
 <input type="file" id="fileUploadAttachment" name="fileUploadAttachment" multiple="multiple"
-    accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf" style="display:none;" (change)="onSelectFile($event)" />
+    accept=".pdf" style="display:none;" (change)="onSelectFile($event)" />
+    <!-- .xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt, -->
 <h2 mat-dialog-title>Create a post</h2>
 
 <mat-dialog-content>

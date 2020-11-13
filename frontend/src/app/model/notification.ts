@@ -1,8 +1,8 @@
-export class Notification {
-    private id: number;
-    private from: string;
-    private sendTo: string;
-    private message: string;
-    private sendDate: string;
-    private status: string;
+export class Notifications {
+    id: number;
+    from: string;
+    sendTo: string;
+    message: string;
+    sendDate: string;
+    status: string;
 }

@@ -11,7 +11,7 @@ import { MyGroupsComponent } from '../my-groups/my-groups.component';
   selector: 'app-groups',
   templateUrl: './groups.component.html',
   styleUrls: ['./groups.component.css'],
-  providers: [MyGroupsComponent]
+ 
 })
 export class GroupsComponent implements OnInit {
   groupList: any;
@@ -22,6 +22,7 @@ export class GroupsComponent implements OnInit {
   canShowButton: boolean = true;
   isShown: boolean = false ;
   groupName:string;
+  selected: any;
   constructor(private groupService: GroupsService,
     private router: Router, private employeService: EmployeService) {
   }
@@ -62,5 +63,12 @@ export class GroupsComponent implements OnInit {
   public hasData(): boolean {
     return (this.card_data != null && this.card_data.length > 0);
   }
+
+  select(item: any) {
+    this.selected = item;
+ };
+ isActive(item: any) {
+   return this.selected === item;
+ };
 
 }

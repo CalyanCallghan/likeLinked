@@ -27,6 +27,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { UploadImageComponent } from './upload-profile-image/upload-image.component';
 import { NgMatSearchBarModule } from 'ng-mat-search-bar';
 import { LayoutComponent } from './layout/layout.component';
+import { TestGridComponent } from './test-grid/test-grid.component';
+import { AgGridModule } from 'ag-grid-angular';
 
 
 
@@ -48,7 +50,8 @@ import { LayoutComponent } from './layout/layout.component';
     GroupsComponent,
     EmployeeListComponent,
     UploadImageComponent,
-    LayoutComponent
+    LayoutComponent,
+    TestGridComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +66,8 @@ import { LayoutComponent } from './layout/layout.component';
     PdfViewerModule,
     FlexLayoutModule,
     ImageCropperModule,
-    NgMatSearchBarModule
+    NgMatSearchBarModule,
+    AgGridModule.withComponents([])
   ],
   providers: [],
   bootstrap: [AppComponent]

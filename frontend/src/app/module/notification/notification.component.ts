@@ -2,8 +2,6 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FixedSizeVirtualScrollStrategy, VIRTUAL_SCROLL_STRATEGY } from '@angular/cdk/scrolling';
 import { HostListener } from '@angular/core';
 import { NotificationService } from 'src/app/service/notification.service';
-import { Notification } from './../../model/notification';
-import { HeaderComponent } from '../header/header.component';
 import { UnReadService } from 'src/app/service/unreadCount.service';
 
 

@@ -2,6 +2,6 @@ export class CommentData{
     commentId:number;
 	firstName:string;
 	lastName:string;
-	 profileImage:string; 
+	profileImage:string; 
 	content:string;
 }

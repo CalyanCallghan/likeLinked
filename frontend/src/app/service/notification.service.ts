@@ -2,6 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../model/environment';
+import { Notifications } from '../model/notification';
+
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +15,8 @@ export class NotificationService {
 
   constructor(private http: HttpClient) { }
 
-  getNotifications(): Observable<Notification[]> {
-    return this.http.get<Notification[]>(`${this.baseUrl}/getNotifications`);
+  getNotifications(): Observable<Notifications[]> {
+    return this.http.get<Notifications[]>(`${this.baseUrl}/getNotifications`);
   }
 
   getTotalCount(): Observable<any> {

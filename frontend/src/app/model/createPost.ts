@@ -4,4 +4,5 @@ export class CreatePost{
     type:string;
     format:string;
     groupId:number;
+    file: File;
 }

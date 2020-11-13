@@ -12,26 +12,28 @@ import { StartPostComponent } from '../start-post/start-post.component';
 @Component({
   selector: 'app-my-groups',
   templateUrl: './my-groups.component.html',
-  styleUrls: ['./my-groups.component.css'], 
+  styleUrls: ['./my-groups.component.css'],
 })
 export class MyGroupsComponent implements OnInit {
   indexId: number;
-  postData:PostData[];
-  card_data:EmployeesData[];
-  designation:string = localStorage.getItem("designation").toLowerCase();;
+  postData: PostData[];
+  card_data: EmployeesData[];
+  designation: string = localStorage.getItem("designation").toLowerCase();
+  selected: any;
+
   constructor(public dialog: MatDialog, private router: Router,
     private personPostService: PersonPostService, private employeService: EmployeService) {
 
   }
-  
+
   ngOnInit(): void {
-    localStorage.setItem("type","M");
+    localStorage.setItem("type", "M");
     this.getAllPosts();
     this.employeService.getEmployeeDetailsByDesignation(this.designation).subscribe(result => {
-      this.card_data = result;
-    },error => console.log(error));
+       this.card_data = result;
+    }, error => console.log(error));
   }
- 
+
   openPostDialog() {
     this.dialog.open(StartPostComponent);
   }
@@ -46,24 +48,31 @@ export class MyGroupsComponent implements OnInit {
   }
 
 
-  getAllPosts(){
+  getAllPosts() {
     this.personPostService.getAllPosts("M").subscribe(data => {
       this.postData = data;
     });
-  } 
+  }
 
-  addNewPostItem(event:PostData){
+  addNewPostItem(event: PostData) {
     this.postData.unshift(event);
   }
 
 
-  commentCountOfPost(countOfComment:number,indexId:number){
+  commentCountOfPost(countOfComment: number, indexId: number) {
     this.postData[indexId].commentCount = countOfComment;
-     
+
   }
 
-  likeCountOfPost(countOfLike:number,indexId:number){
+  likeCountOfPost(countOfLike: number, indexId: number) {
     this.postData[indexId].likeCount = countOfLike;
   }
+
+  select(item: any) {
+     this.selected = item;
+  };
+  isActive(item: any) {
+    return this.selected === item;
+  };
 
 }

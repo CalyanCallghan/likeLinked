@@ -6,10 +6,10 @@
              <mat-card-title style="color: aliceblue;text-align: center;font-size: 19px">Software Developer</mat-card-title>
             <div class="row">
               <div  style="height:250px;overflow-y: scroll;" class="scroll">
-                <ul class="list-group ml-3" *ngFor="let data of card_data ;let i=index">
-                  <li class="list-group-item" style="width: 14.9em;height: 3em;margin-left: -15px;display: flex;
+                <ul class="list-group ml-3" >
+                  <!-- <li class="list-group-item" style="width: 14.9em;height: 3em;margin-left: -15px;display: flex;
              justify-content: flex-start;
-             align-items: center;" >
+             align-items: center;" *ngFor="let data of card_data ;let i=index" (click)="select(product)" [ngClass]="{active: isActive(product)}">
                    <div>
                      <mat-icon style="cursor: default;">person</mat-icon>
                    </div>
@@ -19,7 +19,20 @@
                    <div>
                         <mat-icon (click)="openChatBox(i)" style="cursor: pointer">message</mat-icon>
                    </div>
-             </li>
+             </li> -->
+             <li class="list-group-item" style="width: 14.9em;height: 3em;margin-left: -15px;display: flex;
+              justify-content: flex-start;
+              align-items: center;" *ngFor="let userData of card_data;let i=index" (click)="select(userData)" [ngClass]="{active: isActive(userData)}">
+                <div>
+                  <mat-icon style="cursor: default;">person</mat-icon>
+                </div>
+                <div class="employeeName">
+                  <div style="cursor: default;margin-left: 0.5em;">{{userData.name}}</div>
+                </div>
+                <div>
+                  <mat-icon (click)="openChatBox(i)" style="cursor: pointer">message</mat-icon>
+                </div>
+              </li>
                 </ul>
               </div>
             </div>

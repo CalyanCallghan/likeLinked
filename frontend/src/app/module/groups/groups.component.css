@@ -90,6 +90,11 @@ h3 {
     top: 30%;
     width: 100%;
 }
+.list-group-item.active{
+    z-index: 2;
+    color: #fff;
+    background-color: #0b81d6;
+}
 /* .myGroupBtn{
     margin-top: -4em;
     text-align: center;
