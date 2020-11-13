@@ -30,4 +30,11 @@ public class UploadFileResponse {
 		this.message = message;
 		this.fileName = fileName;
 	}
+	
+	public UploadFileResponse(LocalDateTime dateTime, HttpStatus status, String message) {
+		this.dateTime = dateTime;
+		this.status = status;
+		this.message = message;
+	}
+	
 }

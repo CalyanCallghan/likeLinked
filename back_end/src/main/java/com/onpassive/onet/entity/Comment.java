@@ -1,5 +1,9 @@
 package com.onpassive.onet.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -41,6 +46,10 @@ public class Comment extends AuditModel{
     @NotNull
     @Column(name="emp_id")
     private String empId;
+    
+//    @NotNull
+//    @Column(name="post_id")
+//    private int postId;
   
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -50,5 +59,26 @@ public class Comment extends AuditModel{
     @JsonIdentityReference(alwaysAsId=true)
     @JsonProperty("post_id")
     private Post post;
+    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "commentId")
+	private Set<SubComment> subComment = new HashSet<>();
+    
+//    @OneToMany(fetch = FetchType.EAGER)
+//    private SubComment SubComment;
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "post_id")
+//    private Post post;
+//    
+//    @OneToMany(cascade = CascadeType.ALL,
+//            fetch = FetchType.EAGER,
+//            mappedBy = "comment")
+//    private Set<SubComment> subComments = new HashSet<>();
+    
+//    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+//    private List<SubComment> subComment = new ArrayList<>();
+
+    
+    
+    
     
 }

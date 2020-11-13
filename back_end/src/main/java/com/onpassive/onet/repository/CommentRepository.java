@@ -19,7 +19,7 @@ public interface CommentRepository extends CrudRepository<Comment, Integer> {
 	
 	
 	//
-	@Query(value = "select comments.id,user.first_name,user.last_name,user.profile_pic_name,comments.content from comments, post, user"
+	@Query(value = "select comments.id,user.first_name,user.last_name,user.profile_pic_name,comments.content,comments.created_at from comments, post, user"
 			+ " where comments.emp_id= user.emp_Id and post.id = comments.post_id and comments.post_id=:postId",nativeQuery = true)
 //	select c.id,c.emp_id,c.content from comments c, post p where p.id = c.post_id and c.post_id=1 ;
 	public List<Object[]> getAllCommentsByPostId(int postId);

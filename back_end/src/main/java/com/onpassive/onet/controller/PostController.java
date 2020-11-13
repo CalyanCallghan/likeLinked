@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,12 +46,14 @@ public class PostController {
 	
 	@Autowired
 	private PostRepository postRepository;
+	
 
 	// For uploading files to File system
 	@SuppressWarnings("static-access")
 	@PostMapping("/uploadFile")
 	public ResponseEntity<UploadFileResponse> uploadFile(@RequestParam("files") MultipartFile[] files,
 			@RequestParam("data") String data) {
+		//postRepository.
 		logger.debug("data---uploadFile------>"+data);
 		String message = "";
 		LocalDateTime dateTime = null;
@@ -85,6 +88,7 @@ public class PostController {
 		}
 
 	}
+	
 
 	// Downloading file based on the fileName
 	@GetMapping("/downloadFile/{fileName:.+}")

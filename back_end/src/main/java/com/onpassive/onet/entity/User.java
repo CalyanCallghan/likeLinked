@@ -1,11 +1,7 @@
 package com.onpassive.onet.entity;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.onpassive.onet.model.AuditModel;
@@ -18,19 +14,16 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User extends AuditModel{
+public class User extends AuditModel {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "user_id")
-	private Integer userId;
+	@Column(name = "emp_id", nullable = false, updatable = false)
+	private long empId;
 	@Column(name = "email")
 	private String email;
 	@Column(name = "first_name")
 	private String firstName;
 	@Column(name = "last_name")
 	private String lastName;
-	@Column(name = "emp_id")
-	private String empId;
 	@Column(name = "pf_path")
 	private String pfPath;
 	@Column(name = "profile_pic_name")
@@ -39,7 +32,7 @@ public class User extends AuditModel{
 	private Integer groupId;
 	@Column(name = "status")
 	private boolean status;
-	@Column(name = "created_dt")
-	private LocalDateTime createdDt;
+	@Column(name = "phone_no")
+	private String phoneNo;
 
 }

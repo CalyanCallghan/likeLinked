@@ -12,5 +12,6 @@ public class CommentDetails {
 	private String lastName;
 	private String profileImage;
 	private String content;	
+	private String when;
 }
 

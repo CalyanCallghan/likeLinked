@@ -1,5 +1,9 @@
 package com.onpassive.onet.controller;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -10,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +34,7 @@ import com.onpassive.onet.repository.PostLikeRepository;
 import com.onpassive.onet.repository.PostRepository;
 import com.onpassive.onet.repository.SubCommentRepository;
 import com.onpassive.onet.service.CommentsAndLikesService;
+import com.onpassive.onet.util.TimeUtills;
 
 //@CrossOrigin("*")
 @RestController
@@ -71,11 +75,13 @@ public class CommentController {
 		List<Object[]> allComments =commentRepository.getAllCommentsByPostId(postId);
 		for(Object[] objArr : allComments)
 	    {
-			commentDtetails.add(new CommentDetails(((Integer)objArr[0]),((String)objArr[1]),((String)objArr[2]),((String)objArr[3]),((String)objArr[4])));
+			LocalDateTime localDateTime  = ((Timestamp)objArr[5]).toLocalDateTime();
+			String when  =  TimeUtills.convertToSpecificFormatLocalDateTime(localDateTime);
+			commentDtetails.add(new CommentDetails(((Integer)objArr[0]),((String)objArr[1]),((String)objArr[2]),((String)objArr[3]),((String)objArr[4]),when));
 		}
 		return new ResponseEntity<List<CommentDetails>>(commentDtetails, new HttpHeaders(), HttpStatus.OK);
 	}
-
+	
 	// to update comment of post by commentId
 	@PutMapping("/posts/{postId}/comments/{commentId}")
 	public Comment updateComment(@PathVariable(value = "postId") Integer postId,
@@ -124,7 +130,7 @@ public class CommentController {
 	public SubComment createSubComment(@PathVariable(value = "commentId") Integer commentId,
 			@Valid @RequestBody SubComment subComment) {
 		return commentRepository.findById(commentId).map(comment -> {
-			subComment.setComment(comment);
+			//subComment.setComment(comment);
 			return subCommentRepository.save(subComment);
 		}).orElseThrow(() -> new ResourceNotFoundException("PostId " + commentId + " not found"));
 	}
