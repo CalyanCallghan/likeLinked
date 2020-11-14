@@ -1,65 +1,92 @@
 package com.onpassive.onet.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
-import org.springframework.batch.core.JobParametersBuilder;
+import org.springframework.batch.core.JobParameter;
+import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersInvalidException;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.onpassive.onet.util.UploadFileResponse;
+import com.onpassive.onet.entity.BatchProcessEntity;
+import com.onpassive.onet.repository.BatchProcessRepository;
+import com.onpassive.onet.service.PostStorageService;
+import com.onpassive.onet.util.BatchData;
+import com.onpassive.onet.util.BatchResponse;
 
 @RestController
-@RequestMapping("/doBatchProcess")
+@CrossOrigin
+@RequestMapping("/doBatch")
 public class BatchProcessController {
-	@Autowired
-	private JobLauncher launcher;
-	
-	@Autowired
-	
-	private Job job;
-	
-	LocalDateTime dateTime = null;
-	
-	@PostMapping("/processfile")
-	public ResponseEntity<UploadFileResponse> process(@RequestParam("file") MultipartFile file) throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException, IOException {
-		
-		
-		byte[] bytes = file.getBytes();
-        Path path = Paths.get(new File(file.getOriginalFilename()).getAbsolutePath());
-        Files.write(path, bytes);
-        
-		 System.out.println(" fileName :::  "+file.getOriginalFilename());
-		 JobExecution execution=launcher.run(job, 
-				new JobParametersBuilder()
-				.addString("fullPathFileName", file.getOriginalFilename())
-				.addDate("date", new Date(),true)
-				.toJobParameters()
-				);
-		System.out.println("Job execution status"+execution.getStatus());
-		String msg  = "failed to upload";
-		if(execution.getStatus().toString().equals("COMPLETED")) {
-			msg = "file uploaded successfully";
-		}
-		return ResponseEntity.ok(new UploadFileResponse(dateTime.now(), HttpStatus.OK, msg));
 
+	@Autowired
+	private PostStorageService PostStorageService;
+	@Autowired
+	private BatchProcessRepository batchRepository;
+	
+	@Autowired
+	JobLauncher jobLauncher;
+
+	@Autowired
+	Job job;
+
+	@PostMapping("/storeAndProcessFile")
+	public BatchResponse uploadFile(@RequestParam("file") MultipartFile file) {
+		BatchResponse batchResponse = new BatchResponse();
+		BatchData data = new BatchData();
+		try {
+			String fileName = PostStorageService.storeFileCvs(file);
+			System.out.println("==============" + fileName);
+			if (fileName.contains(fileName)) {
+				load();
+				List<BatchProcessEntity> findByJobExecutionId = batchRepository.findByStepName("ATTENDANCE-file-load");
+				for (BatchProcessEntity batchProcessEntity : findByJobExecutionId) {
+					data.setSuccessCount(batchProcessEntity.getReadCount());
+					data.setFailureCount(batchProcessEntity.getReadSkipCount());
+					batchResponse.setData(data);
+					batchResponse.setMessage(" Upload File successfully...");
+					batchResponse.setStatus(true);
+				}
+			}
+
+		} catch (Exception e) {
+			batchResponse.setMessage(" Upload File fail...");
+			batchResponse.setData(data);
+			batchResponse.setStatus(false);
+
+			return batchResponse;
+		}
+		return batchResponse;
+	}
+
+	public BatchStatus load() throws JobParametersInvalidException, JobExecutionAlreadyRunningException,
+			JobRestartException, JobInstanceAlreadyCompleteException {
+
+		Map<String, JobParameter> maps = new HashMap<>();
+
+		JobParameters parameters = new JobParameters(maps);
+		JobExecution jobExecution = jobLauncher.run(job, parameters);
+
+		System.out.println("JobExecution: " + jobExecution.getStatus());
+
+		while (jobExecution.isRunning()) {
+			System.out.println("...");
+		}
+
+		return jobExecution.getStatus();
 	}
 }

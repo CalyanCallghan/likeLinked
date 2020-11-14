@@ -29,6 +29,7 @@ import com.onpassive.onet.service.PostStorageService;
 public class PostStorageServiceImpl implements PostStorageService {
 
 	private final Path fileStorageLocation;
+	private final Path fileStorageLocationCsv;
 
 	@Autowired
 	private PostRepository postRepository;
@@ -36,8 +37,10 @@ public class PostStorageServiceImpl implements PostStorageService {
 	@Autowired
 	public PostStorageServiceImpl(FileStorageProperties fileStorageProperties) {
 		this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir()).toAbsolutePath().normalize();
+		this.fileStorageLocationCsv = Paths.get(fileStorageProperties.getUploadDirCvs()).toAbsolutePath().normalize();
 		try {
 			Files.createDirectories(this.fileStorageLocation);
+			Files.createDirectories(this.fileStorageLocationCsv);
 		} catch (Exception ex) {
 			throw new FileStorageException("Could not create the directory where the uploaded files will be stored.",
 					ex);
@@ -122,5 +125,25 @@ public class PostStorageServiceImpl implements PostStorageService {
 		}
 		return post.getId();
 
+	}
+	
+	public String storeFileCvs(MultipartFile file) {
+		// Normalize file name
+		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+		try {
+
+			// Check if the file's name contains invalid characters
+			if (fileName.contains("..")) {
+				throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
+			}
+			Path targetLocation = this.fileStorageLocationCsv.resolve(fileName);
+			
+			// Saving file/copy file to the target location (Replacing existing file with
+			// the same name)
+			Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+			return fileName;
+		} catch (IOException ex) {
+			throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
+		}
 	}
 }

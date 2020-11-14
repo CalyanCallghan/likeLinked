@@ -22,14 +22,14 @@ import com.onpassive.onet.entity.User;
 
 @Configuration
 @EnableBatchProcessing
-public class CSVBatchConfig {
-
+public class BatchConfiguration {
 	@Bean
     public Job job(JobBuilderFactory jobBuilderFactory,
                    StepBuilderFactory stepBuilderFactory,
                    ItemReader<User> itemReader,
                    ItemProcessor<User, User> itemProcessor,
-                   ItemWriter<User> itemWriter,TaskletStep taskletStep) {
+                   ItemWriter<User> itemWriter,TaskletStep taskletStep
+    ) {
 
         Step step = stepBuilderFactory.get("ATTENDANCE-file-load")
                 .<User, User>chunk(100)
@@ -37,10 +37,10 @@ public class CSVBatchConfig {
                 .processor(itemProcessor)
                 .writer(itemWriter)
                 .build();
-        
         Step step2 = stepBuilderFactory.get("step2")
 				.tasklet(taskletStep)
 				.build();
+
 
         return jobBuilderFactory.get("ATTENDANCE-Load")
                 .incrementer(new RunIdIncrementer())
@@ -52,7 +52,7 @@ public class CSVBatchConfig {
     @Bean
     public FlatFileItemReader<User> itemReader() {
         FlatFileItemReader<User> flatFileItemReader = new FlatFileItemReader<>();
-        flatFileItemReader.setResource(new FileSystemResource("E:/onet/Attendance.csv"));
+        flatFileItemReader.setResource(new FileSystemResource("uploads/Attendance.csv"));
         flatFileItemReader.setName("CSV-Reader");
         flatFileItemReader.setLinesToSkip(1);
         flatFileItemReader.setLineMapper(lineMapper());
@@ -64,15 +64,17 @@ public class CSVBatchConfig {
 
         DefaultLineMapper<User> defaultLineMapper = new DefaultLineMapper<>();
         DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
+
         lineTokenizer.setDelimiter(",");
         lineTokenizer.setStrict(false);
+        //lineTokenizer.setNames(new String[]{"empId", "companyName", "branch", "inTime","outTime","date"});
         lineTokenizer.setNames(new String[] { "email", "firstName", "lastName", "groupId", "empId","phoneNo" });
         BeanWrapperFieldSetMapper<User> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
         fieldSetMapper.setTargetType(User.class);
+
         defaultLineMapper.setLineTokenizer(lineTokenizer);
         defaultLineMapper.setFieldSetMapper(fieldSetMapper);
+
         return defaultLineMapper;
     }
-
-	
 }

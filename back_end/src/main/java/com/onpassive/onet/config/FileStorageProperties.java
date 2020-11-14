@@ -10,4 +10,5 @@ import lombok.Data;
 public class FileStorageProperties {
 	
     private String uploadDir;
+    private String uploadDirCvs;
 }
