@@ -1,13 +1,13 @@
 <div class="container-fluid" style="overflow-y: auto;height: 32em;">
-  <div class="row">
-      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-           <app-profile ></app-profile>
-           <mat-card class="mygroup">
-             <mat-card-title style="color: aliceblue;text-align: center;font-size: 19px">Software Developer</mat-card-title>
-            <div class="row">
-              <div  style="height:250px;overflow-y: scroll;" class="scroll">
-                <ul class="list-group ml-3" >
-                  <!-- <li class="list-group-item" style="width: 14.9em;height: 3em;margin-left: -15px;display: flex;
+    <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <app-profile></app-profile>
+            <mat-card class="mygroup">
+                <mat-card-title style="color: aliceblue;text-align: center;font-size: 19px">Software Developer</mat-card-title>
+                <div class="row">
+                    <div style="height:250px;overflow-y: scroll;" class="scroll">
+                        <ul class="list-group ml-3">
+                            <!-- <li class="list-group-item" style="width: 14.9em;height: 3em;margin-left: -15px;display: flex;
              justify-content: flex-start;
              align-items: center;" *ngFor="let data of card_data ;let i=index" (click)="select(product)" [ngClass]="{active: isActive(product)}">
                    <div>
@@ -20,49 +20,49 @@
                         <mat-icon (click)="openChatBox(i)" style="cursor: pointer">message</mat-icon>
                    </div>
              </li> -->
-             <li class="list-group-item" style="width: 14.9em;height: 3em;margin-left: -15px;display: flex;
+                            <li class="list-group-item" style="width: 14.9em;height: 3em;margin-left: -15px;display: flex;
               justify-content: flex-start;
               align-items: center;" *ngFor="let userData of card_data;let i=index" (click)="select(userData)" [ngClass]="{active: isActive(userData)}">
-                <div>
-                  <mat-icon style="cursor: default;">person</mat-icon>
+                                <div>
+                                    <mat-icon style="cursor: default;">person</mat-icon>
+                                </div>
+                                <div class="employeeName">
+                                    <div style="cursor: default;margin-left: 0.5em;">{{userData.first_name}} {{userData.last_name}}</div>
+                                </div>
+                                <div>
+                                    <mat-icon (click)="openChatBox(i)" style="cursor: pointer">message</mat-icon>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="employeeName">
-                  <div style="cursor: default;margin-left: 0.5em;">{{userData.name}}</div>
-                </div>
-                <div>
-                  <mat-icon (click)="openChatBox(i)" style="cursor: pointer">message</mat-icon>
-                </div>
-              </li>
-                </ul>
-              </div>
-            </div>
             </mat-card>
-      </div>
-      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-        <app-start-post (addNewPost)="addNewPostItem($event)"></app-start-post>
-        <app-person-post [postData]="postData"></app-person-post>
-      </div>
-      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-          <app-news></app-news>
-          <div id="boxes">
-            <div id="rightbox">
-              <ng-template [ngIf]="indexId == 0 || indexId == 1 || indexId == 2">
-                <app-chat></app-chat>
-              </ng-template>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <app-start-post (addNewPost)="addNewPostItem($event)"></app-start-post>
+            <app-person-post [postData]="postData"></app-person-post>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <app-news></app-news>
+            <div id="boxes">
+                <div id="rightbox">
+                    <ng-template [ngIf]="indexId == 0 || indexId == 1 || indexId == 2">
+                        <app-chat></app-chat>
+                    </ng-template>
+                </div>
+
+                <div id="middlebox">
+                    <ng-template [ngIf]="indexId == 1 || indexId == 2">
+                        <app-chat></app-chat>
+                    </ng-template>
+                </div>
+
+                <div id="leftbox">
+                    <ng-template [ngIf]="indexId == 2 ">
+                        <app-chat></app-chat>
+                    </ng-template>
+                </div>
             </div>
-          
-            <div id="middlebox">
-              <ng-template [ngIf]="indexId == 1 || indexId == 2">
-                <app-chat></app-chat>
-              </ng-template>
-            </div>
-          
-            <div id="leftbox">
-              <ng-template [ngIf]="indexId == 2 ">
-                <app-chat></app-chat>
-              </ng-template>
-            </div>
-          </div>
-      </div>
-  </div>
+        </div>
+    </div>
 </div>

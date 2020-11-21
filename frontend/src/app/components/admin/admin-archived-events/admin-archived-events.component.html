@@ -1,0 +1,52 @@
+<div class="arch_main">>
+    <div class="container-fluid">
+        <div class="row no-gutters">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <h1>Archived Events</h1>
+
+                <table class="table table-responsive" *ngFor="let eventDetails of eventModel;let i = index">
+                    <tr>
+                        <td><b>{{i+1}}</b></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><label>Event Title</label></td>
+                        <td colspan="3"><input matInput type="text" value="{{eventDetails.title}}" readonly size="47">
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><label>Event Information</label></td>
+                        <td colspan="3">
+
+                            <textarea matInput cols="50" rows="2" readonly value="{{eventDetails.info}}">
+                                    </textarea>
+
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><label>Start Date</label></td>
+                        <td>
+                            <input matInput type="text" readonly value="{{eventDetails.eventStartDate}}" class="event-date">
+                        </td>
+                        <td><label>End Date</label></td>
+                        <td>
+                            <input matInput type="text" readonly value="{{eventDetails.eventEndDate}}" class="event-date">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><label>Image/Post</label></td>
+                        <td>
+                            <input matInput type="text" name="image" readonly value="{{eventDetails.eventImage}}">
+                            <!-- <img mat-card-image src="{{backendUrl}}/file/downloadFile/{{eventDetails.eventImage}}" alt="event Image" style="width:50%;height: 50%;"> -->
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

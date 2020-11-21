@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../model/environment';
-import { Notifications } from '../model/notification';
+import { environment } from 'src/environments/environment';
+import { NotificationsModel } from '../model/notification';
 
 
 
@@ -11,12 +11,12 @@ import { Notifications } from '../model/notification';
   providedIn: 'root'
 })
 export class NotificationService {
-  private baseUrl = environment.baseApplicationUrl+"/notification";
+  private baseUrl = environment.baseApplicationUrl+"/event";
 
   constructor(private http: HttpClient) { }
 
-  getNotifications(): Observable<Notifications[]> {
-    return this.http.get<Notifications[]>(`${this.baseUrl}/getNotifications`);
+  getNotifications(): Observable<NotificationsModel[]> {
+    return this.http.get<NotificationsModel[]>(`${this.baseUrl}/getAllEvents`);
   }
 
   getTotalCount(): Observable<any> {

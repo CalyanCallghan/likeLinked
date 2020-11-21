@@ -1,0 +1,178 @@
+<div class="adm-groups-main float-left" *ngIf="!usr_grp_enable">
+    <div class="adm-grp-flex">
+        <div class="float-left mb-2">
+            <button class="btn cmn_btn mr-2" (click)="create_group()">Create New Group</button>
+        </div>
+        <div class="float-left en_cs_group mb-2" *ngIf="en_cs_group">
+            <div class="float-left en_grp_name mb-2">
+                <span>Enter Group Name</span>
+                <input type="text" [(ngModel)]="c_grp_text">
+            </div>
+            <div class="float-left mb-2">
+                <button class="btn cmn_btn cncl_clr mr-4" (click)="cancel_group()">Cancel</button>
+                <button class="btn cmn_btn" (click)="save_group()">Save</button>
+            </div>
+        </div>
+        <div class="float-left" *ngIf="groupTables">
+            <div class="float-left mb-2">
+                <ng-container *ngFor="let grp of groupList">
+                    <button class="btn cmn_btn mr-2" [ngClass]="{'grp_inactive' : !grp['active']}" (click)="get_tables(grp)">{{grp['groupName']}}</button>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="add_usr_grp" *ngIf="usr_grp_enable">
+    <div class="add_usr_grp">
+
+        <div class="aug_hhalf">
+            <div class="aug-main">
+                <div class="aug-header">
+                    <div class="float-left w-100 bg-white">
+                        <div class="form-group has-search m-0">
+                            <span class="fa fa-search form-control-feedback"></span>
+                            <input type="text" class="form-control" placeholder="Search" [(ngModel)]="grp_filter_text">
+                        </div>
+                    </div>
+                </div>
+                <div class="aug-body overflow-auto">
+                    <ng-container *ngFor="let muser of all_users | filter:grp_filter_text">
+                        <div class="m_data" (click)="muser.status = !muser.status" [ngClass]="{'dis_mstr' : (muser['groupId'] != 0)}">
+                            <div class="inp_chk float-left">
+                                <i class="far fa-circle" *ngIf="!muser.status"></i>
+                                <i class="far fa-check-circle" *ngIf="muser.status"></i>
+                            </div>
+                            <div class="inp_text float-left"><span>{{muser.firstName}} {{muser.lastName}}</span>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="aug-footer">
+                    <button class="btn cmn_btn float-right mr-2" (click)="add_mastergroup(clickedGroupId)">Add</button>
+                </div>
+            </div>
+        </div>
+        <div class="aug_hhalf">
+            <div class="aug-main">
+                <div class="aug-header">
+                    <div class="usrgrp-tile">
+                        {{clickedGroupName}}
+                    </div>
+                </div>
+                <div class="aug-body overflow-auto">
+                    <ng-container *ngFor="let muser of grp_users">
+                        <div class="m_data" (click)="muser.status = !muser.status">
+                            <div class="inp_chk float-left" (click)="muser.status = !muser.status">
+                                <i class="far fa-circle" *ngIf="!muser.status"></i>
+                                <i class="far fa-check-circle" *ngIf="muser.status"></i>
+                            </div>
+                            <div class="inp_text float-left"><span>{{muser.first_name}} {{muser.lastName}}</span>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="aug-footer">
+                    <div class="float-right">
+                        <button class="btn cmn_btn float-right mr-2" (click)="del_grpUsers(clickedGroupId)">Remove</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="table_modal" *ngIf="table_show">
+
+    <div class="tablem-header">
+        <span class="grpName">{{clickedGroupName}}</span>
+        <div class="float-right">
+            <button class="btn del_grp_btn mr-2" (click)="deleteGroup(clickedGroupId)">Delete</button>
+            <button class="btn cnl_grp_btn" (click)="table_show = false">x</button>
+        </div>
+    </div>
+    <div class="tablem-body overflow-auto">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tr style="background-color: white;">
+                    <th>EMP ID</th>
+                    <th>Name</th>
+                    <th>Email ID</th>
+                </tr>
+                <tr *ngFor="let u of grp_table_data; let i = index; ">
+                    <td>{{u.emp_id}}</td>
+                    <td> {{u.first_name}}</td>
+                    <td>{{u.email}} </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="tablem-footer">
+        <div class="row m-0">
+            <div class="col-sm-6">
+                <button class="btn add_grp_btn float-right" (click)="plus_table(clickedGroupId)">+</button>
+            </div>
+            <div class="col-sm-6">
+                <button class="btn min_grp_btn" (click)="table_show = false">-</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container-fluid">
+    <div class="row no-gutters">
+        <div class="col-lg-8 col-xl-8">
+
+            <button mat-raised-button class="create-button" (click)="callingFunction()">
+                Create New Group
+            </button>
+
+            <table class="table table-responsive" *ngIf=input>
+                <tr>
+                    <td>
+                        <h2>Enter Group Name</h2>
+                    </td>
+                    <td>
+                        <input type="text" [(ngModel)]="group.groupName" size="25" style="font-size: 18px;">
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="2">
+                        <button class="btn btn-danger" (click)="onCloseClick()">Cancel</button>
+                        <button class="btn btn-primary" (click)="save()" value="Submit" style="margin-left: 4em;">Save</button>
+                    </td>
+                </tr>
+            </table>
+
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xl-2 col-lg-2" *ngFor="let gplist of groupList;let i = index">
+                        <button class="btn btn-secondary" (click)="openGroupBox(gplist.groupName,gplist.id,i)">{{gplist.groupName}}</button>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="col-lg-4 col-xl-4">
+            <div style="margin-top: 20em;">
+                <app-group-box #childComponent></app-group-box>
+            </div>
+
+        </div>
+
+    </div>
+</div> -->

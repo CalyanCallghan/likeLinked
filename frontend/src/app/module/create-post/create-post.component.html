@@ -1,69 +1,60 @@
-<input type="file" id="fileUpload" name="fileUpload" multiple="multiple" accept="{{accept}}" style="display:none;"
-    (change)="onSelectFile($event)" />
+<input type="file" id="fileUpload" name="fileUpload" multiple="multiple" accept="{{accept}}" style="display:none;" (change)="onSelectFile($event)" />
 
-<input type="file" id="fileUploadVideo" name="fileUploadVideo" multiple="multiple"
-    accept="video/mp4,video/x-m4v,video/*" style="display:none;" (change)="onSelectFile($event)" />
+<input type="file" id="fileUploadVideo" name="fileUploadVideo" multiple="multiple" accept="video/mp4,video/x-m4v,video/*" style="display:none;" (change)="onSelectFile($event)" />
 
-<input type="file" id="fileUploadAttachment" name="fileUploadAttachment" multiple="multiple"
-    accept=".pdf" style="display:none;" (change)="onSelectFile($event)" />
-    <!-- .xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt, -->
+<input type="file" id="fileUploadAttachment" name="fileUploadAttachment" multiple="multiple" accept=".pdf" style="display:none;" (change)="onSelectFile($event)" />
 <h2 mat-dialog-title>Create a post</h2>
 
 <mat-dialog-content>
     <div>
         <mat-form-field style="width: 16%">
             <mat-select name="countryReactiveString" [(ngModel)]="post.type" [(value)]="selected">
-              <mat-option value="A">Anyone</mat-option>
-              <mat-option value="M">MyGroup</mat-option>
+                <mat-option value="A">Anyone</mat-option>
+                <mat-option value="M">MyGroup</mat-option>
             </mat-select>
-          </mat-form-field>
+        </mat-form-field>
     </div>
-     <div>
-        <mat-form-field style="width: 34em;"><textarea matInput [(ngModel)]="post.content"  cdkTextareaAutosize
-            #autosize="cdkTextareaAutosize" [formControl]="textareaPost"></textarea></mat-form-field>
+    <div>
+        <mat-form-field style="width: 34em;"><textarea matInput [(ngModel)]="post.content" cdkTextareaAutosize #autosize="cdkTextareaAutosize" [formControl]="textareaPost"></textarea></mat-form-field>
         <form #formRef="ngForm">
             <div class="table-responsive">
-            <table class="table" >
-              <tr *ngFor="let test of userList; let i=index" >
-                  <td style="padding-right: 0px;width:10px">#</td>
-                <td>
-                    <input matInput type="text"  id="name{{i}}"  style="width: 20em;" 
-                    [matAutocomplete]="auto" [formControl]="searchCtrl+i" />
-                    <mat-autocomplete #auto="matAutocomplete">
-                        <mat-option *ngFor="let element of filteredName | async" [value]="element.firstName" (onSelectionChange)="callSomeFunction(element.userId)">
-                          <span style="font-size: 12px;"> {{ element.firstName}} {{element.lastName}}</span>
-                        </mat-option>
-                      </mat-autocomplete>
-                </td>
-                </tr>
-            </table>
+                <table class="table">
+                    <tr *ngFor="let test of userList; let i=index">
+                        <td style="padding-right: 0px;width:10px">#</td>
+                        <td>
+                            <input matInput type="text" id="name{{i}}" style="width: 20em;" [matAutocomplete]="auto" [formControl]="searchCtrl+i" />
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option *ngFor="let element of filteredName | async" [value]="element.firstName" (onSelectionChange)="callSomeFunction(element.userId)">
+                                    <span style="font-size: 12px;"> {{ element.firstName}} {{element.lastName}}</span>
+                                </mat-option>
+                            </mat-autocomplete>
+                        </td>
+                    </tr>
+                </table>
             </div>
-            <button [disabled]="!formRef.form.valid" (click)="add()" mat-button color="primary">add hashtag</button>
+            <button [disabled]="!formRef.form.valid" (click)="add()" mat-button color="primary">Add hashtag</button>
         </form>
-    </div> 
+    </div>
     <div>
         <img style="width: 34em;" *ngIf="format==='image' && url" [src]="url" class="example-form">
         <video style="width: 34em;" *ngIf="format==='video' && url" [src]="url" class="example-form" controls></video>
-        <pdf-viewer *ngIf="format==='pdf' && url" [src]="url" [show-all]="false" [(page)]="pageVariable"
-            [render-text]="true" [original-size]="false" (after-load-complete)="afterLoadComplete($event)"
-            style="display: block;width: 34em;"></pdf-viewer>
-        <mat-slider style="width: 34em;" [max]="max" [min]="min" [thumbLabel]="true" *ngIf="format==='pdf' && url"
-            (change)="someFucn($event.value)">
+        <pdf-viewer *ngIf="format==='pdf' && url" [src]="url" [show-all]="false" [(page)]="pageVariable" [render-text]="true" [original-size]="false" (after-load-complete)="afterLoadComplete($event)" style="display: block;width: 34em;"></pdf-viewer>
+        <mat-slider style="width: 34em;" [max]="max" [min]="min" [thumbLabel]="true" *ngIf="format==='pdf' && url" (change)="someFucn($event.value)">
         </mat-slider>
     </div>
     <div>
-        <button mat-button (click)="onClick()" *ngIf="format==='none'">
+        <button class="out_line_none" mat-button (click)="onClick()" *ngIf="format==='none'">
             <mat-icon>image</mat-icon>
         </button>
-        <button mat-button (click)="onClickVideo()" *ngIf="format==='none'">
+        <button class="out_line_none" mat-button (click)="onClickVideo()" *ngIf="format==='none'">
             <mat-icon>videocam</mat-icon>
         </button>
-        <button mat-button (click)="onClickAttachment()" *ngIf="format==='none'">
+        <button class="out_line_none" mat-button (click)="onClickAttachment()" *ngIf="format==='none'">
             <mat-icon>insert_drive_file</mat-icon>
         </button>
     </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close id='cancel' name='cancel'>Cancel</button>
-    <button mat-button (click)="createPost()" disabled="{{textareaPost.hasError('required')}}">Post</button>
+    <button class="out_line_none" mat-button mat-dialog-close id='cancel' name='cancel'>Cancel</button>
+    <button class="out_line_none" mat-button (click)="createPost()" [disabled]="de_createpost()">Post</button>
 </mat-dialog-actions>

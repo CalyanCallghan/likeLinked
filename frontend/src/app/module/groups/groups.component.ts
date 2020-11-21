@@ -2,10 +2,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { EmployeesData } from 'src/app/model/employeesData';
-import { environment } from 'src/app/model/environment';
 import { EmployeService } from 'src/app/service/employe.service';
 import { GroupsService } from 'src/app/service/groups.service';
-import { MyGroupsComponent } from '../my-groups/my-groups.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-groups',
@@ -17,40 +16,40 @@ export class GroupsComponent implements OnInit {
   groupList: any;
   indexId: number;
   card_data: EmployeesData[];
+  
   backendUrl = environment.baseApplicationUrl;
+  designationId: string = localStorage.getItem("designationId").toLowerCase();
   designation: string = localStorage.getItem("designation").toLowerCase();
   canShowButton: boolean = true;
   isShown: boolean = false ;
-  groupName:string;
+  groupName:string = "SOFTWARE ENGINEER";
   selected: any;
   constructor(private groupService: GroupsService,
     private router: Router, private employeService: EmployeService) {
   }
 
   ngOnInit(): void {
-    this.groupName = this.designation;
     this.groupService.getGroupByDesignation().subscribe(result => {
       this.groupList = result;
     }, error => console.log(error));
-    this.employeService.getEmployeeDetailsByDesignation(this.designation).subscribe(result => {
+    this.employeService.getEmployeeDetailsByDesignation(this.designationId).subscribe(result => {
       this.card_data = result;
+      console.log("---card_data---------->"+JSON.stringify(result));
     }, error => console.log(error));
   }
 
-  showMeEmplyeeList(desig: any) {
-    let des = desig.toLowerCase();
-    this.groupName = desig;
+  showMeEmplyeeList(desig: any,desigDesc: any) {
+    this.groupName = desigDesc;
     this.isShown = true;
-    this.employeService.getEmployeeDetailsByDesignation(des).subscribe(result => {
+    this.employeService.getEmployeeDetailsByDesignation(desig).subscribe(result => {
       this.card_data = result;
     }, error => console.log(error));
-    this.designation = localStorage.getItem("designation").toLowerCase();+
-    console.log(des+"---"+this.designation);
-    if (des != this.designation) {
-      this.canShowButton = false;
-    } else {
-      this.canShowButton = true;
-    }
+    this.designationId = localStorage.getItem("designationId").toLowerCase();
+     if (desig != this.designationId) {
+       this.canShowButton = false;
+     } else {
+       this.canShowButton = true;
+     }
   }
   openChat1Box(i: number) {
     this.indexId = i;

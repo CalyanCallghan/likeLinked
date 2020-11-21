@@ -27,8 +27,11 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { UploadImageComponent } from './upload-profile-image/upload-image.component';
 import { NgMatSearchBarModule } from 'ng-mat-search-bar';
 import { LayoutComponent } from './layout/layout.component';
-import { TestGridComponent } from './test-grid/test-grid.component';
-import { AgGridModule } from 'ag-grid-angular';
+
+
+/* admin */
+import { ToastrModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -50,8 +53,7 @@ import { AgGridModule } from 'ag-grid-angular';
     GroupsComponent,
     EmployeeListComponent,
     UploadImageComponent,
-    LayoutComponent,
-    TestGridComponent
+    LayoutComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +69,11 @@ import { AgGridModule } from 'ag-grid-angular';
     FlexLayoutModule,
     ImageCropperModule,
     NgMatSearchBarModule,
-    AgGridModule.withComponents([])
+
+
+    /* admin */
+    ToastrModule.forRoot(),
+    NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

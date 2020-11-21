@@ -1,0 +1,105 @@
+<div class="body">
+    <div class="container-fluid">
+        <div class="row no-gutters">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <h1>Upload Events</h1>
+                <button type="button" class="btn btn-light">Add Events</button>
+                <form [formGroup]="eventForm" (ngSubmit)="eventSubmit()">
+                    <table class="table table-responsive">
+                        <tr>
+                            <td><label>Event Title</label></td>
+                            <td colspan="3">
+                                <input matInput type="text" formControlName="title" maxLength="50" size="47" required>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label>Event Information</label></td>
+                            <td colspan="3">
+
+                                <textarea matInput cols="50" rows="2" formControlName="info" maxLength="500" required></textarea>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label>Start Date</label></td>
+                            <td>
+                                <input matInput type="datetime-local" min="{{currentDateVal}}T00:00" formControlName="start" class="event-date" required (change)="validateCurrentDate()">
+                            </td>
+                            <td><label>End Date</label></td>
+                            <td>
+                                <input matInput type="datetime-local" min="{{validateEndDate}}" formControlName="end" class="event-date" required>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label>Image/Post</label></td>
+                            <td colspan="3">
+                                <input matInput type="file" formControlName="image" (change)="onSelectFile($event)" accept=".jpg,.png" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td colspan="3"><button type="button" class="btn" (click)="openDialog()">Preview</button>
+                                <button type="submit" class="btn" style="margin-left: 8em;">Publish Event</button></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal previewModal fade" id="previewModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="prev_flex">
+                    <div class="row m-0 w-100">
+                        <div class="col-lg-6">
+                            <div class="prev_key">
+                                Event Title
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="prev_val">
+                                : {{prev_items['title']}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-0 w-100 mt-2">
+                        <div class="col-lg-6">
+                            <div class="prev_key">
+                                Event information
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="prev_val">
+                                : {{prev_items['info']}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-0 w-100 mt-2">
+                        <div class="col-lg-6">
+                            <div class="prev_key">
+                                Image/Post
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="prev_val">
+                                : {{prev_items['fname']}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-0 w-100 mt-2">
+                        <div class="col-lg-6">
+                        </div>
+                        <div class="col-lg-6">
+                            <button _ngcontent-nuo-c91="" class="btn prev_btn" data-dismiss="modal">Okay</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

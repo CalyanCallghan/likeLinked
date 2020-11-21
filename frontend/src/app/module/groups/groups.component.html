@@ -1,76 +1,72 @@
 <div class="container-fluid" style="overflow-y: auto;height: 32em;">
-  <div class="row">
-    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-      <app-profile></app-profile>
-      <mat-card class="group">
-        <mat-card-title style="color: aliceblue;text-align: center;font-size: 19px">Groups</mat-card-title>
-        <div class="row">
-          <div style="height:250px;overflow-y: scroll;" class="scroll">
-            <ul class="list-group ml-3">
-              <li *ngFor="let gplist of groupList;let i = index"
-                (click)="showMeEmplyeeList(gplist.desgdesc);select(gplist)" class="list-group-item " style="width: 14.9em;height: 3em;margin-left: -15px;display: flex;
+    <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <app-profile></app-profile>
+            <mat-card class="group">
+                <mat-card-title style="color: aliceblue;text-align: center;font-size: 19px">Groups</mat-card-title>
+                <div class="row">
+                    <div style="height:250px;overflow-y: scroll;" class="scroll">
+                        <ul class="list-group ml-3">
+                            <li *ngFor="let gplist of groupList;let i = index" (click)="showMeEmplyeeList(gplist.id,gplist.groupName);select(gplist)" class="list-group-item " style="width: 14.9em;height: 3em;margin-left: -15px;display: flex;
             justify-content: flex-start;align-items: center;" [ngClass]="{active: isActive(gplist)}">
-                <div>
-                  <mat-icon style="cursor: default;">person</mat-icon>
-                </div>
-                <div class="disgnations">
+                                <div>
+                                    <mat-icon style="cursor: default;">person</mat-icon>
+                                </div>
+                                <div class="disgnations">
 
-                  <div style="cursor: pointer;margin-left: 0.5em;">{{gplist.desgdesc}}</div>
+                                    <div style="cursor: pointer;margin-left: 0.5em;">{{gplist.groupName}}</div>
+                                </div>
+                                <div>
+                                    <mat-icon style="cursor: default;">keyboard_arrow_right</mat-icon>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div>
-                  <mat-icon style="cursor: default;">keyboard_arrow_right</mat-icon>
+            </mat-card>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <mat-card class="listOfEmployees" style="overflow-y: auto;height: 32em;">
+                <div *ngIf="!hasData()">
+                    <h3>No Data Found </h3>
                 </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </mat-card>
-    </div>
-    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-      <mat-card class="listOfEmployees" style="overflow-y: auto;height: 32em;">
-        <div *ngIf="!hasData()">
-          <h3>No Data Found </h3>
-        </div>
-        <div class="mygroupBtnDiv" style="    display: flex;
+                <div class="mygroupBtnDiv" style="    display: flex;
         justify-content: space-between;
         align-items: center;">
-          <div>
-            <strong style="color:#0b81d6; margin-left: 48px;"><span>{{groupName | uppercase}}</span></strong>
-          </div>
-          <div *ngIf="canShowButton">
-            <button mat-button class="myGroupBtn" color="primary" routerLink="/mygroup">My Group</button>
-          </div>
-          <!-- <button mat-button color="primary" *ngIf="!photoUploaded" (click)="uploadMyProfile()" [mat-dialog-close]="data.animal">Upload</button> -->
+                    <div>
+                        <strong style="color:#0b81d6; margin-left: 48px;"><span>{{groupName | uppercase}}</span></strong>
+                    </div>
+                    <div *ngIf="canShowButton">
+                        <button mat-button class="myGroupBtn" color="primary" routerLink="/mygroup">My Group</button>
+                    </div>
+                    <!-- <button mat-button color="primary" *ngIf="!photoUploaded" (click)="uploadMyProfile()" [mat-dialog-close]="data.animal">Upload</button> -->
+                </div>
+                <div class="page-wrapper">
+                    <div class="content" fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="16px grid">
+                        <div fxFlex.xs="100%" *ngFor="let num of card_data;let i = index">
+                            <mat-card class="mat-elevation-z4 profilePicAndData" style="width:9.3em;height: 16em" fxLayout="column" fxLayoutAlign="center center">
+                                <mat-card-content fxLayout="column" fxLayoutAlign="center center" style="flex: 1;">
+                                    <div style="flex: 1;">
+                                        <img src="{{backendUrl}}/file/downloadFile/{{num.imageName}}" style="width:6em;border-radius: 50%;">
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <span style="color: rgba(0,0,0,.9);font-weight: 900;padding-top: 0.5em;text-align: center;" class="center line-clamp-name">{{num.first_name}} {{num.last_name}}</span>
+                                        <span style="color: rgba(0,0,0,.87);font-size: 13px" class="line-clamp">{{num.email}}</span>
+                                    </div>
+                                </mat-card-content>
+                                <mat-card-actions>
+                                    <!-- <button mat-button>Send message</button> -->
+                                    <mat-icon (click)="openChat1Box(i)" style="cursor: pointer;margin-left: 80px;">message</mat-icon>
+                                </mat-card-actions>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
         </div>
-        <div class="page-wrapper">
-          <div class="content" fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="16px grid">
-            <div fxFlex.xs="100%" *ngFor="let num of card_data;let i = index">
-              <mat-card class="mat-elevation-z4 profilePicAndData" style="width:9.3em;height: 16em" fxLayout="column"
-                fxLayoutAlign="center center">
-                <mat-card-content fxLayout="column" fxLayoutAlign="center center" style="flex: 1;">
-                  <div style="flex: 1;">
-                    <img src="{{backendUrl}}/file/downloadFile/{{num.profilePic}}"
-                      style="width:6em;border-radius: 50%;">
-                  </div>
-                  <div style="flex: 1;">
-                    <span style="color: rgba(0,0,0,.9);font-weight: 900;padding-top: 0.5em;text-align: center;"
-                      class="center line-clamp-name">{{num.name}}</span>
-                    <span style="color: rgba(0,0,0,.87);font-size: 13px" class="line-clamp">{{num.email}}</span>
-                  </div>
-                </mat-card-content>
-                <mat-card-actions>
-                  <!-- <button mat-button>Send message</button> -->
-                  <mat-icon (click)="openChat1Box(i)" style="cursor: pointer;margin-left: 80px;">message</mat-icon>
-                </mat-card-actions>
-              </mat-card>
-            </div>
-          </div>
-        </div>
-      </mat-card>
-    </div>
-    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-      <app-news></app-news>
-      <!-- <div id="boxes">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <app-news></app-news>
+            <!-- <div id="boxes">
         <div id="rightbox">
           <ng-template [ngIf]="indexId == 0 || indexId == 1 || indexId == 2">
             <app-chat></app-chat>
@@ -89,6 +85,6 @@
           </ng-template>
         </div>
       </div> -->
+        </div>
     </div>
-  </div>
 </div>

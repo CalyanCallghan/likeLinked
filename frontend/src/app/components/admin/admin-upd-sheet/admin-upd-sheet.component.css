@@ -1,0 +1,135 @@
+.usheet-main {
+    height: 100%;
+    width: 100%;
+    background: #f5f5f5;
+}
+
+.usheet-main-header {
+    height: 45px;
+    padding: 10px;
+}
+
+.usheet-main-body {
+    height: calc(100% - 45px);
+    padding: 10px;
+    padding-top: 0px;
+}
+
+.usheet-main-footer {
+    height: 45px;
+    padding: 10px;
+    padding-top: 0px;
+}
+
+.footer_enable {
+    height: calc(100% - 90px)
+}
+
+.cmn_btn,
+.cmn_btn:focus {
+    color: #fff;
+    background-color: #428dce;
+    border-color: #428dce;
+    height: 25px;
+    line-height: 12.5px;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+}
+
+.upd-main {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.upd-file-upload {
+    color: #fff;
+    background-color: #428dce;
+    border-color: #428dce;
+    line-height: 15px;
+    padding: 5px 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.upd-file-upload input {
+    position: absolute;
+    font-size: 50px;
+    opacity: 0;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+}
+
+.upd-file-name {
+    width: 380px;
+}
+
+.upd-file-name input {
+    background-color: #f2f2f2 !important;
+    border-radius: 10px;
+    border: 1px solid #b9b9b9;
+    text-align: center;
+}
+
+.view_table {
+    background: #fff;
+    height: auto;
+    margin: 0px;
+    border: 1px solid #c1c1c1;
+}
+
+.view_table thead th {
+    background-color: #e5e5e5;
+    color: #545454;
+    font-weight: 600;
+    font-size: 15px;
+    border-right: 1px solid #bcbcbc;
+}
+
+.view_table thead th:last-child {
+    border-right: none;
+}
+
+.view_table tbody tr td {
+    border: none;
+    border-right: 1px solid #bcbcbc;
+    height: 50px;
+    padding: 15px;
+    line-height: 20px;
+    color: #6c6c6c;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.view_table tbody tr td input {
+    border: 1px solid #bcbcbc;
+    height: 30px;
+    padding: 15px;
+    line-height: 20px;
+    color: #6c6c6c;
+    font-size: 14px;
+}
+
+.view_table tbody tr td:last-child {
+    border-right: none;
+}
+
+.ed_div {
+    display: flex;
+    justify-content: center;
+}
+
+.ed_div_btn {
+    color: #fff;
+    background-color: #428dce;
+    border-color: #428dce;
+    line-height: 12.5px;
+    position: relative;
+    overflow: hidden;
+    height: 25px;
+}

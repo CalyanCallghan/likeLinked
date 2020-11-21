@@ -1,0 +1,88 @@
+.body {
+    background-image: none !important;
+}
+
+.adminHome {
+    height: 100%;
+    width: 100%;
+}
+
+.adminHeader {
+    height: 45px;
+    background: #efefef;
+}
+
+.adminBody {
+    height: calc(100% - 45px);
+    background: #fff;
+    padding: 20px;
+}
+
+.adminHome .home-title {
+    color: #2e93cf;
+    font-size: 22px;
+    line-height: 45px;
+    font-weight: 600;
+}
+
+.cmn_border {
+    border: 1px solid #ababab;
+}
+
+.ab-inner-div {
+    height: 100%;
+    padding: 60px;
+}
+
+.ab-inner-side-div {
+    float: left;
+    position: relative;
+    width: 245px;
+    height: 100%;
+    margin-right: 30px;
+    background: #f5f5f5;
+    overflow: auto;
+}
+
+.ab-inner-main-div {
+    float: left;
+    position: relative;
+    width: calc(100% - 275px);
+    height: 100%;
+    background: #f5f5f5;
+}
+
+.snav_tabs li {
+    position: relative;
+    width: 100%;
+    list-style: none;
+    padding: 20px;
+    background: #fff;
+    margin-bottom: 5px;
+    line-height: 20px;
+}
+
+.snav_tabs {
+    margin: 0;
+    padding: 5px;
+}
+
+.snav_tabs li a {
+    color: #818181;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.snav_tabs li span svg {
+    height: 20px;
+}
+
+.snav_tabs li a.active {
+    color: #286c94 !important;
+}
+
+.sub_child_li {
+    margin-left: 20px;
+    width: calc(100% - 20px) !important;
+    padding: 20px 15px !important;
+}

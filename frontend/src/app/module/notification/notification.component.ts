@@ -3,6 +3,7 @@ import { FixedSizeVirtualScrollStrategy, VIRTUAL_SCROLL_STRATEGY } from '@angula
 import { HostListener } from '@angular/core';
 import { NotificationService } from 'src/app/service/notification.service';
 import { UnReadService } from 'src/app/service/unreadCount.service';
+import { environment } from 'src/environments/environment';
 
 
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
@@ -23,6 +24,7 @@ export class NotificationComponent implements OnInit {
   notifications: any;
   totalCount = 0;
   unreadCount = 0;
+  backEndUrl =environment.baseApplicationUrl;
 
   @HostListener('mouseover') onHover() {
 

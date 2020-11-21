@@ -18,7 +18,7 @@ export class MyGroupsComponent implements OnInit {
   indexId: number;
   postData: PostData[];
   card_data: EmployeesData[];
-  designation: string = localStorage.getItem("designation").toLowerCase();
+  designation: string = localStorage.getItem("designationId").toLowerCase();
   selected: any;
 
   constructor(public dialog: MatDialog, private router: Router,

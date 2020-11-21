@@ -1,4 +1,4 @@
-export class Notifications {
+export class NotificationsModel {
     id: number;
     from: string;
     sendTo: string;

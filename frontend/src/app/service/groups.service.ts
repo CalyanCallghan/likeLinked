@@ -1,7 +1,8 @@
-import { environment } from './../model/environment';
+
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Grouplist } from '../module/groups/grouplist';
 
 @Injectable({

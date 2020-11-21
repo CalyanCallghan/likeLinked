@@ -1,0 +1,10 @@
+.a-home {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    color: #56a7d7;
+    font-size: 29px;
+    font-weight: 600;
+}

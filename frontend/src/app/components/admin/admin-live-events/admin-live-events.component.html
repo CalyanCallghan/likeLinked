@@ -1,0 +1,115 @@
+<div class="live_main">
+    <div class="container-fluid">
+        <div class="row no-gutters">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <h1>Live Events</h1>
+                <table class="table table-responsive" *ngFor="let eventDetails of eventModel;let i = index">
+                    <tr>
+                        <td><b>{{i+1}}</b></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><label>Event Title</label></td>
+                        <td colspan="3">
+                            <input [(ngModel)]="eventDetails.title" [readonly]="!eventDetails['edit_details']" matInput type="text" value="{{eventDetails.title}}" readonly size="47">
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><label>Event Information</label></td>
+                        <td colspan="3">
+
+                            <textarea matInput cols="50" rows="2" value="{{eventDetails.info}}" [(ngModel)]="eventDetails.info" [readonly]="!eventDetails['edit_details']" readonly>
+                                    </textarea>
+
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><label>Start Date</label></td>
+                        <td>
+                            <input matInput type="text" [readonly]="!eventDetails['edit_details']" value="{{eventDetails.eventStartDate}}" [(ngModel)]="eventDetails.eventStartDate" class="event-date">
+                        </td>
+                        <td><label>End Date</label></td>
+                        <td>
+                            <input matInput type="text" [(ngModel)]="eventDetails.eventEndDate" [readonly]="!eventDetails['edit_details']" value="{{eventDetails.eventEndDate}}" class="event-date">
+                        </td>
+                        <tr>
+                            <td></td>
+                            <td><label>Image/Post</label></td>
+                            <td *ngIf="flag1"><input matInput type="text" value="{{eventDetails.eventImage}}" readonly></td>
+                            <td *ngIf="flag"><input matInput type="file" (change)="onSelectFile($event)" accept=".jpg,.png"></td>
+                            <td colspan="2"><button type="submit" class="btn-update" (click)="updateSubmit(eventDetails)">Upload new</button></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td colspan="2"><button type="button" class="btn" (click)="openDialog(i)">View</button>
+                                <button type="button" class="btn" (click)="edit(i)" style="margin-left: 6em;">Edit</button>
+                            </td>
+                        </tr>
+
+                        <div class="veiw_modals">
+                            <div class="modal previewModal fade" [id]="'viewModal_'+i" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <div class="prev_flex">
+                                                <div class="row m-0 w-100">
+                                                    <div class="col-lg-6">
+                                                        <div class="prev_key">
+                                                            Event Title
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="prev_val">
+                                                            : {{eventDetails.title}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row m-0 w-100 mt-2">
+                                                    <div class="col-lg-6">
+                                                        <div class="prev_key">
+                                                            Event information
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="prev_val">
+                                                            : {{eventDetails.info}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row m-0 w-100 mt-2">
+                                                    <div class="col-lg-6">
+                                                        <div class="prev_key">
+                                                            Image/Post
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="prev_val" *ngIf="upd_file">
+                                                            : {{upd_file['name']}}
+                                                        </div>
+                                                        <div class="prev_val" *ngIf="!upd_file">
+                                                            : {{eventDetails.eventImage}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row m-0 w-100 mt-2">
+                                                    <div class="col-lg-6">
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <button _ngcontent-nuo-c91="" class="btn prev_btn" data-dismiss="modal">Okay</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -10,7 +10,6 @@ import { LogoutComponent } from './logout/logout.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { LayoutComponent } from './layout/layout.component';
 import { AuthService } from '../service/auth.service';
-import { TestGridComponent } from './test-grid/test-grid.component';
 
 // const routes: Routes = [
 //   { path: '', component: HomepageComponent },
@@ -41,9 +40,10 @@ const routes: Routes = [
         { path: 'mygroup', component: MyGroupsComponent,canActivate: [AuthService]  },
         { path: 'chat' , component: ChatComponent,canActivate: [AuthService] },
         { path: 'notification' , component: NotificationComponent,canActivate: [AuthService] },
-        { path: 'groups' , component: GroupsComponent,canActivate: [AuthService] }
+        { path: 'groups' , component: GroupsComponent,canActivate: [AuthService] },
     ]
-  }
+  },
+  {path:'admin', loadChildren: () => import('./../modules/admin/admin-home/admin-home.module').then(m=>m.AdminHomeModule)}, 
  ];
  
 

@@ -1,5 +1,4 @@
-
-.card{
+.card {
     width: 57%;
     margin-top: 15.3%;
     left: 5.8em;
@@ -9,51 +8,61 @@
     background-size: 804px 42px;
     border: none
 }
-.card-top{
-  color:white;
+
+.card-top {
+    color: white;
 }
-.card-text{
-    display:inline-block;
+
+.card-text {
+    display: inline-block;
     padding-right: 40%;
     font-size: 12px;
-    color:gray;
+    color: gray;
 }
-.card-digit{
+
+.card-digit {
     font-size: 22px;
-    color:#007acc;
+    color: #007acc;
     font-weight: 600;
 }
-.notification-title{
-    color:#007acc;
+
+.notification-title {
+    color: #007acc;
     font-size: 14px;
     font-weight: 1000;
     justify-content: center;
     padding-bottom: 1em
 }
-.notification-message{
+
+.notification-message {
     font-size: 12px;
     font-weight: 600px;
 }
 
 .example-viewport {
-  height: 500px;
- 
+    height: 500px;
 }
-.panel-description{
-  text-align: right;
-  font-size: 12px;
+
+.panel-description {
+    text-align: right;
+    font-size: 12px;
 }
-.allNotofications{
-    margin-top: 15.3%;
-    right: 6em;
-    width: 32em;
-    border-radius: 1em
-}
-.postcard{
+
+.allNotofications {
     margin-top: 15.3%;
     right: 6em;
     width: 32em;
     border-radius: 1em
 }
 
+.postcard {
+    margin-top: 15.3%;
+    right: 6em;
+    width: 32em;
+    border-radius: 1em
+}
 
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}

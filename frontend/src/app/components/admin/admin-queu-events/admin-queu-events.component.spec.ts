@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TestGridComponent } from './test-grid.component';
+import { AdminQueuEventsComponent } from './admin-queu-events.component';
 
-describe('TestGridComponent', () => {
-  let component: TestGridComponent;
-  let fixture: ComponentFixture<TestGridComponent>;
+describe('AdminQueuEventsComponent', () => {
+  let component: AdminQueuEventsComponent;
+  let fixture: ComponentFixture<AdminQueuEventsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TestGridComponent ]
+      declarations: [ AdminQueuEventsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestGridComponent);
+    fixture = TestBed.createComponent(AdminQueuEventsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

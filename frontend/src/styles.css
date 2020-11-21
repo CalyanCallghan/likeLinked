@@ -1,11 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
-@import "../node_modules/ag-grid-community/dist/styles/ag-grid.css";
-@import "../node_modules/ag-grid-community/dist/styles/ag-theme-alpine.css";
 
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+html,
+body {
+    height: 100%;
+    /* background-image: url("src/assets/images/logos/background_ef.svg");
+    background-repeat: no-repeat;  */
+}
 
-html, body { height: 100%;
-    background-image: url("src/assets/images/logos/background_ef.svg");
-    background-repeat: no-repeat; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow: hidden;}
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    overflow: hidden;
+}

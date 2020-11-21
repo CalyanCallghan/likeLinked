@@ -1,11 +1,13 @@
 ul {
     list-style: none;
 }
-.heading{
+
+.heading {
     font-size: 14px;
-    color: rgba(0,0,0,.9);
+    color: rgba(0, 0, 0, .9);
 }
-.subHeading{
+
+.subHeading {
     font-size: 12px;
-    color: rgba(0,0,0,.6);
+    color: rgba(0, 0, 0, .6);
 }

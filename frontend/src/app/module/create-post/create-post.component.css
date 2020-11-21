@@ -5,3 +5,11 @@
     width: 0px;
     background: transparent;
 }
+
+/* kondareddy post buttons css starts */
+
+.out_line_none, .out_line_none:focus{
+    outline: none;
+}
+
+/* kondareddy post buttons css ends */

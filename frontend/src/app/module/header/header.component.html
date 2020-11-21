@@ -1,53 +1,45 @@
 <mat-toolbar id="mainToolbar" style="height: 3.2em;">
-    <img id="omIcon" src="assets/images/logos/logo.svg" style="width: 3em"/>
-     <input class="form-control form-control-sm" style="margin-left: 32em;" type="text" placeholder="Search"
-      aria-label="Search" mdbInput [matAutocomplete]="auto" [formControl]="searchCtrl" matTooltipPosition="after">
-      <!-- <mat-search-bar style="margin-left: 36em;" [matAutocomplete]="auto" [formControl]="searchCtrl"
-      matTooltipPosition="after" (onOpen)="clearValue()"></mat-search-bar> -->
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let element of filteredName | async" [value]="element.firstName" >
-        <div style="display: flex;justify-content: flex-start;align-items: center;">
-          <div style="flex:1">
-            {{ element.firstName}} {{element.lastName}}
-          </div>
-          <div>
-            <mat-icon style="cursor: pointer;">message</mat-icon>
-          </div>
-          <!-- <span style="font-size: 12px;"></span> -->
-        </div> 
+    <img id="omIcon" src="assets/images/logos/logo.svg" style="width: 3em" />
+    <input class="form-control form-control-sm" style="margin-left: 32em;" type="text" placeholder="Search" aria-label="Search" mdbInput [matAutocomplete]="auto" [formControl]="searchCtrl" matTooltipPosition="after">
+    <!-- <mat-search-bar style="margin-left: 36em;" [matAutocomplete]="auto" [formControl]="searchCtrl"
+    matTooltipPosition="after" (onOpen)="clearValue()"></mat-search-bar> -->
+    <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let element of filteredName | async" [value]="element.firstName">
+            <div style="display: flex;justify-content: flex-start;align-items: center;">
+                <div style="flex:1">
+                    {{ element.firstName}} {{element.lastName}}
+                </div>
+                <div>
+                    <mat-icon style="cursor: pointer;">message</mat-icon>
+                </div>
+                <!-- <span style="font-size: 12px;"></span> -->
+            </div>
 
         </mat-option>
-      </mat-autocomplete>
+    </mat-autocomplete>
     <div style="display: flex; align-items: center;" class="btn-group" (click)="onButtonGroupClick($event)">
-      <!-- <div>
-        <a 
-          href="assets/images/logos/sampleTemplate.csv" 
-          class="btn btn-default" 
-          style="margin-left: 20px;" 
-          target="_blank" 
-          download="sampleTemplate.csv">
-          Download Import
-        </a>
-      </div> -->
-      <button class='btn btn-secondary' type="button" mat-button  routerLink="/"><span class="header-icon-names">Home</span><mat-icon>home</mat-icon></button>
-      <button class='btn btn-secondary' type="button" mat-button routerLink="groups"><span class="header-icon-names">Groups</span> <mat-icon>groups</mat-icon></button>
-      <button class='btn btn-secondary' type="button" mat-button routerLink="mygroup"><span class="header-icon-names">My Group</span><mat-icon>group</mat-icon></button>
-      <button class='btn btn-secondary' type="button" mat-button routerLink="notification" (click)="changeColor()"><span class="header-icon-names">Notifications</span> 
-         <mat-icon  >
-          notifications_none
-        </mat-icon> 
-        <!-- [ngStyle]="colorStatus =='unread'?{'background-color':'orangered'} : {'background-color': 'none'}" 
-        matBadgeColor="{{notificationColor}}" matBadge="{{unreadCount}}" -->
-        <!-- <mat-icon 
-             *ngIf="colorStatus =='unread'">
-        <img src="assets/images/logos/alert_notify.png" width="30" height="20">
-      </mat-icon> -->
-      </button>
+        <button class='btn btn-secondary hm_btn' type="button" mat-button routerLink="/" routerLinkActive="hm_btn_active" [routerLinkActiveOptions]="{exact: true}"><span class="header-icon-names">Home</span><mat-icon>home</mat-icon></button>
+        <button class='btn btn-secondary hm_btn' type="button" mat-button routerLink="groups" routerLinkActive="hm_btn_active"><span class="header-icon-names">Groups</span> <mat-icon>groups</mat-icon></button>
+        <button class='btn btn-secondary hm_btn' type="button" mat-button routerLink="mygroup" routerLinkActive="hm_btn_active"><span class="header-icon-names">My Group</span><mat-icon>group</mat-icon></button>
+        <button class='btn btn-secondary hm_btn' type="button" mat-button routerLink="notification" (click)="changeColor()" routerLinkActive="hm_btn_active"><span class="header-icon-names">Notifications</span> 
+       <!-- <mat-icon  >
+        notifications_none
+      </mat-icon>  -->
+      <mat-icon [ngStyle]="colorStatus =='unread'?{'color':'red','font-weight':'bold'} : {'background-color': 'none'}">
+        notifications_none
+        </mat-icon>
+      <!-- [ngStyle]="colorStatus =='unread'?{'background-color':'orangered'} : {'background-color': 'none'}" 
+      matBadgeColor="{{notificationColor}}" matBadge="{{unreadCount}}" -->
+      <!-- <mat-icon 
+           *ngIf="colorStatus =='unread'">
+      <img src="assets/images/logos/alert_notify.png" width="30" height="20">
+    </mat-icon> -->
+    </button>
 
-      <!-- <a class='btn' mat-button>Learning <mat-icon>library_books</mat-icon></a> -->
-      <img src="{{backendUrl}}/file/downloadFile/{{userdata.file_name}}" style="width:64px;border-radius: 50%;" [matMenuTriggerFor]="belowMenu" class='btn'>
-      <mat-menu #belowMenu="matMenu" yPosition="below">
-        <div><a class='btn' mat-button routerLink="logout">Sign Out<mat-icon>login</mat-icon></a></div>      
-      </mat-menu>
+        <!-- <a class='btn' mat-button>Learning <mat-icon>library_books</mat-icon></a> -->
+        <img src="{{backendUrl}}/file/downloadFile/{{userdata.file_name}}" style="width:64px;border-radius: 50%;" [matMenuTriggerFor]="belowMenu" class='btn'>
+        <mat-menu #belowMenu="matMenu" yPosition="below">
+            <div><a class='btn' mat-button routerLink="logout">Sign Out<mat-icon>login</mat-icon></a></div>
+        </mat-menu>
     </div>
-  </mat-toolbar>
+</mat-toolbar>

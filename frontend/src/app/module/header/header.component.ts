@@ -1,4 +1,4 @@
-import { Notifications } from './../../model/notification';
+import { NotificationsModel } from './../../model/notification';
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from 'src/app/service/notification.service';
 import { UnReadService } from 'src/app/service/unreadCount.service';
@@ -10,7 +10,7 @@ import { SearchService } from 'src/app/service/search.service';
 import { startWith, map } from 'rxjs/operators';
 import { EmployeService } from 'src/app/service/employe.service';
 import { UserData } from 'src/app/model/userData';
-import { environment } from 'src/app/model/environment';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit {
   userId:string = localStorage.getItem("employeeCode");
   userEmailId:string = localStorage.getItem("emailId");
   backendUrl = environment.baseApplicationUrl;
-  notifications : Notifications[];
+  notifications : NotificationsModel[];
   colorStatus: string;
 
   constructor(private notificationService: NotificationService, private unReadService: UnReadService

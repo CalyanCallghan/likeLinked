@@ -3,46 +3,52 @@ body {
     padding: 0;
     margin: 0;
 }
+
 #toolbarMenu {
     cursor: pointer;
     margin-right: 20px;
 }
+
 #mainToolbar .toolbar-spacer {
     flex: 1 1 auto;
 }
-  
-#mainToolbar{
-      color: whitesmoke;
-      display: flex;
-      background-image: url("src/assets/images/logos/header_bg.svg");
-      height: 3.2em;
+
+#mainToolbar {
+    color: whitesmoke;
+    display: flex;
+    background-image: url("src/assets/images/logos/header_bg.svg");
+    height: 3.2em;
 }
-  
+
 #mainToolbar .toolbar-icon {
     cursor: pointer;
     margin: 0 8px;
 }
-  
-#onetIcon{
+
+#onetIcon {
     width: 3em
 }
- 
-.toolbar-btns .btn{
+
+.toolbar-btns .btn {
     color: whitesmoke;
 }
 
-.image{
-    width:64px;
+.image {
+    width: 64px;
     border-radius: 50%;
 }
-.search{
+
+.search {
     margin-left: 32em;
 }
-.iconAndName{
+
+.iconAndName {
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
 }
+
+
 /* .header-button .mat-button-wrapper  {
 
     display: flex;
@@ -58,41 +64,51 @@ body {
     font-size: 13px;
 } */
 
-.btn-secondary .mat-button-wrapper  {
-
+.btn-secondary .mat-button-wrapper {
     display: flex;
     align-items: center;
     flex-direction: column-reverse;
     line-height: 1.5;
 }
-.btn-secondary .material-icons  {
 
+.btn-secondary .material-icons {
     line-height: 1.25;
 }
-.btn-secondary-icon-names{
+
+.btn-secondary-icon-names {
     font-size: 13px;
 }
 
-.btn:focus  {
-    outline:0;
+/* .btn:focus {
+    outline: 0;
     color: #fff;
-    /* background-color: #428bca; */
-    background-color: #075288; 
-    border-color:  #0b81d6;
-    border-radius: 5px;
-  }
-  .btn:hover{
-      background-color: #075288;
-  }
-
-  .btn-secondary:not(:disabled):not(.disabled):active, .btn-secondary:not(:disabled):not(.disabled).active, .show > .btn-secondary.dropdown-toggle {
-    color: #fff;
-    background-color: #075288; 
+    background-color: #075288;
     border-color: #0b81d6;
+    border-radius: 5px;
 }
 
+.btn:hover {
+    background-color: #075288;
+} */
+
+/* .btn-secondary:not(:disabled):not(.disabled):active,
+.btn-secondary:not(:disabled):not(.disabled).active,
+.show>.btn-secondary.dropdown-toggle {
+    color: #fff;
+    background-color: #075288;
+    border-color: #0b81d6;
+} */
 
 
-  
+/* kondareddy button css starts */
 
- 
+.hm_btn{
+    background-color: inherit !important;
+    border-color: inherit !important;
+}
+
+.hm_btn_active{
+    border-bottom: 2px solid #fff !important;
+}
+
+/* kondareddy button css ends */

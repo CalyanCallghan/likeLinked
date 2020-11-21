@@ -1,50 +1,54 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-      <mat-card class="card">
-        <mat-card-header class="card-top"> Notifications</mat-card-header>
-        <mat-divider></mat-divider>
-        <mat-card-header>
-          <mat-card-title class="card-text">Unread Notifications</mat-card-title>
-          <mat-card-title class="card-digit">{{unreadCount}}</mat-card-title>
-        </mat-card-header>
-        <mat-divider></mat-divider>
-        <mat-card-header>
-          <mat-card-title class="card-text">Total Notfications</mat-card-title>
-          <mat-card-subtitle class="card-digit">{{totalCount}}</mat-card-subtitle>
-        </mat-card-header>
-      </mat-card>
-    </div>
+<div class="container-fluid" style="overflow-y: auto;height: 32em;">
+    <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <mat-card class="card">
+                <mat-card-header class="card-top"> Notifications</mat-card-header>
+                <mat-divider></mat-divider>
+                <mat-card-header>
+                    <mat-card-title class="card-text">Unread Notifications</mat-card-title>
+                    <mat-card-title class="card-digit">{{unreadCount}}</mat-card-title>
+                </mat-card-header>
+                <mat-divider></mat-divider>
+                <mat-card-header>
+                    <mat-card-title class="card-text">Total Notfications</mat-card-title>
+                    <mat-card-subtitle class="card-digit">{{totalCount}}</mat-card-subtitle>
+                </mat-card-header>
+            </mat-card>
+        </div>
 
-    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-        <mat-card class="postcard">
-          <mat-card-header class="notification-title">Recent Notifications</mat-card-header>
-          <cdk-virtual-scroll-viewport class="example-viewport">
-            <mat-expansion-panel *ngFor="let notification of notifications"
-              [ngStyle]="notification.status =='unread'?{'background-color':'rgba(0, 0, 0, 0.08)'} : {'background-color': 'none'}"
-              [appHighlight] >
-              <mat-expansion-panel-header (click)='makeMeUnread(notification.id)'>
-                <mat-panel-title>
-                  <img src="assets/images/logos/logo.svg" alt="image" style="width: 2.5em">
-                  <b>&nbsp;&nbsp;{{notification.from}}</b>
-                </mat-panel-title>
-                <div class="panel-description">
-                  <mat-panel-description>
-                    {{notification.sendDate}}
-                  </mat-panel-description>
-                </div>
-              </mat-expansion-panel-header>
-              <mat-divider></mat-divider>
-              <p class="notification-message" >{{notification.message}}</p>
-            </mat-expansion-panel>
-          </cdk-virtual-scroll-viewport>
-        </mat-card>
-        
-    </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <mat-card class="postcard">
+                <mat-card-header class="notification-title">Recent Notifications</mat-card-header>
+                <cdk-virtual-scroll-viewport class="example-viewport">
+                    <mat-expansion-panel *ngFor="let notification of notifications" [ngStyle]="notification.status =='unread'?{'background-color':'rgba(0, 0, 0, 0.08)'} : {'background-color': 'none'}" [appHighlight]>
+                        <mat-expansion-panel-header (click)='makeMeUnread(notification.eventId)'>
+                            <mat-panel-title>
+                                <img src="assets/images/logos/logo.svg" alt="image" style="width: 2.5em">
+                                <b>&nbsp;&nbsp;{{notification.email}}</b>
+                            </mat-panel-title>
+                            <div class="panel-description">
+                                <mat-panel-description>
+                                    {{notification.eventCreatedDate}}
+                                </mat-panel-description>
+                            </div>
+                        </mat-expansion-panel-header>
+                        <mat-divider></mat-divider>
+                        <p><b><u>{{notification.title | uppercase}}</u></b></p>
+                        <p class="notification-message">{{notification.information}}</p>
+                        <div class="image-wrapper">
+                            <img src="{{backEndUrl}}/file/downloadFile/{{notification.eventImage}}" style="width:50%;height:50%;">
 
-    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-      <app-news></app-news>
+                        </div>
+
+                    </mat-expansion-panel>
+                </cdk-virtual-scroll-viewport>
+            </mat-card>
+
+        </div>
+
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <app-news></app-news>
+        </div>
+
     </div>
-    
-  </div>
 </div>

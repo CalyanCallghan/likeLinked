@@ -1,13 +1,13 @@
 <mat-card class="profilePicAndData">
     <a>
-         <div class="container" fxLayoutAlign="center center">
+        <div class="container" fxLayoutAlign="center center">
             <img src="{{backendUrl}}/file/downloadFile/{{userdata.file_name}}" style="width: 5em;border-radius: 50%;">
             <div class="overlay" fxLayoutAlign="center center">
                 <span class="material-icons" (click)="openUploadDialog()">camera_alt</span>
             </div>
         </div>
         <div style="font-weight: 600;text-align: center">
-            {{userdata.first_name}} {{userdata.last_name}}
+            {{userdata.firstName}} {{userdata.lastName}}
         </div>
     </a>
     <p style="font-size: 13px;text-align: center">{{userdata.email}}</p>

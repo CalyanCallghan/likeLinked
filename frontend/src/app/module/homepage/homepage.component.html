@@ -5,20 +5,29 @@
             <mat-card class="iconsAndName">
                 <table style="margin-left: 17%;">
                     <tr>
-                        <td><a class='btn' mat-button style="border-bottom-style: none;" routerLink="groups">
+                        <td>
+                            <a class='btn' mat-button style="border-bottom-style: none;" routerLink="groups">
                                 <mat-icon style="margin-right: 5%;">groups</mat-icon><span>Groups</span>
-                            </a></td>
+                            </a>
+                        </td>
                     </tr>
                     <tr>
-                        <td><a class='btn' mat-button style="border-bottom-style: none;" routerLink="mygroup">
+                        <td>
+                            <a class='btn' mat-button style="border-bottom-style: none;" routerLink="mygroup">
                                 <mat-icon style="margin-right: 5%;">group</mat-icon><span>My Group</span>
-                            </a></td>
+                            </a>
+                        </td>
                     </tr>
                     <tr>
-                        <td><a class='btn' mat-button style="border-bottom-style: none;" routerLink="notification">
-                                <mat-icon style="margin-right: 5%;">notifications_none</mat-icon>
+                        <td>
+                            <a class='btn' mat-button style="border-bottom-style: none;" routerLink="notification">
+                                <!-- <mat-icon style="margin-right: 5%;">notifications_none</mat-icon> -->
+                                <mat-icon style="margin-right: 5%;" [ngStyle]="colorStatus =='unread'?{'color':'red','font-weight':'bold'} : {'background-color': 'none'}">
+                                    notifications_none
+                                </mat-icon>
                                 <span>Notifications</span>
-                            </a></td>
+                            </a>
+                        </td>
                     </tr>
                 </table>
             </mat-card>

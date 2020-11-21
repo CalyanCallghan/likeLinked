@@ -1,0 +1,75 @@
+<div class="usheet-main">
+    <div class="usheet-main-header">
+        <div class="float-right">
+            <button class="btn cmn_btn mr-2" (click)="enable_add_records()">Add Records</button>
+            <button class="btn cmn_btn mr-2" (click)="disable_add_records()" *ngIf="show_add_records">Go Back</button>
+        </div>
+    </div>
+    <div class="usheet-main-body overflow-auto" [ngClass]="{'footer_enable': show_add_records}">
+        <div class="upd-main" *ngIf="!show_add_records">
+
+            <div class="upd-file-name form-group pull-left" *ngIf="sheetToUpload">
+                <input type="text" class="form-control" id="pwd" disabled="" [(value)]="sheetToUpload['name']">
+            </div>
+            <div class="upd-file-name form-group pull-left" *ngIf="!sheetToUpload">
+                <input type="text" class="form-control" id="pwd" disabled="" value="No File Selected">
+            </div>
+
+            <div class="pull-left">
+                <div class="file btn upd-file-upload mr-3">
+                    Upload Sheet
+                    <input type="file" name="upd-file" accept=".csv" (change)="uploadSheet($event.target.files)">
+                </div>
+                <div class="file btn upd-file-upload mr-3" (click)="post_upd_sheet()" *ngIf="sheetToUpload">
+                    Save
+                </div>
+                <div class="file btn upd-file-upload" (click)="cnl_upd_sheet()" *ngIf="sheetToUpload">
+                    Cancel
+                </div>
+            </div>
+        </div>
+        <div class="add-table-div" *ngIf="show_add_records">
+            <div class="table-responsive">
+                <table class="table view_table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Emp ID</th>
+                            <th scope="col">Emp Name</th>
+                            <th scope="col" class="text-center">Email ID</th>
+                            <th scope="col">Contact No</th>
+                            <th scope="col">Group</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let rw of tableData;let ind = index;">
+                            <td>
+                                <input type="text" class="form-control" [(ngModel)]="rw.empId" />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" [(ngModel)]="rw.firstName" />
+                                <input type="text" class="form-control" [(ngModel)]="rw.lastName" />
+
+                            </td>
+                            <td>
+                                <input type="email" class="form-control" [(ngModel)]="rw.email" />
+
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" [(ngModel)]="rw.phoneNo" />
+
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" [(ngModel)]="rw.groupId" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="usheet-main-footer" *ngIf="show_add_records">
+        <div class="float-right">
+            <button class="btn cmn_btn mr-2" (click)="save_records()">Save Records</button>
+        </div>
+    </div>
+</div>

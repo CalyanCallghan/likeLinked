@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  baseApplicationUrl: 'https://opnetqaapi.onpassive.com',
+  // baseApplicationUrl: 'https://onetsitapi.onpassive.com'
 };

@@ -1,0 +1,221 @@
+.adm-groups-main {
+    height: 100%;
+    width: 100%;
+    padding: 0px 50px;
+}
+
+.cmn_btn,
+.cmn_btn:focus {
+    color: #fff !important;
+    border-color: #428dce;
+    height: 30px;
+    line-height: 15px;
+    border: none;
+    box-shadow: none;
+    background: linear-gradient(180deg, #82c1f7, #125f99);
+}
+
+.cncl_clr {
+    background: linear-gradient(180deg, #dc6e6e, #7a1b1b)!important;
+}
+
+.grp_inactive {
+    background: linear-gradient(180deg, #bababa, #696969)!important;
+}
+
+.adm-grp-flex {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.en_grp_name {
+    padding: 45px 0px;
+}
+
+.en_grp_name span {
+    margin-right: 4rem;
+    color: #777777;
+    font-size: 16px;
+}
+
+.en_cs_group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.en_grp_name input,
+.en_grp_name input:focus {
+    border: 1px solid #c3c3c3;
+    outline: none;
+}
+
+.table_modal {
+    position: absolute;
+    bottom: 0;
+    height: 60%;
+    width: 50%;
+    right: 0;
+    background: #fff;
+}
+
+.tablem-header {
+    height: 45px;
+    padding: 10px;
+    background-color: #428dce;
+}
+
+.tablem-body {
+    height: calc(100% - 90px);
+    font-size: 12px;
+}
+
+.tablem-footer {
+    height: 45px;
+    padding: 10px;
+    background-color: #ebebeb;
+}
+
+.add_usr_grp {
+    height: 100%;
+    background: #fff;
+}
+
+.aug_hhalf {
+    float: left;
+    height: 100%;
+    width: 50%;
+    padding: 10px;
+}
+
+.aug-header {
+    height: 45px;
+    padding: 10px;
+    background-color: #ebebeb;
+}
+
+.aug-main {
+    height: 100%;
+    border: 1px solid #ababab;
+}
+
+.aug-body {
+    height: calc(100% - 90px);
+    font-size: 12px;
+}
+
+.aug-footer {
+    height: 45px;
+    padding: 10px;
+    background-color: #ebebeb;
+}
+
+button.btn.del_grp_btn {
+    color: #787878;
+    border-color: #428dce;
+    height: 25px;
+    line-height: 12.5px;
+    border: none;
+    box-shadow: none;
+    background: #fff;
+    padding: 0px 4px;
+    font-size: 13px;
+}
+
+.cnl_grp_btn {
+    color: #787878;
+    border-color: #428dce;
+    height: 25px;
+    line-height: 12.5px;
+    border: none;
+    box-shadow: none;
+    background: #fff;
+    border-radius: 50%;
+    width: 25px;
+    padding: 0px;
+    font-size: 13px;
+}
+
+.add_grp_btn,
+.min_grp_btn {
+    color: #fff;
+    border-color: #428dce;
+    height: 25px;
+    line-height: 12.5px;
+    border: none;
+    box-shadow: none;
+    background: #428dce;
+    border-radius: 50%;
+    width: 25px;
+    padding: 0px;
+    font-size: 14px;
+}
+
+.grpName {
+    color: #fff;
+}
+
+.m_data {
+    float: left;
+    width: 100%;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.inp_chk i {
+    font-size: 15px;
+    margin: 3px 0px;
+}
+
+.inp_text {
+    padding: 0px 20px;
+    line-height: 21px;
+    font-size: 15px;
+    color: #5c5c5c;
+}
+
+.m_data:not(:first-child) {
+    padding-top: 0px;
+}
+
+.usrgrp-tile {
+    text-align: center;
+    font-size: 17px;
+    font-weight: 500;
+    color: #818181;
+}
+
+.has-search {
+    position: relative;
+}
+
+.has-search .form-control,
+.has-search .form-control:focus {
+    padding-left: 2.375rem;
+    height: 25px;
+    line-height: 25px;
+    font-size: 14px;
+    box-shadow: none;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+    font-size: 13px;
+}
+
+.dis_mstr {
+    pointer-events: none;
+}

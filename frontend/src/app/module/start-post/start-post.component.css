@@ -8,3 +8,11 @@
     width: 32em;
     border-radius: 1em
 }
+
+/* kondareddy start post css starts*/
+
+.startpost:focus {
+    outline: none;
+}
+
+/* kondareddy start post css ends*/

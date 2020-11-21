@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../model/environment';
+import { environment } from 'src/environments/environment';
+import { NotificationsModel } from '../model/notification';
 import { UserData } from '../model/userData';
 
 @Injectable({
@@ -13,5 +14,9 @@ export class SearchService {
   
     getAllUserDetails(): Observable<UserData[]> {
       return this.http.get<UserData[]>(environment.baseApplicationUrl+"/user/getAllUsers");
+    }
+
+    displayLatestTenEvents(): Observable<NotificationsModel> {
+      return this.http.get<NotificationsModel>(environment.baseApplicationUrl+"/event/displayTenEvents");
     }
   }
