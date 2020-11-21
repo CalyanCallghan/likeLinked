@@ -60,8 +60,8 @@ public class Comment extends AuditModel{
     @JsonProperty("post_id")
     private Post post;
     
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "commentId")
-	private Set<SubComment> subComment = new HashSet<>();
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "commentId")
+//	private Set<SubComment> subComment = new HashSet<>();
     
 //    @OneToMany(fetch = FetchType.EAGER)
 //    private SubComment SubComment;

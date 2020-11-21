@@ -7,11 +7,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommentDetails {
-	private int commentId;
+	private int id;
 	private String firstName;
 	private String lastName;
 	private String profileImage;
 	private String content;	
 	private String when;
+	private long likeCount;
+	private long commentCount;
 }
 

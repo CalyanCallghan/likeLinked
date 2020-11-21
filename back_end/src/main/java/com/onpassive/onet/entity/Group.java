@@ -6,24 +6,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 
-import com.onpassive.onet.model.AuditModel;
-
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @Entity
-@Table(name = "designation")
-@NoArgsConstructor
-public class Designation extends AuditModel {
+@Table(name = "grp", uniqueConstraints = @UniqueConstraint(columnNames = "group_name"))
+
+public class Group {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "desg_id")
-	private Integer desgId;
-	@Column(name = "desg_desc")
-	private String desgdesc;
+	@Column(name = "group_id")
+	private Integer id;
+	@NotNull
 
+	@Column(name = "group_name")
+	private String groupName;
 }

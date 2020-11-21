@@ -20,7 +20,7 @@ public class ExcelController {
 
 	  @GetMapping("/download")
 	  public ResponseEntity<Resource> getFile() {
-	    String filename = "sample-file - Copy.csv";
+	    String filename = "MasterData.csv";
 	    InputStreamResource resource = new InputStreamResource(excelService.load());
 
 	    return ResponseEntity.ok()

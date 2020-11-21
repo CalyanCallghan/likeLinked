@@ -11,8 +11,8 @@ public class TimeUtills {
 		String specificFormat = null;
 		try {
 
-			SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
+			SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 			LocalDateTime now = LocalDateTime.now();
 			Date d1 = format.parse(dateStart);
 			Date d2 = (Date) format.parse(dtf.format(now).toString());
@@ -48,10 +48,10 @@ public class TimeUtills {
 	public static String convertToSpecificFormatLocalDateTime(LocalDateTime localDateTime) {
 		String specificFormat = null;
 		try {
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 			String formatDateTime =localDateTime.format(formatter);
-			SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 			LocalDateTime now = LocalDateTime.now();
 			Date d1 = format.parse(formatDateTime);
 			Date d2 = (Date) format.parse(dtf.format(now).toString());

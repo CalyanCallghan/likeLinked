@@ -15,9 +15,8 @@ import org.springframework.web.filter.CorsFilter;
 import com.onpassive.onet.config.FileStorageProperties;
 
 @SpringBootApplication
-//@ComponentScan(basePackages = "com.onpassive.onet.*")
 @EnableJpaAuditing
-@EnableConfigurationProperties({ FileStorageProperties.class}) // To enable the ConfigurationProperties feature
+@EnableConfigurationProperties({ FileStorageProperties.class}) 
 public class OnetApplication extends SpringBootServletInitializer{
 
 	public static void main(String[] args) {
@@ -30,7 +29,7 @@ public class OnetApplication extends SpringBootServletInitializer{
 	    final CorsConfiguration config = new CorsConfiguration();
 	    config.setAllowCredentials(true);
 	    //config.setAllowedOrigins(Arrays.asList("https://opnetqaapi.onpassive.com", "https://opnetqaui.onpassive.com")); 
-	    config.setAllowedOrigins(Arrays.asList("http://localhost:8080", "http://localhost:4200"));
+	    config.setAllowedOrigins(Arrays.asList("*", "*"));
 	    //config.setAllowedOrigins(Arrays.asList("https://onetsitapi.onpassive.com", "https://onetsitui.onpassive.com"));
 	    config.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept","Authorization"));
 	    config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH"));

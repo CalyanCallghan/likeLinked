@@ -10,7 +10,7 @@ import com.onpassive.onet.entity.PostLike;
 
 @Repository
 public interface PostLikeRepository extends CrudRepository<PostLike, Integer> {
-	@Query( value = "SELECT count(*) FROM opnetdb.post_like where is_liked='1' and post_id=:postId " , nativeQuery = true)
+	@Query( value = "SELECT count(*) FROM post_like where is_liked='1' and post_id=:postId " , nativeQuery = true)
 	public long countByIsliked(int postId);
 	
 	PostLike findByempIdAndPostId(String empId, Integer postId);

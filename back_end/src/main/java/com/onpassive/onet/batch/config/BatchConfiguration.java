@@ -31,7 +31,7 @@ public class BatchConfiguration {
                    ItemWriter<User> itemWriter,TaskletStep taskletStep
     ) {
 
-        Step step = stepBuilderFactory.get("ATTENDANCE-file-load")
+        Step step = stepBuilderFactory.get("MASTERDATA-file-load")
                 .<User, User>chunk(100)
                 .reader(itemReader)
                 .processor(itemProcessor)
@@ -42,7 +42,7 @@ public class BatchConfiguration {
 				.build();
 
 
-        return jobBuilderFactory.get("ATTENDANCE-Load")
+        return jobBuilderFactory.get("MASTERDATA-Load")
                 .incrementer(new RunIdIncrementer())
                 .start(step)
                 .next(step2)
@@ -52,7 +52,7 @@ public class BatchConfiguration {
     @Bean
     public FlatFileItemReader<User> itemReader() {
         FlatFileItemReader<User> flatFileItemReader = new FlatFileItemReader<>();
-        flatFileItemReader.setResource(new FileSystemResource("uploads/Attendance.csv"));
+        flatFileItemReader.setResource(new FileSystemResource("uploads/MasterData.csv"));
         flatFileItemReader.setName("CSV-Reader");
         flatFileItemReader.setLinesToSkip(1);
         flatFileItemReader.setLineMapper(lineMapper());
@@ -64,11 +64,12 @@ public class BatchConfiguration {
 
         DefaultLineMapper<User> defaultLineMapper = new DefaultLineMapper<>();
         DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
-
+    
         lineTokenizer.setDelimiter(",");
         lineTokenizer.setStrict(false);
         //lineTokenizer.setNames(new String[]{"empId", "companyName", "branch", "inTime","outTime","date"});
         lineTokenizer.setNames(new String[] { "email", "firstName", "lastName", "groupId", "empId","phoneNo" });
+        //a@b.xcom,raj,fghjk,7898776781,1,1234567
         BeanWrapperFieldSetMapper<User> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
         fieldSetMapper.setTargetType(User.class);
 

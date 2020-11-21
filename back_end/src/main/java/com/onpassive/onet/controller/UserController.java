@@ -3,15 +3,15 @@ package com.onpassive.onet.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,12 +24,10 @@ import com.onpassive.onet.service.PostStorageService;
 import com.onpassive.onet.service.UserService;
 import com.onpassive.onet.util.UploadFileResponse;
 
-//@CrossOrigin(origins = {"https://opnetqaapi.onpassive.com","https://opnetqaui.onpassive.com"})
-//@CrossOrigin("*")
 @RestController
 @RequestMapping("/user")
 public class UserController {
-	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+	//private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
 	UserService userService;
@@ -42,14 +40,14 @@ public class UserController {
 	
 	@GetMapping("/getAllUsers")
 	public List<User> getUsers() {
-		logger.info("<-----getUsers-------start--->");
+		//logger.info("<-----getUsers-------start--->");
 	    return userService.findAll();
 	}
 	
 	@PostMapping("/uploadProfileImage")
 	public ResponseEntity<UploadFileResponse> uploadProfileImage(@RequestParam("file") MultipartFile[] files,
 			@RequestParam("userId") int userId) {
-		logger.debug("<-----uploadProfileImage-------start---userId>"+userId);
+		//logger.debug("<-----uploadProfileImage-------start---userId>"+userId);
 
 		String message = "";
 		LocalDateTime dateTime = null;
@@ -66,9 +64,42 @@ public class UserController {
 	
 	@GetMapping("/userDetails/{emailId}")
 	public UserDetails getUserDetails(@PathVariable("emailId") String emailId) {
-		logger.debug("<-----getUserDetails-------start---emailId>"+emailId);
+		//logger.debug("<-----getUserDetails-------start---emailId>"+emailId);
 		UserDetails userDetails = userRepository.findUserByEmailId(emailId);
 		return userDetails;
+	}
+	
+	@DeleteMapping("/deleteUser/{empId}")
+	public ResponseEntity<UploadFileResponse> deleteuser(@PathVariable Long empId) {
+		String message = "";
+		try {
+			userService.deleteUser(empId);
+			message = "User deleted successfully.";
+			return ResponseEntity.ok(new UploadFileResponse(LocalDateTime.now(), HttpStatus.OK, message));
+		} catch (Exception e) {
+			message = "Getting Exception while deleting.!!!";
+			return ResponseEntity
+					.ok(new UploadFileResponse(LocalDateTime.now(), HttpStatus.EXPECTATION_FAILED, message));
+		}
+	}
+
+	
+	@RequestMapping(value = "/saveAll")
+	public List<User> saveUsers(@RequestBody List<User> requestList) {
+		
+		List<User> userList = (List<User>) userService.saveUsers(requestList);
+		return userList;
+	}
+	@GetMapping("/getUsers")
+	public List<UserDetails> getAllUse() {
+		//logger.info("<-----getUsers-------start--->");
+		return userService.findAllUser();
+	}
+	
+	 @PutMapping(value = "/updateUsers")
+	 public User updateUsers(@RequestBody User user) {
+		User updatedUser = userService.updateUser(user);
+		return updatedUser;
 	}
 	
 	

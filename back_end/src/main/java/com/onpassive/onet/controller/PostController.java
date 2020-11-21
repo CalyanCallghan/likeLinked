@@ -2,25 +2,22 @@ package com.onpassive.onet.controller;
 
 import java.io.IOException;
 import java.math.BigInteger;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,14 +28,14 @@ import com.onpassive.onet.model.HomeRequestModel;
 import com.onpassive.onet.model.PostDetails;
 import com.onpassive.onet.repository.PostRepository;
 import com.onpassive.onet.service.PostStorageService;
+import com.onpassive.onet.util.TimeUtills;
 import com.onpassive.onet.util.UploadFileResponse;
 
-//@CrossOrigin(origins = {"https://opnetqaapi.onpassive.com","https://opnetqaui.onpassive.com"})
-//@CrossOrigin("*")
+
 @RestController
 @RequestMapping("/file")
 public class PostController {
-	private static final Logger logger = LoggerFactory.getLogger(PostController.class);
+	//private static final Logger logger = LoggerFactory.getLogger(PostController.class);
 	@Autowired
 	HttpServletRequest request;
 	@Autowired
@@ -54,7 +51,7 @@ public class PostController {
 	public ResponseEntity<UploadFileResponse> uploadFile(@RequestParam("files") MultipartFile[] files,
 			@RequestParam("data") String data) {
 		//postRepository.
-		logger.debug("data---uploadFile------>"+data);
+		//logger.debug("data---uploadFile------>"+data);
 		String message = "";
 		LocalDateTime dateTime = null;
 		//List<String> fileNames = new ArrayList<>();
@@ -82,7 +79,7 @@ public class PostController {
 			return ResponseEntity.ok(new UploadFileResponse(dateTime.now(), HttpStatus.OK, message,postDetails));
 		} catch (Exception e) {
 			message = "Fail to upload files!!!";
-			logger.error("error occured at uploadFile---->"+e.getMessage());
+			//logger.error("error occured at uploadFile---->"+e.getMessage());
 			// return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(message);
 			return ResponseEntity.ok(new UploadFileResponse(dateTime.now(), HttpStatus.EXPECTATION_FAILED, message,postDetails));
 		}
@@ -94,7 +91,7 @@ public class PostController {
 	@GetMapping("/downloadFile/{fileName:.+}")
 	public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
 		String contentType = null;
-		logger.debug("fileName-----downloadFile------>"+fileName);
+		//logger.debug("fileName-----downloadFile------>"+fileName);
 		// Load file as Resource
 		Resource resource = postStorageService.loadFileAsResource(fileName);
 		try {
@@ -113,29 +110,21 @@ public class PostController {
 	
 	@GetMapping("/getAllPosts/{type}")
 	public ResponseEntity<List<PostDetails>> getAllPosts(@PathVariable String type) {
-		logger.debug("type---getAllPosts------>"+type);
+		//logger.debug("type---getAllPosts------>"+type);
 		List<PostDetails> data= postStorageService.getAllPosts(type);
 		return new ResponseEntity<List<PostDetails>>(data, new HttpHeaders(), HttpStatus.OK);
 	}
 	@GetMapping("/getAllPostsWithCommentsAndLikes/{type}")
 	public ResponseEntity<List<PostDetails>> getAllPostsWithCommentsAndLikes(@PathVariable String type) {
-		logger.debug("type---getAllPosts------>"+type);
+		//logger.debug("type---getAllPosts------>"+type);
 		List<PostDetails> postDetails = new ArrayList<>();
 		List<Object[]> allPosts =postRepository.allthePostsDataWithCountAndLike(type);
 		for(Object[] postDAta : allPosts)
 	    {	
-			System.err.println(postDAta[0]);
-			System.err.println(postDAta[1]);
-			System.err.println(postDAta[2]);
-			System.err.println(postDAta[3]);
-			System.err.println(postDAta[4]);
-			System.err.println(postDAta[5]);
-			System.err.println(postDAta[6]);
-			System.err.println(postDAta[7]);
-			System.err.println(postDAta[8]);
-			System.err.println(postDAta[9]);
-			System.err.println("------------");
-			postDetails.add(new PostDetails(((Integer)postDAta[0]),((String)postDAta[1]),((String)postDAta[2]),((String)postDAta[3]),((String)postDAta[4]),((String)postDAta[5]),((String)postDAta[6]),((String)postDAta[7]),(((BigInteger)postDAta[8]).longValue()),(((BigInteger)postDAta[9]).longValue())));
+			LocalDateTime localDateTime = ((Timestamp) postDAta[10]).toLocalDateTime();
+			String when = TimeUtills.convertToSpecificFormatLocalDateTime(localDateTime);
+
+			postDetails.add(new PostDetails(((Integer)postDAta[0]),((String)postDAta[1]),((String)postDAta[2]),((String)postDAta[3]),((String)postDAta[4]),((String)postDAta[5]),((String)postDAta[6]),((String)postDAta[7]),(((BigInteger)postDAta[8]).longValue()),(((BigInteger)postDAta[9]).longValue()),when));
 		}
 		return new ResponseEntity<List<PostDetails>>(postDetails, new HttpHeaders(), HttpStatus.OK);
 	}

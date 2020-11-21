@@ -18,6 +18,8 @@ public class PostDetails {
 	private String userProfile;
 	private long likeCount;
 	private long commentCount;
+	private String when;
+
 	
 	public PostDetails(int postId, String fileName, String postContent, String postFormat, String type,
 			String firstName, String lastName, String userProfile) {

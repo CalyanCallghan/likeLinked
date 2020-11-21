@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import com.onpassive.onet.model.AuditModel;
 
 import lombok.AllArgsConstructor;
@@ -14,6 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@DynamicUpdate
 public class User extends AuditModel {
 	@Id
 	@Column(name = "emp_id", nullable = false, updatable = false)
@@ -34,5 +37,10 @@ public class User extends AuditModel {
 	private boolean status;
 	@Column(name = "phone_no")
 	private String phoneNo;
+	@Column(name = "role")
+	private String role;
+	
+	// update user set updated_at=?, email=?, first_name=?, group_id=?, last_name=?, phone_no=? where emp_id=?
+
 
 }

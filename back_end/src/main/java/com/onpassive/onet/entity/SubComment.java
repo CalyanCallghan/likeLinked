@@ -54,8 +54,8 @@ public class SubComment extends AuditModel implements Serializable {
 	 * @JoinColumn(name = "comment_id", nullable = false) //@OnDelete(action =
 	 * OnDeleteAction.CASCADE) private Comment comment;
 	 */
-    @Column(name="comment_id")
-	private Integer commentId;
+//    @Column(name="comment_id")
+//	private Integer commentId;
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -71,9 +71,14 @@ public class SubComment extends AuditModel implements Serializable {
 	@Column(name="emp_id")
     private String empId;
 	
-//	 @ManyToOne(fetch = FetchType.EAGER)
-//	    @JoinColumn(name = "comment_id")
-//	    private Comment comment;
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "comment_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityReference(alwaysAsId=true)
+    @JsonProperty("comment_id")
+    private Comment comment;
 //	 
 //	 @ManyToOne(fetch = FetchType.EAGER)
 //	    @JoinColumn(name = "post_id")

@@ -27,7 +27,7 @@ public interface PostRepository extends CrudRepository<Post,Integer>{
 	
 	@Query(value = "select p.id,p.file_name,p.description,p.format,p.type,u.first_name,u.last_name,u.profile_pic_name,"
 			+ "(select count(*) from post_like where post_like.is_liked=1 and post_like.post_id = p.id ) as likeCount,"
-			+" (select count(*) from comments where comments.post_id = p.id ) as commentCount"
+			+" (select count(*) from comments where comments.post_id = p.id ) as commentCount,p.created_at"
 			+ " from post p, user u where p.created_by= u.emp_Id  and p.type=:type order by p.id desc", nativeQuery = true)
 	public List<Object[]> allthePostsDataWithCountAndLike(String type);
 	
